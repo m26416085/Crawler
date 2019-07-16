@@ -3,52 +3,12 @@
 @section('content')
 <?php
 $data_arr = array();
-if (isset($_POST['find'])) {
-    
 
-    //tokopedia
-    $search = $_POST['text_value'];
-
-    $search = str_replace(' ', '%20', $search);
-
-    $url = "https://ta.tokopedia.com/promo/v1/display/ads?user_id=0&ep=product&item=10&src=search&device=desktop&page=2&q=" . $search . "&fshop=1";
-
-    $profile = http_request($url);
-
-    //replace JSON string to Array
-    $profile = json_decode($profile, TRUE);
-
-    #echo $profile["data"][0]["product"]["name"];
-
-    //old loop
-    // $i = 0;
-    // foreach ($profile["data"] as $profil) {
-    //     echo '<img src=' . $profile["data"][$i]["product"]["image"]["m_url"] . '><br>';
-    //     echo $profile["data"][$i]["product"]["name"] . '<br>';
-    //     echo $profile["data"][$i]["product"]["price_format"] . '<br>';
-    //     echo $profile["data"][$i]["shop"]["name"] . '<br>';
-    //     echo $profile["data"][$i]["shop"]["location"] . '<br>';
-    //     echo '<a href=' . $profile["data"][$i]["product"]["uri"] . '>Link</a>' . '<br>';
-    //     echo '<button type="submit" id="add" name="add">Add to Cart</button><br><br>';
-    //     $i = $i + 1;
-    // }
-
-    //new loop
-    $i = 0;
-    foreach ($profile["data"] as $profil) {
-        $image_url = $profile['data'][$i]['product']['image']['m_url'];
-        $product_name = $profile['data'][$i]['product']['name'];
-        $price_format = $profile['data'][$i]['product']['price_format'];
-        $shop_name = $profile['data'][$i]['shop']['name'];
-        $shop_location = $profile['data'][$i]['shop']['location'];
-
-        $data_arr['data'][] = array('image_url' => $image_url, 'product_name' => $product_name, 'price_format' => $price_format, 'shop_name' => $shop_name, 'shop_location' => $shop_location);
-        $i++;
-    }
-    // print "<pre>";
-    // print_r($data_arr);
-    // print "</pre>";
+function function_search_tokopedia($data_arr){
+    echo "masuk func";
+    $data_arr = search_tokopedia($data_arr);
 }
+
 ?>
 <div class="container justify-content-center content">
     <!-- filter -->
@@ -87,13 +47,13 @@ if (isset($_POST['find'])) {
     </ul>
 
     <!-- Search -->
-    <form action="/home" method="POST">
+    <form action="#" id="search" method="POST">
         @csrf
         <div class="tab-content" id="pills-tabContent">
             <div class="tab-pane fade show active" id="pills-name" role="tabpanel" aria-labelledby="pills-name-tab">
                 <div class="input-group search">
-                    <input type="text" name="text_value" class="form-control input-search" placeholder="Nama Barang">
-                    <button class="btn btn-default" name="find" type="submit"><img class="icon-search" src="./svg/magnifying-glass.svg"></button>
+                    <input type="text" name="searchvalue" id="searchvalue" class="form-control input-search" placeholder="Nama Barang">
+                    <button class="btn btn-default" id="search_button" name="search_button" type="submit"><img class="icon-search" src="./svg/magnifying-glass.svg"></button>
                 </div>
             </div>
             <div class="tab-pane fade" id="pills-link" role="tabpanel" aria-labelledby="pills-link-tab">
@@ -188,17 +148,20 @@ if (isset($_POST['find'])) {
             <!-- Cards -->
             <div class="carousel-inner row mx-auto">
                 <?php
+                print "<pre>";
+                print_r($data_arr);
+                print "</pre>";
                 if ($data_arr != null) {
                     echo "<div class='carousel-item col-md-3 active'>
                         <a href='#' style='color: black;'>
                             <div class='card item'>";
 
-                    echo "<img class='card-img-top img-fluid' src='".$data_arr['data'][0]['image_url']."'>";
-                    echo "<h4 class='card-title' style='font-size: 20px;'>".$data_arr['data'][0]['product_name']."</h4>";
-                    echo "<p class='card-text'>".$data_arr['data'][0]['price_format']."</p>";
-                    echo "<p class='card-text'>".$data_arr['data'][0]['shop_name']."</p>";
-                    echo "<p class='card-text'>".$data_arr['data'][0]['shop_location']."</p>";
-                    
+                    echo "<img class='card-img-top img-fluid' src='" . $data_arr['data'][0]['image_url'] . "'>";
+                    echo "<h4 class='card-title' style='font-size: 20px;'>" . $data_arr['data'][0]['product_name'] . "</h4>";
+                    echo "<p class='card-text'>" . $data_arr['data'][0]['price_format'] . "</p>";
+                    echo "<p class='card-text'>" . $data_arr['data'][0]['shop_name'] . "</p>";
+                    echo "<p class='card-text'>" . $data_arr['data'][0]['shop_location'] . "</p>";
+
                     echo "</div>
                         </a>
                     </div>";
@@ -352,7 +315,43 @@ if (isset($_POST['find'])) {
                 <img class="icon-next" src="./svg/chevron-right.svg">
                 <span class="sr-only">Next</span>
             </a>
+            <div id="postRequestData"></div>
         </div>
     </div>
 </div>
+<script src="js/jquery-3.4.1.js"></script>
+<script>
+    $(document).ready(function(){
+        $('.search_button').click(function(){
+            var search = $('#searchvalue').val();
+            $.ajax({
+                type: "POST",
+                url: "home",
+                data: search,
+            }).done(function(msg){
+                alert('Data sent! ' + msg);
+                
+            });
+        });
+    });
+    // $.ajaxSetup({
+    //     headers: {
+    //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    //     }
+    // });
+    // $(document).ready(function(){
+    //     $('#search').submit(function(){
+    //         var search = $('#searchvalue').val();
+    //         $.ajax({
+    //             type: "POST",
+    //             url: "searchdata",
+    //             data: search,
+    //             success: function(data){
+    //                 console.log(data)
+    //                 $('#postRequestData').html(data);
+    //             }
+    //         });
+    //     });
+    // });
+</script>
 @endsection

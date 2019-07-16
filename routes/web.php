@@ -1,4 +1,6 @@
 <?php
+//use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +24,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //Route::get('/home', 'TokopediaController@index');
 //Route::get('/home', 'TokopediaController@search');
+
+Route::post('/searchdata', function(){
+    if(Request::ajax()){
+        //return Response::json(Request::all());
+        return response(Request::all())->header('Content-type', 'text/plain');
+    }
+});

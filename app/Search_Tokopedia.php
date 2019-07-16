@@ -1,10 +1,10 @@
 <?php
-function search_tokopedia(){
-    if (isset($_POST['find'])) {
-        $data_arr = array();
-        
+function search_tokopedia($data_arr){
+    
+        //$data_arr = array();
+    
         //tokopedia
-        $search = $_POST['text_value'];
+        $search = $_POST['searchvalue'];
     
         $search = str_replace(' ', '%20', $search);
     
@@ -38,14 +38,14 @@ function search_tokopedia(){
             $price_format = $profile['data'][$i]['product']['price_format'];
             $shop_name = $profile['data'][$i]['shop']['name'];
             $shop_location = $profile['data'][$i]['shop']['location'];
-            
+    
             $data_arr['data'][] = array('image_url' => $image_url, 'product_name' => $product_name, 'price_format' => $price_format, 'shop_name' => $shop_name, 'shop_location' => $shop_location);
             $i++;
         }
-
+        print "<pre>";
+        print_r($data_arr);
+        print "</pre>";
+    
         return $data_arr;
-        // print "<pre>";
-        // print_r($data_arr);
-        // print "</pre>";
-    }
 }
+
