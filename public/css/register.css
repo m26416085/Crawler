@@ -1,0 +1,44 @@
+body {
+    font-family: "Lato", sans-serif;
+    color: #333333;
+}
+
+/* form css */
+.container-regis{
+    text-align: center;
+}
+.icon-input{
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+.input-regis{
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #000000;
+    width: 300px;
+    margin-bottom: 20px;
+}
+.input-regis:focus {
+    outline:none;
+}
+.btn-regis{
+    float: right;
+    height: 40px;
+    width: 100px;
+    margin-right: 390px;
+}
+.btn-cancel{
+    float: left;
+    height: 40px;
+    width: 100px;
+    margin-left: 390px;
+}
+.regis-form{
+    margin-top: 10%;
+}
+.btn-register{
+    text-decoration: none;
+    color: #333333;
+}
+
