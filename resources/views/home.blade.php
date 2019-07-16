@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
+    
 <div class="container justify-content-center content">
     <!-- filter -->
     <h5 class="filter-title">Filter</h5>
@@ -82,8 +82,7 @@
 
             <!-- Cards -->
             <div class="carousel-inner row mx-auto">
-           
-            
+       
             <!-- coba for print dalamnya php-->
             @for ($i = 0; $i < 10; $i++)
                 @if ($i == 0)
