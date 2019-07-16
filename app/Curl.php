@@ -21,7 +21,4 @@
         // return curl result
         return $output;
     }
-
-    
-
 ?>

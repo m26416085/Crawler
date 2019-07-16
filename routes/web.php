@@ -16,8 +16,7 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
-Route::post('/home', 'HomeController@index')->name('home');
+Route::post('/home', 'HomeController@find');
 Route::get('/home', 'HomeController@index')->name('home');
 
 //Route::get('/home', 'TokopediaController@index');
