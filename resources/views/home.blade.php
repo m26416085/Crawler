@@ -1,15 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<?php
-$data_arr = array();
 
-function function_search_tokopedia($data_arr){
-    echo "masuk func";
-    $data_arr = search_tokopedia($data_arr);
-}
-
-?>
 <div class="container justify-content-center content">
     <!-- filter -->
     <h5 class="filter-title">Filter</h5>
@@ -81,63 +73,6 @@ function function_search_tokopedia($data_arr){
                 <a class="item-deletebtn" href="#"><img class="icon-delete" src="./svg/delete.svg"></a>
             </div>
         </div>
-        <div class="row row-add">
-            <div class="col-sm-4">
-                <img class="item-add-img" src="./svg/person.svg">
-            </div>
-            <div class="col-sm-7">
-                <p class="text-namabarang-add">Nama Barang</p>
-                <p class="text-harga-add">50000000000</p>
-                <p class="text-namatoko-add">Nama Toko</p>
-                <p class="text-lokasitoko-add">Lokasi Toko</p>
-            </div>
-            <div class="col-sm-1">
-                <a class="item-deletebtn" href="#"><img class="icon-delete" src="./svg/delete.svg"></a>
-            </div>
-        </div>
-        <div class="row row-add">
-            <div class="col-sm-4">
-                <img class="item-add-img" src="./svg/person.svg">
-            </div>
-            <div class="col-sm-7">
-                <p class="text-namabarang-add">Nama Barang</p>
-                <p class="text-harga-add">50000000000</p>
-                <p class="text-namatoko-add">Nama Toko</p>
-                <p class="text-lokasitoko-add">Lokasi Toko</p>
-            </div>
-            <div class="col-sm-1">
-                <a class="item-deletebtn" href="#"><img class="icon-delete" src="./svg/delete.svg"></a>
-            </div>
-        </div>
-        <div class="row row-add">
-            <div class="col-sm-4">
-                <img class="item-add-img" src="./svg/person.svg">
-            </div>
-            <div class="col-sm-7">
-                <p class="text-namabarang-add">Nama Barang</p>
-                <p class="text-harga-add">50000000000</p>
-                <p class="text-namatoko-add">Nama Toko</p>
-                <p class="text-lokasitoko-add">Lokasi Toko</p>
-            </div>
-            <div class="col-sm-1">
-                <a class="item-deletebtn" href="#"><img class="icon-delete" src="./svg/delete.svg"></a>
-            </div>
-        </div>
-        <div class="row row-add">
-            <div class="col-sm-4">
-                <img class="item-add-img" src="./svg/person.svg">
-            </div>
-            <div class="col-sm-7">
-                <p class="text-namabarang-add">Nama Barang</p>
-                <p class="text-harga-add">50000000000</p>
-                <p class="text-namatoko-add">Nama Toko</p>
-                <p class="text-lokasitoko-add">Lokasi Toko</p>
-            </div>
-            <div class="col-sm-1">
-                <a class="item-deletebtn" href="#"><img class="icon-delete" src="./svg/delete.svg"></a>
-            </div>
-        </div>
-
     </div>
 
     <!-- List-Items-Searched-Tokopedia -->
@@ -147,55 +82,30 @@ function function_search_tokopedia($data_arr){
 
             <!-- Cards -->
             <div class="carousel-inner row mx-auto">
-                <?php
-                print "<pre>";
-                print_r($data_arr);
-                print "</pre>";
-                if ($data_arr != null) {
-                    echo "<div class='carousel-item col-md-3 active'>
-                        <a href='#' style='color: black;'>
-                            <div class='card item'>";
 
-                    echo "<img class='card-img-top img-fluid' src='" . $data_arr['data'][0]['image_url'] . "'>";
-                    echo "<h4 class='card-title' style='font-size: 20px;'>" . $data_arr['data'][0]['product_name'] . "</h4>";
-                    echo "<p class='card-text'>" . $data_arr['data'][0]['price_format'] . "</p>";
-                    echo "<p class='card-text'>" . $data_arr['data'][0]['shop_name'] . "</p>";
-                    echo "<p class='card-text'>" . $data_arr['data'][0]['shop_location'] . "</p>";
+           
+            
+            <!-- coba for print dalamnya php-->
+            @for ($i = 0; $i < 10; $i++)
+                @if ($i == 0)
+                    <div class="carousel-item col-md-3 active">
+                @elseif ($i > 0)
+                    <div class="carousel-item col-md-3">
+                @endif
 
-                    echo "</div>
-                        </a>
-                    </div>";
-                }
-                ?>
-                <div class="carousel-item col-md-3 active">
                     <a href="#">
                         <div class="card item">
-                            <img class="card-img-top img-fluid" src="http://placehold.it/800x600/f44242/fff">
+                            <img class="card-img-top img-fluid" src="{{$data_arr['data'][$i]['image_url']}}">
                             <div class="card-body">
-                                <h4 class="card-title">Card 1</h4>
-                                <p class="card-text">This is a card content.</p>
-                                <p class="card-text">This is a card content.</p>
-                                <p class="card-text">This is a card content.</p>
-                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                <h4 class="card-title">{{$data_arr['data'][$i]['product_name']}}</h4>
+                                <p class="card-text">{{$data_arr['data'][$i]['price_format']}}</p>
+                                <p class="card-text">{{$data_arr['data'][$i]['shop_name']}}</p>
+                                <p class="card-text">{{$data_arr['data'][$i]['shop_location']}}</p>
                             </div>
                         </div>
                     </a>
                 </div>
-
-
-                <div class="carousel-item col-md-3">
-                    <div class="card">
-                        <img class="card-img-top img-fluid" src="http://placehold.it/800x600/418cf4/fff">
-                        <div class="card-body">
-                            <h4 class="card-title">Card 2</h4>
-                            <p class="card-text">This is a card content.</p>
-                            <p class="card-text">This is a card content.</p>
-                            <p class="card-text">This is a card content.</p>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                        </div>
-                    </div>
-                </div>
-
+            @endfor
             </div>
             <a class="carousel-control-prev" href="#Item-list-Tokopedia" role="button" data-slide="prev">
                 <img class="icon-prev" src="./svg/chevron-left.svg">
