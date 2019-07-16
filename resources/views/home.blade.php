@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    
+
 <div class="container justify-content-center content">
     <!-- filter -->
     <h5 class="filter-title">Filter</h5>
@@ -39,13 +39,13 @@
     </ul>
 
     <!-- Search -->
-    <form action="#" id="search" method="POST">
+    <form action="/home" method="POST">
         @csrf
         <div class="tab-content" id="pills-tabContent">
             <div class="tab-pane fade show active" id="pills-name" role="tabpanel" aria-labelledby="pills-name-tab">
                 <div class="input-group search">
-                    <input type="text" name="searchvalue" id="searchvalue" class="form-control input-search" placeholder="Nama Barang">
-                    <button class="btn btn-default" id="search_button" name="search_button" type="submit"><img class="icon-search" src="./svg/magnifying-glass.svg"></button>
+                    <input type="text" name="text_value" class="form-control input-search" placeholder="Nama Barang">
+                    <button class="btn btn-default" name="find" type="submit"><img class="icon-search" src="./svg/magnifying-glass.svg"></button>
                 </div>
             </div>
             <div class="tab-pane fade" id="pills-link" role="tabpanel" aria-labelledby="pills-link-tab">
@@ -82,6 +82,8 @@
 
             <!-- Cards -->
             <div class="carousel-inner row mx-auto">
+           
+            
             <!-- coba for print dalamnya php-->
             @for ($i = 0; $i < 10; $i++)
                 @if ($i == 0)
@@ -89,7 +91,6 @@
                 @elseif ($i > 0)
                     <div class="carousel-item col-md-3">
                 @endif
-
                     <a href="#">
                         <div class="card item">
                             <img class="card-img-top img-fluid" src="{{$data_arr['data'][$i]['image_url']}}">
@@ -222,43 +223,7 @@
                 <img class="icon-next" src="./svg/chevron-right.svg">
                 <span class="sr-only">Next</span>
             </a>
-            <div id="postRequestData"></div>
         </div>
     </div>
 </div>
-<script src="js/jquery-3.4.1.js"></script>
-<script>
-    $(document).ready(function(){
-        $('.search_button').click(function(){
-            var search = $('#searchvalue').val();
-            $.ajax({
-                type: "POST",
-                url: "home",
-                data: search,
-            }).done(function(msg){
-                alert('Data sent! ' + msg);
-                
-            });
-        });
-    });
-    // $.ajaxSetup({
-    //     headers: {
-    //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    //     }
-    // });
-    // $(document).ready(function(){
-    //     $('#search').submit(function(){
-    //         var search = $('#searchvalue').val();
-    //         $.ajax({
-    //             type: "POST",
-    //             url: "searchdata",
-    //             data: search,
-    //             success: function(data){
-    //                 console.log(data)
-    //                 $('#postRequestData').html(data);
-    //             }
-    //         });
-    //     });
-    // });
-</script>
 @endsection
