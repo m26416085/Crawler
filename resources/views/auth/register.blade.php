@@ -1,6 +1,32 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-@section('content')
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <title>{{ config('app.name', 'Laravel') }}</title>
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/jquery-3.4.1.js') }}"></script>
+
+    <!-- Fonts -->
+    <!-- <link rel="dns-prefetch" href="//fonts.gstatic.com"> -->
+    <!-- <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet"> -->
+
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/cari.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/listbarang.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/login.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/register.css') }}" rel="stylesheet">
+</head>
+<body>
 <div class="container justify-content-center container-regis">
     <h3 class="page-title">Registrasi Akun</h3>
     <form class="regis-form" method="POST" action="{{ route('register') }}">
@@ -63,6 +89,7 @@
         </div>
         <button type="submit" class="btn btn-dark btn-regis">Register</button>
     </form>
-    <button type="submit" href="#" class="btn btn-danger btn-cancel">Cancel</button> 
+    <a href="/" ><button type="submit" class="btn btn-danger btn-cancel">Cancel</button></a> 
 </div>
-@endsection
+</body>
+</html>

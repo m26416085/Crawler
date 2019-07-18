@@ -122,97 +122,26 @@
         <div id="Item-list-Shopee" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner row mx-auto">
 
-                <!-- Cards -->
-                <div class="carousel-item col-md-3 active">
-                    <div class="card">
-                        <img class="card-img-top img-fluid" src="http://placehold.it/800x600/f44242/fff">
-                        <div class="card-body">
-                            <h4 class="card-title">Card 1</h4>
-                            <p class="card-text">This is a card content.</p>
-                            <p class="card-text">This is a card content.</p>
-                            <p class="card-text">This is a card content.</p>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                        </div>
+            <!-- Cards -->
+            @for ($x = 0; $x < 10; $x++)
+            @if ($x == 0)
+            <div class="carousel-item col-md-3 active">
+            @elseif ($x > 0)
+            <div class="carousel-item col-md-3">
+            @endif
+            <a href="#">
+                <div class="card item">
+                    <img class="card-img-top img-fluid" src="{{$dataShopee_arr['data'][$x]['image_url']}}">
+                    <div class="card-body">
+                        <h4 class="card-title">{{$dataShopee_arr['data'][$x]['product_name']}}</h4>
+                        <p class="card-text">{{$dataShopee_arr['data'][$x]['price_format']}}</p>
+                        <p class="card-text">{{$dataShopee_arr['data'][$x]['shop_name']}}</p>
+                        <p class="card-text">{{$dataShopee_arr['data'][$x]['shop_location']}}</p>
                     </div>
                 </div>
-
-                <div class="carousel-item col-md-3">
-                    <div class="card">
-                        <img class="card-img-top img-fluid" src="http://placehold.it/800x600/418cf4/fff">
-                        <div class="card-body">
-                            <h4 class="card-title">Card 2</h4>
-                            <p class="card-text">This is a card content.</p>
-                            <p class="card-text">This is a card content.</p>
-                            <p class="card-text">This is a card content.</p>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="carousel-item col-md-3">
-                    <div class="card">
-                        <img class="card-img-top img-fluid" src="http://placehold.it/800x600/3ed846/fff">
-                        <div class="card-body">
-                            <h4 class="card-title">Card 3</h4>
-                            <p class="card-text">This is a card content.</p>
-                            <p class="card-text">This is a card content.</p>
-                            <p class="card-text">This is a card content.</p>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="carousel-item col-md-3">
-                    <div class="card">
-                        <img class="card-img-top img-fluid" src="http://placehold.it/800x600/42ebf4/fff">
-                        <div class="card-body">
-                            <h4 class="card-title">Card 4</h4>
-                            <p class="card-text">This is a card content.</p>
-                            <p class="card-text">This is a card content.</p>
-                            <p class="card-text">This is a card content.</p>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="carousel-item col-md-3">
-                    <div class="card">
-                        <img class="card-img-top img-fluid" src="http://placehold.it/800x600/f49b41/fff">
-                        <div class="card-body">
-                            <h4 class="card-title">Card 5</h4>
-                            <p class="card-text">This is a card content.</p>
-                            <p class="card-text">This is a card content.</p>
-                            <p class="card-text">This is a card content.</p>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="carousel-item col-md-3">
-                    <div class="card">
-                        <img class="card-img-top img-fluid" src="http://placehold.it/800x600/f4f141/fff">
-                        <div class="card-body">
-                            <h4 class="card-title">Card 6</h4>
-                            <p class="card-text">This is a card content.</p>
-                            <p class="card-text">This is a card content.</p>
-                            <p class="card-text">This is a card content.</p>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="carousel-item col-md-3">
-                    <div class="card">
-                        <img class="card-img-top img-fluid" src="http://placehold.it/800x600/8e41f4/fff">
-                        <div class="card-body">
-                            <h4 class="card-title">Card 7</h4>
-                            <p class="card-text">This is a card content.</p>
-                            <p class="card-text">This is a card content.</p>
-                            <p class="card-text">This is a card content.</p>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                        </div>
-                    </div>
-                </div>
+            </a>
+            </div>
+            @endfor
 
             </div>
             <a class="carousel-control-prev left" href="#Item-list-Shopee" role="button" data-slide="prev">

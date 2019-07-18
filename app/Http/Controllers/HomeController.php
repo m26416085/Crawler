@@ -23,12 +23,48 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $data_arr = array();
+        //Shopee
+        $dataShopee_arr = array();
+        $urlShopee ="https://shopee.co.id/api/v2/search_items/?by=relevancy&keyword=gundam&limit=10&newest=0&order=desc&page_type=search&price_max=0&price_min=0";
+        $profileShopee = http_request($urlShopee);
+        $profileShopee = json_decode($profileShopee, TRUE);
+        $x = 0;
+        foreach ($profileShopee["items"] as $profil){
+            $product_name_Shopee = $profileShopee["items"][$x]["name"];
+
+            //start get product price
+            $shopid_Shopee = $profileShopee["items"][$x]["shopid"];
+            $itemid_Shopee = $profileShopee["items"][$x]["itemid"];
             
-        //tokopedia
-    
-        $url = "https://ta.tokopedia.com/promo/v1/display/ads?user_id=0&ep=product&item=10&src=search&device=desktop&page=2&q=mouse&fshop=1";
-    
+            $url_detail_Shopee = "https://shopee.co.id/api/v2/item/get?itemid=".$itemid_Shopee."&shopid=".$shopid_Shopee;
+
+            $data_detail_Shopee = http_request($url_detail_Shopee);
+            $data_detail_Shopee = json_decode($data_detail_Shopee, TRUE);
+
+            
+            $price_Shopee = substr($data_detail_Shopee["item"]["price"], 0, -5);
+            //end get product price
+
+            $img_url_Shopee = 'https://cf.shopee.co.id/file/'.$data_detail_Shopee["item"]["image"];
+
+            //get shop name
+            $shop_detail_Shopee = 'https://shopee.co.id/api/v2/shop/get?is_brief=1&shopid='.$data_detail_Shopee["item"]["shopid"];
+            $shop_detail_Shopee = http_request($shop_detail_Shopee);
+            $shop_detail_Shopee = json_decode($shop_detail_Shopee, TRUE);
+            $shop_name_Shopee = $shop_detail_Shopee["data"]['name'];
+            $shop_location_Shopee = $data_detail_Shopee["item"]["shop_location"];
+
+            $link_detail_Shopee = 'https://shopee.co.id/'.str_replace(' ', '-', $profileShopee["items"][$x]["name"]).'-i.'.$data_detail_Shopee["item"]["shopid"].'.'.$data_detail_Shopee["item"]["itemid"];
+            $dataShopee_arr['data'][] = array('image_url' => $img_url_Shopee, 'product_name' => $product_name_Shopee, 'price_format' => $price_Shopee, 'shop_name' => $shop_name_Shopee, 'shop_location' => $shop_location_Shopee);
+            $x++;
+        }
+        //Shopee End
+
+        //Tokopedia
+        $data_arr = array();
+        //link with price filter
+        $url = "https://ta.tokopedia.com/promo/v1/display/ads?user_id=0&ep=product&item=10&src=search&device=desktop&page=2&pmin=0&pmax=0&q=mouse&fshop=1";
+        
         $profile = http_request($url);
         $profile = json_decode($profile, TRUE);
     
@@ -43,20 +79,60 @@ class HomeController extends Controller
             $data_arr['data'][] = array('image_url' => $image_url, 'product_name' => $product_name, 'price_format' => $price_format, 'shop_name' => $shop_name, 'shop_location' => $shop_location);
             $i++;
         }
-        return View::make('home', array('data_arr'=>$data_arr));
+        //Tokopedia End
+
+        return view::make('home', compact('dataShopee_arr','data_arr'));
 
     }
     public function find()
     {
         if (isset($_POST['find'])) {
+            $search = $_POST['text_value'];
+            $search = str_replace(' ', '%20', $search);
+
+            //Shopee
+            $dataShopee_arr = array();
+            $urlShopee ="https://shopee.co.id/api/v2/search_items/?by=relevancy&keyword=".$search."&limit=10&newest=0&order=desc&page_type=search&price_max=0&price_min=0";
+            $profileShopee = http_request($urlShopee);
+            $profileShopee = json_decode($profileShopee, TRUE);
+            $x = 0;
+            foreach ($profileShopee["items"] as $profil){
+                $product_name_Shopee = $profileShopee["items"][$x]["name"];
+
+                //start get product price
+                $shopid_Shopee = $profileShopee["items"][$x]["shopid"];
+                $itemid_Shopee = $profileShopee["items"][$x]["itemid"];
+                
+                $url_detail_Shopee = "https://shopee.co.id/api/v2/item/get?itemid=".$itemid_Shopee."&shopid=".$shopid_Shopee;
+
+                $data_detail_Shopee = http_request($url_detail_Shopee);
+                $data_detail_Shopee = json_decode($data_detail_Shopee, TRUE);
+
+                
+                $price_Shopee = substr($data_detail_Shopee["item"]["price"], 0, -5);
+                //end get product price
+
+                $img_url_Shopee = 'https://cf.shopee.co.id/file/'.$data_detail_Shopee["item"]["image"];
+
+                //get shop name
+                $shop_detail_Shopee = 'https://shopee.co.id/api/v2/shop/get?is_brief=1&shopid='.$data_detail_Shopee["item"]["shopid"];
+                $shop_detail_Shopee = http_request($shop_detail_Shopee);
+                $shop_detail_Shopee = json_decode($shop_detail_Shopee, TRUE);
+                $shop_name_Shopee = $shop_detail_Shopee["data"]['name'];
+                $shop_location_Shopee = $data_detail_Shopee["item"]["shop_location"];
+
+                $link_detail_Shopee = 'https://shopee.co.id/'.str_replace(' ', '-', $profileShopee["items"][$x]["name"]).'-i.'.$data_detail_Shopee["item"]["shopid"].'.'.$data_detail_Shopee["item"]["itemid"];
+                $dataShopee_arr['data'][] = array('image_url' => $img_url_Shopee, 'product_name' => $product_name_Shopee, 'price_format' => $price_Shopee, 'shop_name' => $shop_name_Shopee, 'shop_location' => $shop_location_Shopee);
+                $x++;
+            }
+            //Shopee End
+
+
+            //Tokopedia
             $data_arr = array();
             
-            //tokopedia
-            $search = $_POST['text_value'];
-        
-            $search = str_replace(' ', '%20', $search);
-        
-            $url = "https://ta.tokopedia.com/promo/v1/display/ads?user_id=0&ep=product&item=10&src=search&device=desktop&page=2&q=" . $search . "&fshop=1";
+            //link with price filter
+            $url = "https://ta.tokopedia.com/promo/v1/display/ads?user_id=0&ep=product&item=10&src=search&device=desktop&page=2&pmin=0&pmax=0&q=" . $search . "&fshop=1";
         
             $profile = http_request($url);
         
@@ -90,10 +166,10 @@ class HomeController extends Controller
                 $data_arr['data'][] = array('image_url' => $image_url, 'product_name' => $product_name, 'price_format' => $price_format, 'shop_name' => $shop_name, 'shop_location' => $shop_location);
                 $i++;
             }
-            return View::make('home', array('data_arr'=>$data_arr));
-            // print "<pre>";
-            // print_r($data_arr);
-            // print "</pre>";
+            //Tokopedia End
+
+            return view::make('home', compact('dataShopee_arr','data_arr'));
+
         }
     }
 }

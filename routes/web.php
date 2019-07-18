@@ -18,9 +18,11 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+
 Route::post('/home', 'HomeController@find');
 Route::get('/home', 'HomeController@index')->name('home');
-
+Route::get('/itemlist', 'ItemlistController@index');
+Route::get('/profile', 'ProfileController@index');
 //Route::get('/home', 'TokopediaController@index');
 //Route::get('/home', 'TokopediaController@search');
 
