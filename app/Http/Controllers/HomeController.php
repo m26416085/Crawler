@@ -57,8 +57,10 @@ class HomeController extends Controller
             $link_detail_Shopee = 'https://shopee.co.id/'.str_replace(' ', '-', $profileShopee["items"][$x]["name"]).'-i.'.$data_detail_Shopee["item"]["shopid"].'.'.$data_detail_Shopee["item"]["itemid"];
             $dataShopee_arr['data'][] = array('image_url' => $img_url_Shopee, 'product_name' => $product_name_Shopee, 'price_format' => $price_Shopee, 'shop_name' => $shop_name_Shopee, 'shop_location' => $shop_location_Shopee);
             $x++;
+            
         }
         //Shopee End
+
 
         //Tokopedia
         $data_arr = array();
@@ -78,22 +80,48 @@ class HomeController extends Controller
             
             $data_arr['data'][] = array('image_url' => $image_url, 'product_name' => $product_name, 'price_format' => $price_format, 'shop_name' => $shop_name, 'shop_location' => $shop_location);
             $i++;
+            
         }
         //Tokopedia End
-
-        return view::make('home', compact('dataShopee_arr','data_arr'));
+        $countshopee= $x;
+        $counttokped= $i;
+        return view::make('home', compact('dataShopee_arr','data_arr','countshopee','counttokped'));
 
     }
     public function find()
     {
         if (isset($_POST['find'])) {
-            $search = $_POST['text_value'];
+            $search = $_POST['search_barang'];
+            if(empty($_POST['limit'])){
+                $limit = 0;
+            }
+            else{
+                $limit = $_POST['limit'];
+            }  
+            if(empty($_POST['harga_min'])){
+                $pmin = 0;
+         
+            }
+            else{
+                $pmin = $_POST['harga_min'];
+         
+            }
+            if(empty($_POST['harga_maks'])){
+                $pmaks = 0;
+           
+            }
+            else{
+                $pmaks = $_POST['harga_maks'];
+            }
+           
             $search = str_replace(' ', '%20', $search);
 
             //Shopee
             $dataShopee_arr = array();
-            $urlShopee ="https://shopee.co.id/api/v2/search_items/?by=relevancy&keyword=".$search."&limit=10&newest=0&order=desc&page_type=search&price_max=0&price_min=0";
+            $urlShopee ="https://shopee.co.id/api/v2/search_items/?by=relevancy&keyword=".$search."&limit=".$limit."&newest=0&order=desc&page_type=search&price_max=".$pmaks."&price_min=".$pmin;
             $profileShopee = http_request($urlShopee);
+            
+            
             $profileShopee = json_decode($profileShopee, TRUE);
             $x = 0;
             foreach ($profileShopee["items"] as $profil){
@@ -107,8 +135,6 @@ class HomeController extends Controller
 
                 $data_detail_Shopee = http_request($url_detail_Shopee);
                 $data_detail_Shopee = json_decode($data_detail_Shopee, TRUE);
-
-                
                 $price_Shopee = substr($data_detail_Shopee["item"]["price"], 0, -5);
                 //end get product price
 
@@ -124,6 +150,7 @@ class HomeController extends Controller
                 $link_detail_Shopee = 'https://shopee.co.id/'.str_replace(' ', '-', $profileShopee["items"][$x]["name"]).'-i.'.$data_detail_Shopee["item"]["shopid"].'.'.$data_detail_Shopee["item"]["itemid"];
                 $dataShopee_arr['data'][] = array('image_url' => $img_url_Shopee, 'product_name' => $product_name_Shopee, 'price_format' => $price_Shopee, 'shop_name' => $shop_name_Shopee, 'shop_location' => $shop_location_Shopee);
                 $x++;
+                
             }
             //Shopee End
 
@@ -132,8 +159,8 @@ class HomeController extends Controller
             $data_arr = array();
             
             //link with price filter
-            $url = "https://ta.tokopedia.com/promo/v1/display/ads?user_id=0&ep=product&item=10&src=search&device=desktop&page=2&pmin=0&pmax=0&q=" . $search . "&fshop=1";
-        
+            $url = "https://ta.tokopedia.com/promo/v1/display/ads?user_id=0&ep=product&item=".$limit."&src=search&device=desktop&page=2&pmin=".$pmin."&pmax=".$pmaks."&q=" . $search . "&fshop=1";
+
             $profile = http_request($url);
         
             //replace JSON string to Array
@@ -165,10 +192,13 @@ class HomeController extends Controller
                 
                 $data_arr['data'][] = array('image_url' => $image_url, 'product_name' => $product_name, 'price_format' => $price_format, 'shop_name' => $shop_name, 'shop_location' => $shop_location);
                 $i++;
+               
             }
             //Tokopedia End
 
-            return view::make('home', compact('dataShopee_arr','data_arr'));
+            $countshopee= $x;
+            $counttokped= $i;
+            return view::make('home', compact('dataShopee_arr','data_arr','countshopee','counttokped'));
 
         }
     }

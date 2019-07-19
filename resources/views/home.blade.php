@@ -3,31 +3,7 @@
 @section('content')
 
 <div class="container justify-content-center content">
-    <!-- filter -->
-    <h5 class="filter-title">Filter</h5>
-    <form class="filter" method="POST">
-        <label class="label-filter">Location</label>
-        <div class="form-check form-check-inline">
-
-            <select class="filter-kota">
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
-            </select>
-
-        </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="text" id="harga-maks">
-            <label class="form-check-label" for="harga-maks">Harga Maksimal</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="text" id="harga-min">
-            <label class="form-check-label" for="harga-min">Harga Minimal</label>
-        </div>
-    </form>
-
-
+   
     <!-- Tabs -->
     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
         <li class="nav-item">
@@ -43,14 +19,46 @@
         @csrf
         <div class="tab-content" id="pills-tabContent">
             <div class="tab-pane fade show active" id="pills-name" role="tabpanel" aria-labelledby="pills-name-tab">
+            <!-- filter -->
+            <h5 class="filter-title">Filter</h5>
+            <label class="label-filter">Jumlah Barang</label>
+            <div class="form-check form-check-inline">
+
+                <select name="limit" class="filter-limit">
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="25">25</option>
+                </select>
+
+                </div>
+                <label class="label-filter">Location</label>
+                <div class="form-check form-check-inline">
+
+                    <select class="filter-kota">
+                        <option value=""></option>
+                        <option value=""></option>
+                        <option value=""></option>
+                        <option value=""></option>
+                    </select>
+
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="number" name="harga_maks" id="harga-maks">
+                    <label class="form-check-label" for="harga-maks">Harga Maksimal</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="number" name="harga_min" id="harga-min">
+                    <label class="form-check-label" for="harga-min">Harga Minimal</label>
+                </div>
                 <div class="input-group search">
-                    <input type="text" name="text_value" class="form-control input-search" placeholder="Nama Barang">
+                    <input type="text" name="search_barang" class="form-control input-search" placeholder="Nama Barang">
                     <button class="btn btn-default" name="find" type="submit"><img class="icon-search" src="./svg/magnifying-glass.svg"></button>
                 </div>
             </div>
             <div class="tab-pane fade" id="pills-link" role="tabpanel" aria-labelledby="pills-link-tab">
                 <div class="input-group search">
-                    <input type="text" class="form-control input-search" placeholder="Link Barang">
+                    <input type="text" name="search_link" class="form-control input-search" placeholder="Link Barang">
                     <button class="btn btn-default" type="button"><img class="icon-search" src="./svg/magnifying-glass.svg"></button>
                 </div>
             </div>
@@ -85,7 +93,7 @@
            
             
             <!-- coba for print dalamnya php-->
-            @for ($i = 0; $i < 10; $i++)
+            @for ($i = 0; $i < $counttokped; $i++)
                 @if ($i == 0)
                     <div class="carousel-item col-md-3 active">
                 @elseif ($i > 0)
@@ -123,7 +131,7 @@
             <div class="carousel-inner row mx-auto">
 
             <!-- Cards -->
-            @for ($x = 0; $x < 10; $x++)
+            @for ($x = 0; $x < $countshopee; $x++)
             @if ($x == 0)
             <div class="carousel-item col-md-3 active">
             @elseif ($x > 0)
