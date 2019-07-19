@@ -2,7 +2,6 @@
 
 @section('content')
 <div class="container justify-content-center content">
-
     <!-- Tabs -->
     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
         <li class="nav-item">
@@ -18,8 +17,18 @@
         @csrf
         <div class="tab-content" id="pills-tabContent">
             <div class="tab-pane fade show active" id="pills-name" role="tabpanel" aria-labelledby="pills-name-tab">
-                <!-- filter -->
-                <h5 class="filter-title">Filter</h5>
+
+            <!-- filter -->
+            <h5 class="filter-title">Filter</h5>
+            <label class="label-filter">Jumlah Barang</label>
+              <div class="form-check form-check-inline">
+                <select name="limit" class="filter-limit">
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="25">25</option>
+                </select>
+                </div>
 
                 <label class="label-filter">Location</label>
                 <div class="form-check form-check-inline">
@@ -29,24 +38,25 @@
                         <option value="{{ $city['value'] }}">{{ $city['name'] }}</option>
                         @endforeach
                     </select>
-
                 </div>
+                
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="text" id="harga-maks">
+                    <input class="form-check-input" type="number" name="harga_maks" id="harga-maks">
                     <label class="form-check-label" for="harga-maks">Harga Maksimal</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="text" id="harga-min">
+                    <input class="form-check-input" type="number" name="harga_min" id="harga-min">
                     <label class="form-check-label" for="harga-min">Harga Minimal</label>
                 </div>
                 <div class="input-group search">
                     <input type="text" name="text_value" class="form-control input-search" placeholder="Nama Barang" value="{{ str_replace('%20', ' ', $data_arr['data'][0]['keyword']) }}">
+
                     <button class="btn btn-default" name="find" type="submit"><img class="icon-search" src="./svg/magnifying-glass.svg"></button>
                 </div>
             </div>
             <div class="tab-pane fade" id="pills-link" role="tabpanel" aria-labelledby="pills-link-tab">
                 <div class="input-group search">
-                    <input type="text" class="form-control input-search" placeholder="Link Barang">
+                    <input type="text" name="search_link" class="form-control input-search" placeholder="Link Barang">
                     <button class="btn btn-default" type="button"><img class="icon-search" src="./svg/magnifying-glass.svg"></button>
                 </div>
             </div>
@@ -95,9 +105,13 @@
             <!-- Cards -->
             <div class="carousel-inner row mx-auto">
 
-                <!-- coba for print dalamnya php-->
-                @for ($i = 0; $i < 10; $i++) @if ($i==0) <div class="carousel-item col-md-3 active">
-                    @elseif ($i > 0)
+           
+            
+            <!-- coba for print dalamnya php-->
+            @for ($i = 0; $i < $counttokped; $i++)
+                @if ($i == 0)
+                    <div class="carousel-item col-md-3 active">
+                @elseif ($i > 0)
                     <div class="carousel-item col-md-3">
                         @endif
                         <a href="{{ $data_arr['data'][$i]['product_url'] }}">
@@ -151,97 +165,26 @@
         <div id="Item-list-Shopee" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner row mx-auto">
 
-                <!-- Cards -->
-                <div class="carousel-item col-md-3 active">
-                    <div class="card">
-                        <img class="card-img-top img-fluid" src="http://placehold.it/800x600/f44242/fff">
-                        <div class="card-body">
-                            <h4 class="card-title">Card 1</h4>
-                            <p class="card-text">This is a card content.</p>
-                            <p class="card-text">This is a card content.</p>
-                            <p class="card-text">This is a card content.</p>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                        </div>
+            <!-- Cards -->
+            @for ($x = 0; $x < $countshopee; $x++)
+            @if ($x == 0)
+            <div class="carousel-item col-md-3 active">
+            @elseif ($x > 0)
+            <div class="carousel-item col-md-3">
+            @endif
+            <a href="#">
+                <div class="card item">
+                    <img class="card-img-top img-fluid" src="{{$dataShopee_arr['data'][$x]['image_url']}}">
+                    <div class="card-body">
+                        <h4 class="card-title">{{$dataShopee_arr['data'][$x]['product_name']}}</h4>
+                        <p class="card-text">{{$dataShopee_arr['data'][$x]['price_format']}}</p>
+                        <p class="card-text">{{$dataShopee_arr['data'][$x]['shop_name']}}</p>
+                        <p class="card-text">{{$dataShopee_arr['data'][$x]['shop_location']}}</p>
                     </div>
                 </div>
-
-                <div class="carousel-item col-md-3">
-                    <div class="card">
-                        <img class="card-img-top img-fluid" src="http://placehold.it/800x600/418cf4/fff">
-                        <div class="card-body">
-                            <h4 class="card-title">Card 2</h4>
-                            <p class="card-text">This is a card content.</p>
-                            <p class="card-text">This is a card content.</p>
-                            <p class="card-text">This is a card content.</p>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="carousel-item col-md-3">
-                    <div class="card">
-                        <img class="card-img-top img-fluid" src="http://placehold.it/800x600/3ed846/fff">
-                        <div class="card-body">
-                            <h4 class="card-title">Card 3</h4>
-                            <p class="card-text">This is a card content.</p>
-                            <p class="card-text">This is a card content.</p>
-                            <p class="card-text">This is a card content.</p>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="carousel-item col-md-3">
-                    <div class="card">
-                        <img class="card-img-top img-fluid" src="http://placehold.it/800x600/42ebf4/fff">
-                        <div class="card-body">
-                            <h4 class="card-title">Card 4</h4>
-                            <p class="card-text">This is a card content.</p>
-                            <p class="card-text">This is a card content.</p>
-                            <p class="card-text">This is a card content.</p>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="carousel-item col-md-3">
-                    <div class="card">
-                        <img class="card-img-top img-fluid" src="http://placehold.it/800x600/f49b41/fff">
-                        <div class="card-body">
-                            <h4 class="card-title">Card 5</h4>
-                            <p class="card-text">This is a card content.</p>
-                            <p class="card-text">This is a card content.</p>
-                            <p class="card-text">This is a card content.</p>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="carousel-item col-md-3">
-                    <div class="card">
-                        <img class="card-img-top img-fluid" src="http://placehold.it/800x600/f4f141/fff">
-                        <div class="card-body">
-                            <h4 class="card-title">Card 6</h4>
-                            <p class="card-text">This is a card content.</p>
-                            <p class="card-text">This is a card content.</p>
-                            <p class="card-text">This is a card content.</p>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="carousel-item col-md-3">
-                    <div class="card">
-                        <img class="card-img-top img-fluid" src="http://placehold.it/800x600/8e41f4/fff">
-                        <div class="card-body">
-                            <h4 class="card-title">Card 7</h4>
-                            <p class="card-text">This is a card content.</p>
-                            <p class="card-text">This is a card content.</p>
-                            <p class="card-text">This is a card content.</p>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                        </div>
-                    </div>
-                </div>
+            </a>
+            </div>
+            @endfor
 
             </div>
             <a class="carousel-control-prev left" href="#Item-list-Shopee" role="button" data-slide="prev">
