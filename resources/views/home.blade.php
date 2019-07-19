@@ -65,8 +65,8 @@
 
     <!-- List-Items-Added -->
     <div class="item-container-add">
-
-        @foreach($cart_data as $cart)
+        @foreach($cartCollection as $cart)
+       
         @if($cart['name'] != 'asdfghjklkjgfds123890ythbnvdkodetokopediafwgheu3yr2t3r64ortfg')
         <form action="/home" method="POST">
             @csrf
