@@ -49,7 +49,7 @@
                     <label class="form-check-label" for="harga-min">Harga Minimal</label>
                 </div>
                 <div class="input-group search">
-                    <input type="text" name="text_value" class="form-control input-search" placeholder="Nama Barang" value="{{ str_replace('%20', ' ', $data_arr['data'][0]['keyword']) }}">
+                    <input type="text" name="text_value" class="form-control input-search" placeholder="Nama Barang" value="{{ str_replace('%20', ' ', $data_arr['data'][0]['keyword']) }}" required>
 
                     <button class="btn btn-default" name="find" type="submit"><img class="icon-search" src="./svg/magnifying-glass.svg"></button>
                 </div>
@@ -139,7 +139,7 @@
                                         <input type="hidden" name="shop_location" value="{{$data_arr['data'][$i]['shop_location']}}">
 
                                         <input type="hidden" name="text_value" value="{{ $data_arr['data'][$i]['keyword'] }}">
-
+                                        
                                         <button name="add_button" type="submit" onclick="submitForms()">Add</button>
                                     </div>
                                 </form>
@@ -164,7 +164,6 @@
         <h1 class="text-center mb-3">List Barang Shopee</h1>
         <div id="Item-list-Shopee" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner row mx-auto">
-
             <!-- Cards -->
             @for ($x = 0; $x < $countshopee; $x++)
             @if ($x == 0)
@@ -174,13 +173,31 @@
             @endif
             <a href="#">
                 <div class="card item">
-                    <img class="card-img-top img-fluid" src="{{$dataShopee_arr['data'][$x]['image_url']}}">
-                    <div class="card-body">
-                        <h4 class="card-title">{{$dataShopee_arr['data'][$x]['product_name']}}</h4>
-                        <p class="card-text">{{$dataShopee_arr['data'][$x]['price_format']}}</p>
-                        <p class="card-text">{{$dataShopee_arr['data'][$x]['shop_name']}}</p>
-                        <p class="card-text">{{$dataShopee_arr['data'][$x]['shop_location']}}</p>
-                    </div>
+                    <form action="/home" method="POST">
+                    @csrf
+                        <img class="card-img-top img-fluid" src="{{$dataShopee_arr['data'][$x]['image_url']}}">
+                        <input type="hidden" name="image_url" value="{{ $dataShopee_arr['data'][$x]['image_url'] }}">
+                        <div class="card-body">
+                            <input type="hidden" name="id" value="{{ $dataShopee_arr['data'][$x]['id'] }}">
+
+                            <h4 class="card-title">{{$dataShopee_arr['data'][$x]['product_name']}}</h4>
+                            <input type="hidden" name="product_name" value="{{ $dataShopee_arr['data'][$x]['product_name'] }}">
+
+                            <p class="card-text">{{$dataShopee_arr['data'][$x]['price_format']}}</p>
+                            <input type="hidden" name="price_format" value="{{ $dataShopee_arr['data'][$x]['price_format'] }}">
+                            <input type="hidden" name="price" value="{{$dataShopee_arr['data'][$x]['price']}}">
+
+                            <p class="card-text">{{$dataShopee_arr['data'][$x]['shop_name']}}</p>
+                            <input type="hidden" name="shop_name" value="{{ $dataShopee_arr['data'][$x]['shop_name'] }}">
+
+                            <p class="card-text">{{$dataShopee_arr['data'][$x]['shop_location']}}</p>
+                            <input type="hidden" name="shop_location" value="{{ $dataShopee_arr['data'][$x]['shop_location'] }}">
+
+                            <input type="hidden" name="text_value" value="{{ $dataShopee_arr['data'][$x]['keyword'] }}">
+
+                            <button name="add_button" type="submit">Add</button>
+                        </div>
+                    </form>
                 </div>
             </a>
             </div>

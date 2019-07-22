@@ -30,11 +30,12 @@ class HomeController extends Controller
 
         //Shopee
         $dataShopee_arr = array();
-        $urlShopee ="https://shopee.co.id/api/v2/search_items/?by=relevancy&keyword=gundam&limit=10&newest=0&order=desc&page_type=search&price_max=0&price_min=0";
+        $urlShopee ="https://shopee.co.id/api/v2/search_items/?by=relevancy&keyword=mouse&limit=10&newest=0&order=desc&page_type=search&price_max=0&price_min=0";
         $profileShopee = http_request($urlShopee);
         $profileShopee = json_decode($profileShopee, TRUE);
         $x = 0;
         foreach ($profileShopee["items"] as $profil){
+            $product_id_Shopee = $profileShopee['items'][$x]['itemid'];
             $product_name_Shopee = $profileShopee["items"][$x]["name"];
 
             //start get product price
@@ -60,7 +61,12 @@ class HomeController extends Controller
             $shop_location_Shopee = $data_detail_Shopee["item"]["shop_location"];
 
             $link_detail_Shopee = 'https://shopee.co.id/'.str_replace(' ', '-', $profileShopee["items"][$x]["name"]).'-i.'.$data_detail_Shopee["item"]["shopid"].'.'.$data_detail_Shopee["item"]["itemid"];
-            $dataShopee_arr['data'][] = array('image_url' => $img_url_Shopee, 'product_name' => $product_name_Shopee, 'price_format' => $price_Shopee, 'shop_name' => $shop_name_Shopee, 'shop_location' => $shop_location_Shopee);
+            
+            $search = "mouse";
+            
+            $product_url_Shopee = "#";
+
+            $dataShopee_arr['data'][] = array('id' => $product_id_Shopee, 'image_url' => $img_url_Shopee, 'product_name' => $product_name_Shopee, 'price_format' => $price_Shopee, 'price' => $price_Shopee, 'shop_name' => $shop_name_Shopee, 'shop_location' => $shop_location_Shopee, 'product_url' => $product_url_Shopee, 'keyword' => $search);
             $x++;
             
         }
@@ -130,6 +136,7 @@ class HomeController extends Controller
         //Tokopedia End
         $countshopee= $x;
         $counttokped= $i;
+
         
         return view::make('home', compact('dataShopee_arr','data_arr','countshopee','counttokped','cartCollection','data_city'));
 
@@ -172,6 +179,7 @@ class HomeController extends Controller
             $profileShopee = json_decode($profileShopee, TRUE);
             $x = 0;
             foreach ($profileShopee["items"] as $profil){
+                $product_id_Shopee = $profileShopee['items'][$x]['itemid'];
                 $product_name_Shopee = $profileShopee["items"][$x]["name"];
 
                 //start get product price
@@ -195,7 +203,12 @@ class HomeController extends Controller
                 $shop_location_Shopee = $data_detail_Shopee["item"]["shop_location"];
 
                 $link_detail_Shopee = 'https://shopee.co.id/'.str_replace(' ', '-', $profileShopee["items"][$x]["name"]).'-i.'.$data_detail_Shopee["item"]["shopid"].'.'.$data_detail_Shopee["item"]["itemid"];
-                $dataShopee_arr['data'][] = array('image_url' => $img_url_Shopee, 'product_name' => $product_name_Shopee, 'price_format' => $price_Shopee, 'shop_name' => $shop_name_Shopee, 'shop_location' => $shop_location_Shopee);
+                
+                $search = "mouse";
+            
+                $product_url_Shopee = "#";
+                
+                $dataShopee_arr['data'][] = array('id' => $product_id_Shopee, 'image_url' => $img_url_Shopee, 'product_name' => $product_name_Shopee, 'price_format' => $price_Shopee, 'price' => $price_Shopee, 'shop_name' => $shop_name_Shopee, 'shop_location' => $shop_location_Shopee, 'product_url' => $product_url_Shopee, 'keyword' => $search);
                 $x++;
                 
             }
@@ -245,15 +258,16 @@ class HomeController extends Controller
 
             //new loop
             $i = 0;
-            foreach ($profile["data"] as $profil) {
-                $id = $profile['data']['products'][$i]['id'];
-                $image_url = $profile['data']['products'][$i]['image_url'];
-                $product_name = $profile['data']['products'][$i]['name'];
-                $price_format = $profile['data']['products'][$i]['price'];
-                $price = $profile['data']['products'][$i]['price_int'];
-                $shop_name = $profile['data']['products'][$i]['shop']['name'];
-                $shop_location = $profile['data']['products'][$i]['shop']['location'];
-                $product_url = $profile['data']['products'][$i]['url'];
+
+            foreach ($profile["data"]['products'] as $profil) {
+                $id = $profil['id'];
+                $image_url = $profil['image_url'];
+                $product_name = $profil['name'];
+                $price_format = $profil['price'];
+                $price = $profil['price_int'];
+                $shop_name = $profil['shop']['name'];
+                $shop_location = $profil['shop']['location'];
+                $product_url = $profil['url'];
 
                 // ads item
                 // $id = $profile['data'][$i]['product']['id'];
@@ -371,6 +385,7 @@ class HomeController extends Controller
             $profileShopee = json_decode($profileShopee, TRUE);
             $x = 0;
             foreach ($profileShopee["items"] as $profil){
+                $product_id_Shopee = $profileShopee['items'][$x]['itemid'];
                 $product_name_Shopee = $profileShopee["items"][$x]["name"];
 
                 //start get product price
@@ -394,7 +409,12 @@ class HomeController extends Controller
                 $shop_location_Shopee = $data_detail_Shopee["item"]["shop_location"];
 
                 $link_detail_Shopee = 'https://shopee.co.id/'.str_replace(' ', '-', $profileShopee["items"][$x]["name"]).'-i.'.$data_detail_Shopee["item"]["shopid"].'.'.$data_detail_Shopee["item"]["itemid"];
-                $dataShopee_arr['data'][] = array('image_url' => $img_url_Shopee, 'product_name' => $product_name_Shopee, 'price_format' => $price_Shopee, 'shop_name' => $shop_name_Shopee, 'shop_location' => $shop_location_Shopee);
+                
+                $search = "mouse";
+            
+                $product_url_Shopee = "#";
+
+                $dataShopee_arr['data'][] = array('id' =>$product_id_Shopee, 'image_url' => $img_url_Shopee, 'product_name' => $product_name_Shopee, 'price_format' => $price_Shopee, 'price' => $price_Shopee, 'shop_name' => $shop_name_Shopee, 'shop_location' => $shop_location_Shopee, 'product_url' => $product_url, 'keyword' => $search);
                 $x++;
                 
             }
@@ -520,6 +540,7 @@ class HomeController extends Controller
             $profileShopee = json_decode($profileShopee, TRUE);
             $x = 0;
             foreach ($profileShopee["items"] as $profil){
+                $product_id_Shopee = $profileShopee['items'][$x]['name'];
                 $product_name_Shopee = $profileShopee["items"][$x]["name"];
 
                 //start get product price
@@ -543,7 +564,12 @@ class HomeController extends Controller
                 $shop_location_Shopee = $data_detail_Shopee["item"]["shop_location"];
 
                 $link_detail_Shopee = 'https://shopee.co.id/'.str_replace(' ', '-', $profileShopee["items"][$x]["name"]).'-i.'.$data_detail_Shopee["item"]["shopid"].'.'.$data_detail_Shopee["item"]["itemid"];
-                $dataShopee_arr['data'][] = array('image_url' => $img_url_Shopee, 'product_name' => $product_name_Shopee, 'price_format' => $price_Shopee, 'shop_name' => $shop_name_Shopee, 'shop_location' => $shop_location_Shopee);
+                
+                $search = "mouse";
+            
+                $product_url_Shopee = "#";
+                
+                $dataShopee_arr['data'][] = array('id' => $product_id_Shopee, 'image_url' => $img_url_Shopee, 'product_name' => $product_name_Shopee, 'price_format' => $price_Shopee, 'price' => $price_Shopee, 'shop_name' => $shop_name_Shopee, 'shop_location' => $shop_location_Shopee, 'product_url' => $product_url, 'keyword' => $search);
                 $x++;
                 
             }
