@@ -50,10 +50,10 @@
             </tr>
             <tr>       
                 <td> <label>Harga Maksimal</label> </td>
-                <td> <input class="form-control" type="number" name="harga_maks" id="harga-maks"> </td>
+                <td> <input class="form-control" type="number" name="harga_maks" id="harga-maks" value="{{$data_arr['data'][0]['keyword_max']}}"> </td>
              
                 <td> <label>Harga Minimal</label> </td>
-                <td> <input class="form-control" type="number" name="harga_min" id="harga-min"> </td>
+                <td> <input class="form-control" type="number" name="harga_min" id="harga-min" value="{{$data_arr['data'][0]['keyword_min']}}"> </td>
             </tr>
             </table>
                 <div class="input-group search">
@@ -96,6 +96,10 @@
 
                     <input type="hidden" name="keyword_value_location_tokopedia" value="{{ $cart['attributes']['keyword_value_location_tokopedia'] }}">
                     <input type="hidden" name="keyword_value_location_shopee" value="{{ $cart['attributes']['keyword_value_location_shopee'] }}">
+
+                    <input type="hidden" name="keyword_max" value="{{ $cart['attributes']['keyword_max'] }}">
+                    <input type="hidden" name="keyword_min" value="{{ $cart['attributes']['keyword_min'] }}">
+                
                 </div>
                 <div class="col-sm-2">
                     <!-- <a class="item-deletebtn" ><img class="icon-delete" src="./svg/delete.svg"></a> -->
@@ -149,6 +153,9 @@
                                         
                                         <input type="hidden" name="keyword_value_location_tokopedia" value="{{ $data_arr['data'][$i]['keyword_value_location_tokopedia'] }}">
                                         <input type="hidden" name="keyword_value_location_shopee" value="{{ $data_arr['data'][$i]['keyword_value_location_shopee'] }}">
+
+                                        <input type="hidden" name="keyword_max" value="{{ $data_arr['data'][$i]['keyword_max'] }}">
+                                        <input type="hidden" name="keyword_min" value="{{ $data_arr['data'][$i]['keyword_min'] }}">
 
                                         <button class="btn btn-add" name="add_button" type="submit" onclick="submitForms()">Tambah<img class="icon-add" src="./svg/plus.svg"></button>
 
@@ -209,6 +216,9 @@
                             <input type="hidden" name="keyword_value_location_tokopedia" value="{{ $data_arr['data'][$x]['keyword_value_location_tokopedia'] }}">
                             <input type="hidden" name="keyword_value_location_shopee" value="{{ $data_arr['data'][$x]['keyword_value_location_shopee'] }}">
                             
+                            <input type="hidden" name="keyword_max" value="{{ $data_arr['data'][$x]['keyword_max'] }}">
+                            <input type="hidden" name="keyword_min" value="{{ $data_arr['data'][$x]['keyword_min'] }}">
+
                             <button name="add_button" type="submit">Add</button>
                         </div>
                     </form>

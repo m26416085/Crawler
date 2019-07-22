@@ -73,7 +73,10 @@ class HomeController extends Controller
             $city_value_tokopedia = "174,175,176,177,178,179";
             $city_value_shopee = "DKI Jakarta";
 
-            $dataShopee_arr['data'][] = array('id' => $product_id_Shopee, 'image_url' => $img_url_Shopee, 'product_name' => $product_name_Shopee, 'price_format' => $price_Shopee, 'price' => $price_Shopee, 'shop_name' => $shop_name_Shopee, 'shop_location' => $shop_location_Shopee, 'product_url' => $product_url_Shopee, 'keyword' => $search, 'keyword_value_location_tokopedia' => $city_value_tokopedia, 'keyword_value_location_shopee' => $city_value_shopee);
+            $keyword_max = 0;
+            $keyword_min = 0;
+
+            $dataShopee_arr['data'][] = array('id' => $product_id_Shopee, 'image_url' => $img_url_Shopee, 'product_name' => $product_name_Shopee, 'price_format' => $price_Shopee, 'price' => $price_Shopee, 'shop_name' => $shop_name_Shopee, 'shop_location' => $shop_location_Shopee, 'product_url' => $product_url_Shopee, 'keyword' => $search, 'keyword_value_location_tokopedia' => $city_value_tokopedia, 'keyword_value_location_shopee' => $city_value_shopee, 'keyword_max' => $keyword_max, 'keyword_min' => $keyword_min);
             $x++;
             
         }
@@ -147,7 +150,10 @@ class HomeController extends Controller
             $city_value_shopee = "DKI Jakarta";
             $city_value_tokopedia = "174,175,176,177,178,179";
 
-            $data_arr['data'][] = array('id' => $id, 'image_url' => $image_url, 'product_name' => $product_name, 'price_format' => $price_format, 'price' => $price, 'shop_name' => $shop_name, 'shop_location' => $shop_location, 'product_url' => $product_url, 'keyword' => $search, 'keyword_value_location_tokopedia' => $city_value_tokopedia, 'keyword_value_location_shopee' => $city_value_shopee);
+            $keyword_max = 0;
+            $keyword_min = 0;
+
+            $data_arr['data'][] = array('id' => $id, 'image_url' => $image_url, 'product_name' => $product_name, 'price_format' => $price_format, 'price' => $price, 'shop_name' => $shop_name, 'shop_location' => $shop_location, 'product_url' => $product_url, 'keyword' => $search, 'keyword_value_location_tokopedia' => $city_value_tokopedia, 'keyword_value_location_shopee' => $city_value_shopee, 'keyword_max' => $keyword_max, 'keyword_min' => $keyword_min);
             $i++;
             
         }
@@ -234,7 +240,7 @@ class HomeController extends Controller
             
                 $product_url_Shopee = "#";
                 
-                $dataShopee_arr['data'][] = array('id' => $product_id_Shopee, 'image_url' => $img_url_Shopee, 'product_name' => $product_name_Shopee, 'price_format' => $price_Shopee, 'price' => $price_Shopee, 'shop_name' => $shop_name_Shopee, 'shop_location' => $shop_location_Shopee, 'product_url' => $product_url_Shopee, 'keyword' => $search, 'keyword_value_location_tokopedia' => $city_value[0], 'keyword_value_location_shopee' => $city_value[1]);
+                $dataShopee_arr['data'][] = array('id' => $product_id_Shopee, 'image_url' => $img_url_Shopee, 'product_name' => $product_name_Shopee, 'price_format' => $price_Shopee, 'price' => $price_Shopee, 'shop_name' => $shop_name_Shopee, 'shop_location' => $shop_location_Shopee, 'product_url' => $product_url_Shopee, 'keyword' => $search, 'keyword_value_location_tokopedia' => $city_value[0], 'keyword_value_location_shopee' => $city_value[1], 'keyword_max' => $pmaks, 'keyword_min' => $pmin);
                 $x++;
                 
             }
@@ -304,7 +310,7 @@ class HomeController extends Controller
                 // $shop_name = $profile['data'][$i]['shop']['name'];
                 // $shop_location = $profile['data'][$i]['shop']['location'];
                 
-                $data_arr['data'][] = array('id' => $id, 'image_url' => $image_url, 'product_name' => $product_name, 'price_format' => $price_format, 'price' => $price, 'shop_name' => $shop_name, 'shop_location' => $shop_location, 'product_url' => $product_url, 'keyword' => $search, 'keyword_value_location_tokopedia' => $city_value[0], 'keyword_value_location_shopee' => $city_value[1]);
+                $data_arr['data'][] = array('id' => $id, 'image_url' => $image_url, 'product_name' => $product_name, 'price_format' => $price_format, 'price' => $price, 'shop_name' => $shop_name, 'shop_location' => $shop_location, 'product_url' => $product_url, 'keyword' => $search, 'keyword_value_location_tokopedia' => $city_value[0], 'keyword_value_location_shopee' => $city_value[1], 'keyword_max' => $pmaks, 'keyword_min' => $pmin);
                 $i++;
                
             }
@@ -362,12 +368,16 @@ class HomeController extends Controller
             // change space into %2520 for shopee location
             $city_value_shopee = str_replace(' ', '%2520', $city_value_shopee);
 
+            // get max and min price from home
+            $keyword_max = $_POST['keyword_max'];
+            $keyword_min = $_POST['keyword_min'];
+
             //tokopedia
             $search = $_POST['text_value'];
 
             $search = str_replace(' ', '%20', $search);
         
-            $url = "https://ace.tokopedia.com/search/product/v3?scheme=https&device=desktop&related=true&catalog_rows=5&source=search&ob=23&st=product&rows=200&start=0&fcity=".$city_value_tokopedia."&q=" .$search. "&unique_id=a5e21c08aa434ccda179065dc7e41c73&safe_search=false";
+            $url = "https://ace.tokopedia.com/search/product/v3?scheme=https&device=desktop&related=true&catalog_rows=5&source=search&ob=23&st=product&rows=200&start=0&fcity=".$city_value_tokopedia."&q=" .$search. "&pmin=".$keyword_min."&pmax=".$keyword_max."&unique_id=a5e21c08aa434ccda179065dc7e41c73&safe_search=false";
             
             // ads url
             // $url = "https://ta.tokopedia.com/promo/v1/display/ads?user_id=0&ep=product&item=10&src=search&device=desktop&page=2&q=" . $search . "&fshop=1";
@@ -398,18 +408,19 @@ class HomeController extends Controller
                 // $shop_name = $profile['data'][$i]['shop']['name'];
                 // $shop_location = $profile['data'][$i]['shop']['location'];
                 
-                $data_arr['data'][] = array('id' => $id, 'image_url' => $image_url, 'product_name' => $product_name, 'price_format' => $price_format, 'price' => $price, 'shop_name' => $shop_name, 'shop_location' => $shop_location, 'product_url' => $product_url, 'keyword' => $search, 'keyword_value_location_tokopedia' => $city_value_tokopedia, 'keyword_value_location_shopee' => $city_value_shopee);
+                $data_arr['data'][] = array('id' => $id, 'image_url' => $image_url, 'product_name' => $product_name, 'price_format' => $price_format, 'price' => $price, 'shop_name' => $shop_name, 'shop_location' => $shop_location, 'product_url' => $product_url, 'keyword' => $search, 'keyword_value_location_tokopedia' => $city_value_tokopedia, 'keyword_value_location_shopee' => $city_value_shopee, 'keyword_max' => $keyword_max, 'keyword_min' => $keyword_min);
                 $i++;
             }
 
             //Shopee
             $dataShopee_arr = array();
-            $urlShopee ="https://shopee.co.id/api/v2/search_items/?by=relevancy&keyword=".$search."&locations=".$city_value_shopee."&limit=".$limit."&newest=0&order=desc&page_type=search&price_max=".$pmaks."&price_min=".$pmin;
+            $urlShopee ="https://shopee.co.id/api/v2/search_items/?by=relevancy&keyword=".$search."&locations=".$city_value_shopee."&limit=".$limit."&newest=0&order=desc&page_type=search&price_max=".$keyword_max."&price_min=".$keyword_min;
             $profileShopee = http_request($urlShopee);
             
             
             $profileShopee = json_decode($profileShopee, TRUE);
             $x = 0;
+
             foreach ($profileShopee["items"] as $profil){
                 $product_id_Shopee = $profileShopee['items'][$x]['itemid'];
                 $product_name_Shopee = $profileShopee["items"][$x]["name"];
@@ -438,7 +449,7 @@ class HomeController extends Controller
             
                 $product_url_Shopee = "#";
 
-                $dataShopee_arr['data'][] = array('id' =>$product_id_Shopee, 'image_url' => $img_url_Shopee, 'product_name' => $product_name_Shopee, 'price_format' => $price_Shopee, 'price' => $price_Shopee, 'shop_name' => $shop_name_Shopee, 'shop_location' => $shop_location_Shopee, 'product_url' => $product_url, 'keyword' => $search, 'keyword_value_location_tokopedia' => $city_value_tokopedia, 'keyword_value_location_shopee' => $city_value_shopee);
+                $dataShopee_arr['data'][] = array('id' =>$product_id_Shopee, 'image_url' => $img_url_Shopee, 'product_name' => $product_name_Shopee, 'price_format' => $price_Shopee, 'price' => $price_Shopee, 'shop_name' => $shop_name_Shopee, 'shop_location' => $shop_location_Shopee, 'product_url' => $product_url, 'keyword' => $search, 'keyword_value_location_tokopedia' => $city_value_tokopedia, 'keyword_value_location_shopee' => $city_value_shopee, 'keyword_max' => $keyword_max, 'keyword_min' => $keyword_min);
                 $x++;
                 
             }
@@ -466,6 +477,8 @@ class HomeController extends Controller
                     'keyword' => $search,
                     'keyword_value_location_tokopedia' => $city_value_tokopedia,
                     'keyword_value_location_shopee' => $city_value_shopee,
+                    'keyword_max' => $keyword_max,
+                    'keyword_min' => $keyword_min,
                     'product_url' => $product_url
                 )
             ));
@@ -515,13 +528,17 @@ class HomeController extends Controller
             // change space into %2520 for shopee location
             $city_value_shopee = str_replace(' ', '%2520', $city_value_shopee);
 
+            // get max and min price from home
+            $keyword_max = $_POST['keyword_max'];
+            $keyword_min = $_POST['keyword_min'];
+
             
             //tokopedia
             $search = $_POST['text_value'];
         
             $search = str_replace(' ', '%20', $search);
         
-            $url = "https://ace.tokopedia.com/search/product/v3?scheme=https&device=desktop&related=true&catalog_rows=5&source=search&ob=23&st=product&rows=200&start=0&fcity=".$city_value_tokopedia."&q=" .$search. "&unique_id=a5e21c08aa434ccda179065dc7e41c73&safe_search=false";
+            $url = "https://ace.tokopedia.com/search/product/v3?scheme=https&device=desktop&related=true&catalog_rows=5&source=search&ob=23&st=product&rows=200&start=0&fcity=".$city_value_tokopedia."&q=" .$search."&pmin=".$keyword_min."&pmax=".$keyword_max. "&unique_id=a5e21c08aa434ccda179065dc7e41c73&safe_search=false";
             
             // ads url
             // $url = "https://ta.tokopedia.com/promo/v1/display/ads?user_id=0&ep=product&item=10&src=search&device=desktop&page=2&q=" . $search . "&fshop=1";
@@ -554,13 +571,13 @@ class HomeController extends Controller
                 // $shop_name = $profile['data'][$i]['shop']['name'];
                 // $shop_location = $profile['data'][$i]['shop']['location'];
                 
-                $data_arr['data'][] = array('id' => $id, 'image_url' => $image_url, 'product_name' => $product_name, 'price_format' => $price_format, 'price' => $price, 'shop_name' => $shop_name, 'shop_location' => $shop_location, 'product_url' => $product_url, 'keyword' => $search, 'keyword_value_location_tokopedia' => $city_value_tokopedia, 'keyword_value_location_shopee' => $city_value_shopee);
+                $data_arr['data'][] = array('id' => $id, 'image_url' => $image_url, 'product_name' => $product_name, 'price_format' => $price_format, 'price' => $price, 'shop_name' => $shop_name, 'shop_location' => $shop_location, 'product_url' => $product_url, 'keyword' => $search, 'keyword_value_location_tokopedia' => $city_value_tokopedia, 'keyword_value_location_shopee' => $city_value_shopee, 'keyword_max' => $keyword_max, 'keyword_min' => $keyword_min);
                 $i++;
             }
 
             //Shopee
             $dataShopee_arr = array();
-            $urlShopee ="https://shopee.co.id/api/v2/search_items/?by=relevancy&keyword=".$search."&locations=".$city_value_shopee."&limit=".$limit."&newest=0&order=desc&page_type=search&price_max=".$pmaks."&price_min=".$pmin;
+            $urlShopee ="https://shopee.co.id/api/v2/search_items/?by=relevancy&keyword=".$search."&locations=".$city_value_shopee."&limit=".$limit."&newest=0&order=desc&page_type=search&price_max=".$keyword_max."&price_min=".$keyword_min;
             $profileShopee = http_request($urlShopee);
             
             
@@ -594,7 +611,7 @@ class HomeController extends Controller
             
                 $product_url_Shopee = "#";
                 
-                $dataShopee_arr['data'][] = array('id' => $product_id_Shopee, 'image_url' => $img_url_Shopee, 'product_name' => $product_name_Shopee, 'price_format' => $price_Shopee, 'price' => $price_Shopee, 'shop_name' => $shop_name_Shopee, 'shop_location' => $shop_location_Shopee, 'product_url' => $product_url, 'keyword' => $search, 'keyword_value_location_tokopedia' => $city_value_tokopedia, 'keyword_value_location_shopee' => $city_value_shopee);
+                $dataShopee_arr['data'][] = array('id' => $product_id_Shopee, 'image_url' => $img_url_Shopee, 'product_name' => $product_name_Shopee, 'price_format' => $price_Shopee, 'price' => $price_Shopee, 'shop_name' => $shop_name_Shopee, 'shop_location' => $shop_location_Shopee, 'product_url' => $product_url, 'keyword' => $search, 'keyword_value_location_tokopedia' => $city_value_tokopedia, 'keyword_value_location_shopee' => $city_value_shopee, 'keyword_max' => $keyword_max, 'keyword_min' => $keyword_min);
                 $x++;
                 
             }
