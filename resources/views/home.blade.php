@@ -19,35 +19,44 @@
             <div class="tab-pane fade show active" id="pills-name" role="tabpanel" aria-labelledby="pills-name-tab">
 
             <!-- filter -->
-            <h5 class="filter-title">Filter</h5>
-            <label class="label-filter">Jumlah Barang</label>
-              <div class="form-check form-check-inline">
-                <select name="limit" class="filter-limit">
-                    <option value="5">5</option>
-                    <option value="10">10</option>
-                    <option value="15">15</option>
-                    <option value="25">25</option>
-                </select>
-                </div>
-
-                <label class="label-filter">Location</label>
+            <table>
+            <tr>
+                <td><h5 class="filter-title">Filter</h5></td>
+            </tr>
+            <tr>
+                <td><label class="label-filter">Jumlah Barang</label></td>
+                <td>
                 <div class="form-check form-check-inline">
-                    <select class="filter-kota" name="location">
-                        <option value="">Semua</option>
-                        @foreach($data_city['data']['filter'][0]['options'] as $city)
-                        <option value="{{ $city['value'] }}">{{ $city['name'] }}</option>
-                        @endforeach
+                    <select name="limit" class="form-control filter-limit">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="25">25</option>
                     </select>
                 </div>
-                
+                </td>
+            </tr>
+            <tr>
+                <td><label class="label-filter">Lokasi</label></td>
+                <td>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="number" name="harga_maks" id="harga-maks">
-                    <label class="form-check-label" for="harga-maks">Harga Maksimal</label>
+                <select class="form-control filter-kota" name="location">
+                    <option value="">Semua</option>
+                    @foreach($data_city['data']['filter'][0]['options'] as $city)
+                    <option value="{{ $city['value'] }}">{{ $city['name'] }}</option>
+                    @endforeach
+                </select>
                 </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="number" name="harga_min" id="harga-min">
-                    <label class="form-check-label" for="harga-min">Harga Minimal</label>
-                </div>
+                </td>
+            </tr>
+            <tr>       
+                <td> <label>Harga Maksimal</label> </td>
+                <td> <input class="form-control" type="number" name="harga_maks" id="harga-maks"> </td>
+             
+                <td> <label>Harga Minimal</label> </td>
+                <td> <input class="form-control" type="number" name="harga_min" id="harga-min"> </td>
+            </tr>
+            </table>
                 <div class="input-group search">
                     <input type="text" name="text_value" class="form-control input-search" placeholder="Nama Barang" value="{{ str_replace('%20', ' ', $data_arr['data'][0]['keyword']) }}">
 
@@ -68,13 +77,13 @@
         @foreach($cartCollection as $cart)
        
         @if($cart['name'] != 'asdfghjklkjgfds123890ythbnvdkodetokopediafwgheu3yr2t3r64ortfg')
-        <form action="/home" method="POST">
-            @csrf
             <div class="row row-add">
+            <form action="/home" method="POST" class="form-cart">
+            @csrf
                 <div class="col-sm-4">
                     <img class="item-add-img" src="{{ $cart['attributes']['image_url'] }}">
                 </div>
-                <div class="col-sm-7">
+                <div class="col-sm-6">
                     <input type="hidden" name="id_delete" value="{{ $cart['id'] }}">
 
                     <p class="text-namabarang-add">{{ $cart['name'] }}</p>
@@ -86,12 +95,12 @@
 
                     <input type="hidden" name="text_value" value="{{ $cart['attributes']['keyword'] }}">
                 </div>
-                <div class="col-sm-1">
+                <div class="col-sm-2">
                     <!-- <a class="item-deletebtn" ><img class="icon-delete" src="./svg/delete.svg"></a> -->
-                    <button name="delete_button" type="submit">Delete</button>
+                    <button class="btn btn-del" name="delete_button" type="submit">Hapus<img class="icon-delete" src="./svg/delete.svg"></button>
                 </div>
+                </form>
             </div>
-        </form>
         @endif
         @endforeach
 
@@ -104,17 +113,13 @@
 
             <!-- Cards -->
             <div class="carousel-inner row mx-auto">
-
-           
-            
-            <!-- coba for print dalamnya php-->
             @for ($i = 0; $i < $counttokped; $i++)
                 @if ($i == 0)
                     <div class="carousel-item col-md-3 active">
                 @elseif ($i > 0)
                     <div class="carousel-item col-md-3">
                         @endif
-                        <a href="{{ $data_arr['data'][$i]['product_url'] }}">
+                        <a target="_blank" href="{{ $data_arr['data'][$i]['product_url'] }}">
                             <div class="card item">
                                 <form action="/home" method="POST" id="list_tokopedia_form">
                                     @csrf
@@ -140,7 +145,7 @@
 
                                         <input type="hidden" name="text_value" value="{{ $data_arr['data'][$i]['keyword'] }}">
 
-                                        <button name="add_button" type="submit" onclick="submitForms()">Add</button>
+                                        <button class="btn btn-add" name="add_button" type="submit" onclick="submitForms()">Tambah<img class="icon-add" src="./svg/plus.svg"></button>
                                     </div>
                                 </form>
                             </div>
