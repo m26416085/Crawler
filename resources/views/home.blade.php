@@ -41,9 +41,8 @@
                 <td>
                 <div class="form-check form-check-inline">
                 <select class="form-control filter-kota" name="location">
-                    <option value="">Semua</option>
-                    @foreach($data_city['data']['filter'][0]['options'] as $city)
-                    <option value="{{ $city['value'] }}">{{ $city['name'] }}</option>
+                    @foreach($city_data['city'] as $city)
+                        <option value="{{ $city['value_tokopedia'] }}|{{ $city['value_shopee'] }}|{{ $city['name'] }}">{{ $city['name'] }}</option>
                     @endforeach
                 </select>
                 </div>
@@ -94,6 +93,9 @@
                     <input type="hidden" name="shop_location" value="{{ $cart['attributes']['shop_location'] }}">
 
                     <input type="hidden" name="text_value" value="{{ $cart['attributes']['keyword'] }}">
+
+                    <input type="hidden" name="keyword_value_location_tokopedia" value="{{ $cart['attributes']['keyword_value_location_tokopedia'] }}">
+                    <input type="hidden" name="keyword_value_location_shopee" value="{{ $cart['attributes']['keyword_value_location_shopee'] }}">
                 </div>
                 <div class="col-sm-2">
                     <!-- <a class="item-deletebtn" ><img class="icon-delete" src="./svg/delete.svg"></a> -->
@@ -144,6 +146,9 @@
                                         <input type="hidden" name="shop_location" value="{{$data_arr['data'][$i]['shop_location']}}">
 
                                         <input type="hidden" name="text_value" value="{{ $data_arr['data'][$i]['keyword'] }}">
+                                        
+                                        <input type="hidden" name="keyword_value_location_tokopedia" value="{{ $data_arr['data'][$i]['keyword_value_location_tokopedia'] }}">
+                                        <input type="hidden" name="keyword_value_location_shopee" value="{{ $data_arr['data'][$i]['keyword_value_location_shopee'] }}">
 
                                         <button class="btn btn-add" name="add_button" type="submit" onclick="submitForms()">Tambah<img class="icon-add" src="./svg/plus.svg"></button>
 
@@ -201,6 +206,9 @@
 
                             <input type="hidden" name="text_value" value="{{ $dataShopee_arr['data'][$x]['keyword'] }}">
 
+                            <input type="hidden" name="keyword_value_location_tokopedia" value="{{ $data_arr['data'][$x]['keyword_value_location_tokopedia'] }}">
+                            <input type="hidden" name="keyword_value_location_shopee" value="{{ $data_arr['data'][$x]['keyword_value_location_shopee'] }}">
+                            
                             <button name="add_button" type="submit">Add</button>
                         </div>
                     </form>
