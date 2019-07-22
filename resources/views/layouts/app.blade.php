@@ -41,24 +41,22 @@
                     <div class="container-link">
                         <a href="/profile">Profile</a>
                     </div>
-                </div>
-                <!-- Navbar-End -->
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
+                    <div class="container-link">
                         @guest
                         @else
-                            <a class="btn-logout" href="{{ route('logout') }}"
-                                onclick="event.preventDefault();
-                                                document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
+                            <a class="btn-logout" href="{{ route('logout') }}" 
+                            onclick="event.preventDefault(); 
+                            document.getElementById('logout-form').submit();">
+                                Logout
                             </a>
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
                             </form>                    
                         @endguest
-                    </ul>
+                    </div>
+                </div>
+                <!-- Navbar-End -->
                 </div>
             </div>
         </nav>
