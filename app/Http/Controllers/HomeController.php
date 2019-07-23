@@ -28,7 +28,7 @@ class HomeController extends Controller
     public function index()
     {
 
-        $city_url = "https://api.myjson.com/bins/oazhh";
+        $city_url = "https://api.myjson.com/bins/8cnk5";
         $city_data = http_request($city_url);
         $city_data = json_decode($city_data, TRUE);
         
@@ -193,7 +193,7 @@ class HomeController extends Controller
             $search = str_replace(' ', '%20', $search);
 
             // list all city
-            $city_url = "https://api.myjson.com/bins/oazhh";
+            $city_url = "https://api.myjson.com/bins/8cnk5";
             $city_data = http_request($city_url);
             $city_data = json_decode($city_data, TRUE);
 
@@ -333,7 +333,7 @@ class HomeController extends Controller
         if (isset($_POST['find_link'])) {
              
          // list all city
-         $city_url = "https://api.myjson.com/bins/oazhh";
+         $city_url = "https://api.myjson.com/bins/8cnk5";
          $city_data = http_request($city_url);
          $city_data = json_decode($city_data, TRUE);
 
@@ -463,7 +463,7 @@ class HomeController extends Controller
         if (isset($_POST['add_button'])){
 
               // list all city
-              $city_url = "https://api.myjson.com/bins/oazhh";
+              $city_url = "https://api.myjson.com/bins/8cnk5";
               $city_data = http_request($city_url);
               $city_data = json_decode($city_data, TRUE);
               // get city value from home
@@ -711,7 +711,7 @@ class HomeController extends Controller
         if (isset($_POST['delete_button'])){
 
             // list all city
-            $city_url = "https://api.myjson.com/bins/oazhh";
+            $city_url = "https://api.myjson.com/bins/8cnk5";
             $city_data = http_request($city_url);
             $city_data = json_decode($city_data, TRUE);
             // get city value from home
