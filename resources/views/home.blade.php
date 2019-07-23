@@ -49,15 +49,14 @@
                     <label class="form-check-label" for="harga-min">Harga Minimal</label>
                 </div>
                 <div class="input-group search">
-                    <input type="text" name="text_value" class="form-control input-search" placeholder="Nama Barang" value="{{ str_replace('%20', ' ', $data_arr['data'][0]['keyword']) }}">
-
+                    <input type="text" name="text_value" class="form-control input-search" placeholder="Nama Barang">
                     <button class="btn btn-default" name="find" type="submit"><img class="icon-search" src="./svg/magnifying-glass.svg"></button>
                 </div>
             </div>
             <div class="tab-pane fade" id="pills-link" role="tabpanel" aria-labelledby="pills-link-tab">
                 <div class="input-group search">
                     <input type="text" name="search_link" class="form-control input-search" placeholder="Link Barang">
-                    <button class="btn btn-default" type="button"><img class="icon-search" src="./svg/magnifying-glass.svg"></button>
+                    <button class="btn btn-default" name="find_link" type="submit"><img class="icon-search" src="./svg/magnifying-glass.svg"></button>
                 </div>
             </div>
         </div>
@@ -104,10 +103,49 @@
 
             <!-- Cards -->
             <div class="carousel-inner row mx-auto">
+<<<<<<< Updated upstream
 
            
             
             <!-- coba for print dalamnya php-->
+=======
+                @if($counttokped==0)
+                <div class="carousel-item col-md-3 active">
+                    <a target="_blank" href="{{ $data_arr['data'][0]['product_url'] }}">
+                        <div class="card item">
+                            <form action="/home" method="POST" id="list_tokopedia_form">
+                                @csrf
+                                <input type="hidden" name="product_url" value="{{$data_arr['data'][0]['product_url']}}">
+                                <img class="card-img-top img-fluid" src="{{$data_arr['data'][0]['image_url']}}">
+                                <input type="hidden" name="image_url" value="{{$data_arr['data'][0]['image_url']}}">
+                                <div class="card-body">
+                                    <input type="hidden" name="id" value="{{$data_arr['data'][0]['id']}}">
+
+                                    <h4 class="card-title">{{$data_arr['data'][0]['product_name']}}</h4>
+                                    <input type="hidden" name="product_name" value="{{$data_arr['data'][0]['product_name']}}">
+
+                                    <p class="card-text">{{$data_arr['data'][0]['price_format']}}</p>
+                                    <input type="hidden" name="price_format" value="{{$data_arr['data'][0]['price_format']}}">
+
+                                    <p class="card-text" hidden>{{$data_arr['data'][0]['price']}}</p>
+                                    <input type="hidden" name="price" value="{{$data_arr['data'][0]['price']}}">
+
+                                    <p class="card-text">{{$data_arr['data'][0]['shop_name']}}</p>
+                                    <input type="hidden" name="shop_name" value="{{$data_arr['data'][0]['shop_name']}}">
+
+                                    <p class="card-text">{{$data_arr['data'][0]['shop_location']}}</p>
+                                    <input type="hidden" name="shop_location" value="{{$data_arr['data'][0]['shop_location']}}">
+
+                                    <input type="hidden" name="text_value" value="{{ $data_arr['data'][0]['keyword'] }}">
+
+                                    <button class="btn btn-add" name="add_button" type="submit" onclick="submitForms()">Tambah<img class="icon-add" src="./svg/plus.svg"></button>
+                                </div>
+                            </form>
+                        </div>
+                    </a>
+                </div>
+                @elseif ($counttokped > 0)
+>>>>>>> Stashed changes
             @for ($i = 0; $i < $counttokped; $i++)
                 @if ($i == 0)
                     <div class="carousel-item col-md-3 active">
@@ -118,6 +156,7 @@
                             <div class="card item">
                                 <form action="/home" method="POST" id="list_tokopedia_form">
                                     @csrf
+                                    <input type="hidden" name="product_url" value="{{$data_arr['data'][$i]['product_url']}}">
                                     <img class="card-img-top img-fluid" src="{{$data_arr['data'][$i]['image_url']}}">
                                     <input type="hidden" name="image_url" value="{{$data_arr['data'][$i]['image_url']}}">
                                     <div class="card-body">
@@ -147,6 +186,7 @@
                         </a>
                     </div>
                     @endfor
+                    @endif
             </div>
             <a class="carousel-control-prev" href="#Item-list-Tokopedia" role="button" data-slide="prev">
                 <img class="icon-prev" src="./svg/chevron-left.svg">
@@ -166,6 +206,23 @@
             <div class="carousel-inner row mx-auto">
 
             <!-- Cards -->
+         
+            @if ($countshopee==0)
+
+            <div class="carousel-item col-md-3 active">
+            <a href="#">
+                <div class="card item">
+                    <img class="card-img-top img-fluid" src="{{$dataShopee_arr['data'][0]['image_url']}}">
+                    <div class="card-body">
+                        <h4 class="card-title">{{$dataShopee_arr['data'][0]['product_name']}}</h4>
+                        <p class="card-text">{{$dataShopee_arr['data'][0]['price_format']}}</p>
+                        <p class="card-text">{{$dataShopee_arr['data'][0]['shop_name']}}</p>
+                        <p class="card-text">{{$dataShopee_arr['data'][0]['shop_location']}}</p>
+                    </div>
+                </div>
+            </a>
+            </div>
+            @elseif ($countshopee>0)
             @for ($x = 0; $x < $countshopee; $x++)
             @if ($x == 0)
             <div class="carousel-item col-md-3 active">
@@ -185,7 +242,7 @@
             </a>
             </div>
             @endfor
-
+            @endif
             </div>
             <a class="carousel-control-prev left" href="#Item-list-Shopee" role="button" data-slide="prev">
                 <img class="icon-next" src="./svg/chevron-left.svg">
