@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use View;
+
 class ItemlistController extends Controller
 {
    /**
@@ -24,6 +26,9 @@ class ItemlistController extends Controller
      */
     public function index()
     {
-        return view('itemlist');
+
+        $cartCollection = \Cart::getContent();
+    
+        return view::make('itemlist', compact('cartCollection'));
     }
 }
