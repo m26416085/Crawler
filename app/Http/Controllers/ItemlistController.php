@@ -26,9 +26,10 @@ class ItemlistController extends Controller
      */
     public function index()
     {
-
         $cartCollection = \Cart::getContent();
     
-        return view::make('itemlist', compact('cartCollection'));
+        $itemCount = $cartCollection->count();
+        $itemCount = $itemCount-1;
+        return view::make('itemlist', compact('cartCollection','itemCount'));
     }
 }
