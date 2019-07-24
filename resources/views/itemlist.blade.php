@@ -4,5 +4,6 @@
 
 <div class="container justify-content-center content">
    <h3>List Barang</h3>
+
 </div>
 @endsection
