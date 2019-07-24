@@ -6,7 +6,7 @@
    <h3>List Barang</h3>
    
    <div class="item-container-search-Tokopedia">
-        <h1 class="text-center mb-3">List Barang Tokopedia</h1>
+        <h1 class="text-center mb-3">{{$keyword}}</h1>
         <div id="Item-list-Tokopedia" class="carousel slide" data-ride="carousel">
 
             <!-- Cards -->

@@ -29,7 +29,17 @@ class ItemlistController extends Controller
         $cartCollection = \Cart::getContent();
     
         $itemCount = $cartCollection->count();
+
+        $counter=0;
+        foreach($cartCollection as $cart){
+            $keyword = $cart['attributes']['keyword'];
+            if($counter==2){
+                break;
+            }
+            $counter++;
+        }
+        
         $itemCount = $itemCount-1;
-        return view::make('itemlist', compact('cartCollection','itemCount'));
+        return view::make('itemlist', compact('cartCollection','itemCount','keyword'));
     }
 }

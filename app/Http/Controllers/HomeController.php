@@ -110,6 +110,7 @@ class HomeController extends Controller
                 'keyword_min' => 0,
                 'keyword_value_location_tokopedia' => '175',
                 'keyword_value_location_shopee' => 'DKI Jakarta',
+                'keyword' => 'List Kosong',
                 'product_url' => "////"
             )
         ));
