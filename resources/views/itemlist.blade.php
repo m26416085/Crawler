@@ -8,6 +8,10 @@
    <div class="item-container-search-Tokopedia">
         <h1 class="text-center mb-3">{{$keyword}}</h1>
         <div id="Item-list-Tokopedia" class="carousel slide" data-ride="carousel">
+            
+            @foreach ($products as $product)
+            <p>{{$product->product_name}}</p>
+            @endforeach
 
             <!-- Cards -->
             <div class="carousel-inner row mx-auto">

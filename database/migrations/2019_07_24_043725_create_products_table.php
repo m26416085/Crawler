@@ -20,7 +20,8 @@ class CreateProductsTable extends Migration
             $table->string('shop_name');
             $table->string('shop_location');
             $table->string('product_url');
-            $table->integer('id_search')->references('id')->on('searches');
+            $table->integer('id_search')->unsigned();
+            $table->foreign('id_search')->references('id')->on('searches');
             $table->timestamps();
         });
     }
