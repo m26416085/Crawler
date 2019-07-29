@@ -26,7 +26,7 @@
     <link href="{{ asset('css/login.css') }}" rel="stylesheet">
     <link href="{{ asset('css/register.css') }}" rel="stylesheet">
 </head>
-<body>
+<body onload="myFunction()">
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white">
                 <!-- Navbar -->

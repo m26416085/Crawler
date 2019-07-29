@@ -9,6 +9,7 @@ use Darryldecode\Cart\Cart;
 use App\Product;
 use App\Search;
 use View;
+use App\Price_History;
 
 class ItemlistController extends Controller
 {
@@ -44,8 +45,9 @@ class ItemlistController extends Controller
         //get from db
         $products = DB::table('products')->get();
         $sections= DB::table('searches')->get();
+        $price_histories = DB::table('price__histories')->get();
 
-        return view::make('itemlist', compact('cartCollection','keyword','products','sections'));
+        return view::make('itemlist', compact('cartCollection','keyword','products','sections', 'price_histories'));
     }
     public function insert()
     {   
@@ -79,12 +81,19 @@ class ItemlistController extends Controller
                 $product->id_search = $search->id;
                 $product->id_user = auth()->user()->id;
                 $product->save();
+
+                $history = new Price_History();
+                $history->id_product = $product->id;
+                $history->price = $cart['price'];
+                $history->id_user = auth()->user()->id;
+                $history->save();
             }
         }
         
         //get from db
         $products = DB::table('products')->get();
         $sections= DB::table('searches')->get();
+        $price_histories = DB::table('price__histories')->get();
         
         // clear cart item after save to db
         \Cart::clear();
@@ -109,11 +118,54 @@ class ItemlistController extends Controller
             )
         ));
 
-        $cartCollection = \Cart::getContent();
+            $cartCollection = \Cart::getContent();
 
-        $cartCollection->toArray();
+            $cartCollection->toArray();
 
-        return view::make('itemlist', compact('cartCollection','keyword','products','sections'));
+            return view::make('itemlist', compact('cartCollection','keyword','products','sections', 'price_histories'));
+        }
+
+        if(isset($_POST['delete_button'])){
+
+            $sections= DB::table('searches')->get();
+            $products = DB::table('products')->get();
+            $price_histories = DB::table('price__histories')->get();
+
+            $delete_id = $_POST['delete_id'];
+
+            foreach($products as $product){
+                if($product->id_search == $delete_id){
+                    // delete product id
+                    //Product::find($product->id)->delete();
+                    
+                    foreach($price_histories as $history){
+                        if ($product->id == $history->id_product){
+                            // delete price history
+                            //Price_History::find($history->id)->delete();
+                            Price_History::destroy($history->id);
+                        }
+                    }
+                    Product::destroy($product->id);
+                }
+                
+            }
+
+            
+
+            // delete search id
+            Search::destroy($delete_id);
+
+            $cartCollection = \Cart::getContent();
+
+            $cartCollection->toArray();
+
+            $sections= DB::table('searches')->get();
+            $products = DB::table('products')->get();
+            $price_histories = DB::table('price__histories')->get();
+
+
+            return view::make('itemlist', compact('cartCollection','products','sections', 'price_histories'));
+
         }
     }
 }
