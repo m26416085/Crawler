@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Darryldecode\Cart\Cart;
 use App\Product;
 use App\Search;
 use View;
@@ -82,6 +83,33 @@ class ItemlistController extends Controller
         //get from db
         $products = DB::table('products')->get();
         $sections= DB::table('searches')->get();
+        
+        // clear cart item after save to db
+        \Cart::clear();
+
+        // add default cart item so cart wouldn't get any error 
+        \Cart::add(array(
+            'id' => 9999,
+            'name' => "asdfghjklkjgfds123890ythbnvdkodetokopediafwgheu3yr2t3r64ortfg",
+            'price' => 100000,
+            'quantity' => 1,
+            'attributes' => array(
+                'image_url' => "////",
+                'price_format' => "Rp. 100000",
+                'shop_name' => "ertertrtrgv",
+                'shop_location' => "ghrtyrghjnvfg",
+                'keyword_max' => 0,
+                'keyword_min' => 0,
+                'keyword_value_location_tokopedia' => '175',
+                'keyword_value_location_shopee' => 'DKI Jakarta',
+                'keyword' => 'List Kosong',
+                'product_url' => "////"
+            )
+        ));
+
+        $cartCollection = \Cart::getContent();
+
+        $cartCollection->toArray();
 
         return view::make('itemlist', compact('cartCollection','keyword','products','sections'));
         }
