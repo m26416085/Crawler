@@ -18,6 +18,8 @@ class CreatePriceHistoriesTable extends Migration
             $table->integer('id_product')->unsigned();
             $table->foreign('id_product')->references('id')->on('products');
             $table->integer('price');
+            $table->integer('id_user')->unsigned();
+            $table->foreign('id_user')->references('id')->on('users');
             $table->timestamps();
         });
     }

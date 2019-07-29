@@ -60,6 +60,7 @@ class ItemlistController extends Controller
             if($counter==2){
                 $search = new Search();
                 $search->keyword = $keyword;
+                $search->id_user = auth()->user()->id;
                 $search->save();
                 break;
             }
@@ -76,6 +77,7 @@ class ItemlistController extends Controller
                 $product->shop_location = $cart['attributes']['shop_location'];
                 $product->product_url = $cart['attributes']['product_url'];
                 $product->id_search = $search->id;
+                $product->id_user = auth()->user()->id;
                 $product->save();
             }
         }
