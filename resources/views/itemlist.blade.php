@@ -53,6 +53,7 @@
 
    <!-- data from database -->
         @foreach ($sections as $section)
+        @if (auth()->user()->id == $section->id_user)
         <div class="item-container">
         <h1 class="text-center mb-3">{{str_replace('%20', ' ', $section->keyword)}}</h1>
         <div id="Item-list-{{$section->id}}" class="carousel slide" data-ride="carousel">
@@ -98,6 +99,7 @@
             </a>
         </div>
     </div>
+    @endif
     @endforeach
     </div>           
     
