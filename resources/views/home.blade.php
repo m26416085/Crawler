@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container justify-content-center content">
+<div class="container justify-content-center content" id="content">
     <!-- Tabs -->
     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
         <li class="nav-item">
@@ -340,9 +340,18 @@
     </div>
     @endif
 </div>
+<div id="loader"></div>
 <script>
     submitForms = function(){
         document.getElementById('filter_form')
+    }
+    var myVar;
+    function myFunction() {
+        myVar = setTimeout(showPage, 3000);
+    }
+    function showPage() {
+        document.getElementById("loader").style.display = "none";
+        document.getElementById("content").style.display = "block";
     }
 </script>
 @endsection
