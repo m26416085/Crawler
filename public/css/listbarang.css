@@ -9,3 +9,19 @@
 .list-item-container{
     width: 100%;
 }
+.btn-save{
+    text-align: right;
+    margin-left: 90%;
+    padding: 3px;
+    display: inline-block;
+    background-color: #333;
+}
+.btn-save:hover{
+    background-color: #333;
+}
+.btn{
+    transition: text-shadow .3s;
+}
+.btn-save:hover{
+    text-shadow: 0 0 .65px #333, 0 0 .65px #333;
+}

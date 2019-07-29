@@ -34,11 +34,14 @@ body {
     width: 100px;
     margin-left: 390px;
 }
-.regis-form{
-    margin-top: 10%;
-}
 .btn-register{
     text-decoration: none;
     color: #333333;
 }
-
+.invalid-feedback{
+    display:block;
+}
+.error-message{
+    margin: 5px;
+    
+}

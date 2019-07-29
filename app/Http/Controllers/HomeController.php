@@ -163,8 +163,22 @@ class HomeController extends Controller
         //Tokopedia End
         $countshopee= $x;
         $counttokped= $i;
+
+        //cek data empty
+        if(empty($data_arr)){
+            $tokpedisempty=true;
+        }
+        else{
+            $tokpedisempty=false;
+        }
+        if(empty($dataShopee_arr)){
+            $shopeeisempty=true;
+        }
+        else{
+            $shopeeisempty=false;
+        }
     
-        return view::make('home', compact('dataShopee_arr','data_arr','countshopee','counttokped','cartCollection', 'city_data'));
+        return view::make('home', compact('dataShopee_arr','data_arr','countshopee','counttokped','cartCollection', 'city_data', 'tokpedisempty', 'shopeeisempty'));
 
 
     }
@@ -315,16 +329,27 @@ class HomeController extends Controller
             }
 
             //Tokopedia End
-
             $countshopee= $x;
             $counttokped= $i;
-            
 
+            //cek data empty
+            if(empty($data_arr)){
+                $tokpedisempty=true;
+            }
+            else{
+                $tokpedisempty=false;
+            }
+            if(empty($dataShopee_arr)){
+                $shopeeisempty=true;
+            }
+            else{
+                $shopeeisempty=false;
+            }
             
             $cartCollection = \Cart::getContent();
 
             $cartCollection->toArray();
-            return view::make('home', compact('dataShopee_arr','data_arr','countshopee','counttokped','cartCollection','city_data'));
+            return view::make('home', compact('dataShopee_arr','data_arr','countshopee','counttokped','cartCollection','city_data','tokpedisempty','shopeeisempty'));
 
 
         }
@@ -458,7 +483,21 @@ class HomeController extends Controller
        
             $cartCollection->toArray();
 
-            return view::make('home', compact('dataShopee_arr','data_arr','countshopee','counttokped','cartCollection','city_data'));
+            //cek data empty
+            if(empty($data_arr)){
+                $tokpedisempty=true;
+            }
+            else{
+                $tokpedisempty=false;
+            }
+            if(empty($dataShopee_arr)){
+                $shopeeisempty=true;
+            }
+            else{
+                $shopeeisempty=false;
+            }
+
+            return view::make('home', compact('dataShopee_arr','data_arr','countshopee','counttokped','cartCollection','city_data','tokpedisempty','shopeeisempty'));
         }
 
         if (isset($_POST['add_button'])){
@@ -673,7 +712,20 @@ class HomeController extends Controller
                 $countshopee = $x;
             }
            
-
+            //cek data empty
+            if(empty($data_arr)){
+                $tokpedisempty=true;
+            }
+            else{
+                $tokpedisempty=false;
+            }
+            if(empty($dataShopee_arr)){
+                $shopeeisempty=true;
+            }
+            else{
+                $shopeeisempty=false;
+            }
+            
             //cart
             $id = $_POST['id'];
             $image_url = $_POST['image_url'];
@@ -702,12 +754,12 @@ class HomeController extends Controller
                     'product_url' => $product_url
                 )
             ));
-    
+            
             $cartCollection = \Cart::getContent();
            
             $cartCollection->toArray();
            
-            return view::make('home', compact('dataShopee_arr','data_arr','countshopee','counttokped','cartCollection','city_data'));
+            return view::make('home', compact('dataShopee_arr','data_arr','countshopee','counttokped','cartCollection','city_data','tokpedisempty','shopeeisempty'));
         }
         if (isset($_POST['delete_button'])){
 
@@ -921,13 +973,27 @@ class HomeController extends Controller
                 $countshopee = $x;
             }
 
+            //cek data empty
+            if(empty($data_arr)){
+                $tokpedisempty=true;
+            }
+            else{
+                $tokpedisempty=false;
+            }
+            if(empty($dataShopee_arr)){
+                $shopeeisempty=true;
+            }
+            else{
+                $shopeeisempty=false;
+            }
+
             $delete_id = $_POST['id_delete'];
 
             \Cart::remove($delete_id);
             
             $cartCollection = \Cart::getContent();
             $cartCollection->toArray();
-            return view::make('home', compact('dataShopee_arr','data_arr','countshopee','counttokped','cartCollection','city_data'));
+            return view::make('home', compact('dataShopee_arr','data_arr','countshopee','counttokped','cartCollection','city_data','tokpedisempty','shopeeisempty'));
 
         }
     }

@@ -31,6 +31,7 @@
     top: 0;
     left: 0;
     transition: 0.5s;
+    background-color: #f7f7f7;
 }
 .sidenav a {
     padding: 8px 8px 8px;
@@ -122,9 +123,12 @@
     padding: 0px;
     font-size: 15px;
 }
-.btn-add:hover{
+.btn-add{
     text-decoration: none;
-    color: #45c93e;
+    background-color: #45c93e;
+    height: 35px;
+    padding-left: 2px;
+    padding-right: 2px;
 }
 .btn-del{
     display:block;
@@ -143,6 +147,9 @@
 }   
 .row{
     margin-bottom: 20px;
+}
+.border-cart{
+    padding-right: 20px;
 }
 
 /* carousel css */
@@ -197,6 +204,7 @@
     width: 10px;
     height: 10px;
     margin-left: 2px;
+    fill: #ffffff;
 }
 .carousel-item{ 
     margin-right: 0px !important;
@@ -205,7 +213,7 @@
 }
 .card{
     width: 100%;
-    height: 400px;
+    height: 370px;
     text-decoration: none;
     color: #333333;
 }
@@ -218,10 +226,20 @@ a:hover{
 }
 .card-title{
     font-size: 16px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    color: black;
 }
 .card-text{
     margin: 0px;
     font-size: 16px;
+    color: black;
+}
+.card-text-namatoko{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 .carousel-control-next{
     margin-right: -100px;

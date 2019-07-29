@@ -4,69 +4,102 @@
 
 <div class="container justify-content-center content">
    <h3>List Barang</h3>
-   
-   <div class="item-container-search-Tokopedia">
-        <h1 class="text-center mb-3">{{$keyword}}</h1>
-        <div id="Item-list-Tokopedia" class="carousel slide" data-ride="carousel">
-            
-            @foreach ($products as $product)
-            <p>{{$product->product_name}}</p>
-            @endforeach
-
+   <!-- data from cart -->
+        <div class="item-container-cart">
+            <form method="POST" action="/itemlist">
+            @csrf
+            <button class="btn btn-primary btn-save" name="save" type="submit">Simpan</button>
+            </form>
+        <h1 class="text-center mb-3">Cart</h1>
+        <div id="Item-list-cart" class="carousel slide" data-ride="carousel">
+            <?php $counter=0; ?>
             <!-- Cards -->
             <div class="carousel-inner row mx-auto">
             @foreach ($cartCollection as $cart)
-                @if($cart['name'] != 'asdfghjklkjgfds123890ythbnvdkodetokopediafwgheu3yr2t3r64ortfg')
-                  <div class="carousel-item col-md-3 active">
-                     <a target="_blank" href="{{ $cart['attributes']['product_url'] }}">
-                           <div class="card item">
-                              <form action="/home" method="POST" id="list_tokopedia_form">
-                                 @csrf
-                                 <input type="hidden" name="product_url" value="{{$cart['attributes']['product_url']}}">
-                                 <img class="card-img-top img-fluid" src="{{$cart['attributes']['image_url']}}">
-                                 <input type="hidden" name="image_url" value="{{$cart['attributes']['image_url']}}">
-                                 <div class="card-body">
-                                       <input type="hidden" name="id" value="{{$cart['id']}}">
-
-                                       <h4 class="card-title">{{$cart['name']}}</h4>
-                                       <input type="hidden" name="product_name" value="{{$cart['name']}}">
-
-                                       <p class="card-text">{{$cart['attributes']['price_format']}}</p>
-                                       <input type="hidden" name="price_format" value="{{$cart['attributes']['price_format']}}">
-
-                                       <p class="card-text" hidden>{{$cart['price']}}</p>
-                                       <input type="hidden" name="price" value="{{$cart['price']}}">
-
-                                       <p class="card-text">{{$cart['attributes']['shop_name']}}</p>
-                                       <input type="hidden" name="shop_name" value="{{$cart['attributes']['shop_name']}}">
-
-                                       <p class="card-text">{{$cart['attributes']['shop_location']}}</p>
-                                       <input type="hidden" name="shop_location" value="{{$cart['attributes']['shop_location']}}">
-
-                                       <input type="hidden" name="text_value" value="{{ $cart['attributes']['keyword'] }}">
-                                       
-                                       <input type="hidden" name="keyword_value_location_tokopedia" value="{{ $cart['attributes']['keyword_value_location_tokopedia'] }}">
-                                       <input type="hidden" name="keyword_value_location_shopee" value="{{ $cart['attributes']['keyword_value_location_shopee'] }}">
-
-                                       <input type="hidden" name="keyword_max" value="{{ $cart['attributes']['keyword_max'] }}">
-                                       <input type="hidden" name="keyword_min" value="{{ $cart['attributes']['keyword_min'] }}">
-                                 </div>
-                              </form>
-                           </div>
-                     </a>
-                  </div>
-            @endif
-            @endforeach
-            </div>
-            <a class="carousel-control-prev" href="#Item-list-Tokopedia" role="button" data-slide="prev">
+                    @if ($cart['name'] != 'asdfghjklkjgfds123890ythbnvdkodetokopediafwgheu3yr2t3r64ortfg')
+                        @if ($counter==0)
+                            <div class="carousel-item col-md-3 active">
+                            <?php $counter=1; ?>
+                        @elseif ($counter==1)
+                            <div class="carousel-item col-md-3">
+                        @endif
+                            <a target="_blank" href="{{$cart['attributes']['product_url']}}">
+                                <div class="card item">
+                                        <img class="card-img-top img-fluid" src="{{$cart['attributes']['image_url']}}">
+                                        <div class="card-body">
+                                            <h4 class="card-title">{{$cart['name']}}</h4>
+                                            <p class="card-text">333</p>
+                                            <p class="card-text" hidden>3333333</p>
+                                            <p class="card-text">{{$cart['attributes']['shop_name']}}</p>
+                                            <p class="card-text">{{$cart['attributes']['shop_location']}}</p>                   
+                                        </div>
+                                </div>
+                            </a>
+                            </div> 
+                    @endif
+                @endforeach
+                </div>
+            <a class="carousel-control-prev" href="#Item-list-cart" role="button" data-slide="prev">
                 <img class="icon-prev" src="./svg/chevron-left.svg">
                 <span class="sr-only">Previous</span>
             </a>
-            <a class="carousel-control-next" href="#Item-list-Tokopedia" role="button" data-slide="next">
+            <a class="carousel-control-next" href="#Item-list-cart" role="button" data-slide="next">
                 <img class="icon-next" src="./svg/chevron-right.svg">
                 <span class="sr-only">Next</span>
             </a>
         </div>
     </div>
-</div>
+
+
+   <!-- data from database -->
+        @foreach ($sections as $section)
+        <div class="item-container">
+        <h1 class="text-center mb-3">{{str_replace('%20', ' ', $section->keyword)}}</h1>
+        <div id="Item-list-{{$section->id}}" class="carousel slide" data-ride="carousel">
+            <?php $counter=0; ?>
+            <!-- Cards -->
+            <div class="carousel-inner row mx-auto">
+            @foreach ($products as $product)
+                 @if ($section->id == $product->id_search)
+                    @if ($product->product_name != 'asdfghjklkjgfds123890ythbnvdkodetokopediafwgheu3yr2t3r64ortfg')
+                        @if ($counter==0)
+                            <div class="carousel-item col-md-3 active">
+                            <?php $counter=1; ?>
+                        @elseif ($counter==1)
+                            <div class="carousel-item col-md-3">
+                        @endif
+                                <a target="_blank" href="{{$product->product_url}}">
+                                    <div class="card item">
+                                        <form action="/itemlist" method="POST" id="list_tokopedia_form">
+                                            @csrf
+                                            <img class="card-img-top img-fluid" src="{{$product->image_url}}">
+                                            <div class="card-body">
+                                                <h4 class="card-title">{{$product->product_name}}</h4>
+                                                <p class="card-text">333</p>
+                                                <p class="card-text" hidden>3333333</p>
+                                                <p class="card-text">{{$product->shop_name}}</p>
+                                                <p class="card-text">{{$product->shop_location}}</p>               
+                                            </div>
+                                        </form>
+                                    </div>
+                                </a>
+                            </div> 
+                    @endif
+                    @endif
+                @endforeach
+                </div>
+            <a class="carousel-control-prev" href="#Item-list-{{$section->id}}" role="button" data-slide="prev">
+                <img class="icon-prev" src="./svg/chevron-left.svg">
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#Item-list-{{$section->id}}" role="button" data-slide="next">
+                <img class="icon-next" src="./svg/chevron-right.svg">
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+    @endforeach
+    </div>           
+    
+   
 @endsection

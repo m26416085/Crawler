@@ -27,13 +27,35 @@ class ItemlistController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {
+    {   
+        //get from cart   
         $cartCollection = \Cart::getContent();
-        
         $counter=0;
+        //take the first keyword
         foreach($cartCollection as $cart){
             $keyword = $cart['attributes']['keyword'];
-           
+            if($counter==1){
+                break;
+            }
+            $counter++;
+        }
+        
+        //get from db
+        $products = DB::table('products')->get();
+        $sections= DB::table('searches')->get();
+
+        return view::make('itemlist', compact('cartCollection','keyword','products','sections'));
+    }
+    public function insert()
+    {   
+        if(isset($_POST['save'])){
+        //get from cart   
+        $cartCollection = \Cart::getContent();
+        $counter=0;
+        
+        //insert to search
+        foreach($cartCollection as $cart){
+            $keyword = $cart['attributes']['keyword'];
             if($counter==2){
                 $search = new Search();
                 $search->keyword = $keyword;
@@ -42,6 +64,8 @@ class ItemlistController extends Controller
             }
             $counter++;
         }
+    
+        //insert to product
         foreach($cartCollection as $cart){
             if($cart['name']!='asdfghjklkjgfds123890ythbnvdkodetokopediafwgheu3yr2t3r64ortfg'){
                 $product = new Product();
@@ -54,8 +78,12 @@ class ItemlistController extends Controller
                 $product->save();
             }
         }
-        $products = DB::table('products')->get();
         
-        return view::make('itemlist', compact('cartCollection','itemCount','keyword','products'));
+        //get from db
+        $products = DB::table('products')->get();
+        $sections= DB::table('searches')->get();
+
+        return view::make('itemlist', compact('cartCollection','keyword','products','sections'));
+        }
     }
 }

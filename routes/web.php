@@ -19,6 +19,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::post('/itemlist','ItemlistController@insert');
 Route::post('/home', 'HomeController@find');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/itemlist', 'ItemlistController@index');
@@ -26,9 +27,9 @@ Route::get('/profile', 'ProfileController@index');
 //Route::get('/home', 'TokopediaController@index');
 //Route::get('/home', 'TokopediaController@search');
 
-Route::post('/searchdata', function(){
-    if(Request::ajax()){
-        //return Response::json(Request::all());
-        return response(Request::all())->header('Content-type', 'text/plain');
-    }
-});
+// Route::post('/searchdata', function(){
+//     if(Request::ajax()){
+//         //return Response::json(Request::all());
+//         return response(Request::all())->header('Content-type', 'text/plain');
+//     }
+// });
