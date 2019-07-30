@@ -59,7 +59,7 @@ class ItemlistController extends Controller
         //insert to search
         foreach($cartCollection as $cart){
             $keyword = $cart['attributes']['keyword'];
-            if($counter==1){
+            if($cart['attributes']['keyword'] != "List Kosong"){
                 $search = new Search();
                 $search->keyword = $keyword;
                 $search->id_user = auth()->user()->id;
