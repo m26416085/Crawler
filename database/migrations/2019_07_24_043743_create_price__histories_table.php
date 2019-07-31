@@ -15,11 +15,9 @@ class CreatePriceHistoriesTable extends Migration
     {
         Schema::create('price__histories', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('id_product')->unsigned();
-            $table->foreign('id_product')->references('id')->on('products');
+            $table->string('url_product');
             $table->integer('price');
-            $table->integer('id_user')->unsigned();
-            $table->foreign('id_user')->references('id')->on('users');
+            $table->integer('id_user')->nullable();
             $table->timestamps();
         });
     }

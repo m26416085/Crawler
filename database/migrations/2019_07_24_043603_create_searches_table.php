@@ -17,8 +17,7 @@ class CreateSearchesTable extends Migration
             $table->bigIncrements('id');
             $table->timestamps();
             $table->string('keyword');
-            $table->integer('id_user')->unsigned();
-            $table->foreign('id_user')->references('id')->on('users');
+            $table->integer('id_user')->nullable();
         });
     }
 

@@ -58,7 +58,9 @@
         @if (auth()->user()->id == $section->id_user)
             <div class="item-container">
                 
-                    <h1 class="text-center mb-3">{{str_replace('%20', ' ', $section->keyword)}}</h1><button type="submit" name="delete_button">Delete</button>
+                    <h1 class="text-center mb-3">{{str_replace('%20', ' ', $section->keyword)}}</h1>
+                    <button type="submit" name="delete_button">Delete</button>
+                    <a href="/graph/{{$section->id}}">Graph</a>
                     <div id="Item-list-{{$section->id}}" class="carousel slide" data-ride="carousel">
                         <?php $counter = 0; ?>
                         <!-- Cards -->
@@ -81,7 +83,7 @@
                                             <div class="card-body">
                                                 <h4 class="card-title">{{$product->product_name}}</h4>
                                                 @foreach($price_histories as $price_history)
-                                                @if ($price_history->id_product == $product->id)
+                                                @if ($price_history->url_product == $product->product_url)
                                                 <p class="card-text">Rp. {{ number_format($price_history->price,0,",",".") }}</p>
                                                 @endif
                                                 @endforeach
@@ -93,8 +95,6 @@
 
                                         </div>
                                     </a>
-                                    
-                
             </div>
         @endif
         @endif
