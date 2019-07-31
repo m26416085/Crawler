@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\User;
+use Illuminate\Support\Facades\DB;
+use View;
 
 class ProfileController extends Controller
 {
@@ -24,6 +27,8 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        return view('profile');
+        $user = auth()->user();
+        
+        return view::make('profile', compact('user'));
     }
 }
