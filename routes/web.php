@@ -28,6 +28,8 @@ Route::get('/itemlist', 'ItemlistController@index');
 Route::get('/profile', 'ProfileController@index');
 Route::get('/graph/{search}', 'PricegraphController@index');
 Route::post('/profile', 'ProfileController@profile');
+Route::get('/checkout', 'Checkout@index');
+Route::post('/checkout', 'Checkout@post');
 //Route::get('/home', 'TokopediaController@index');
 //Route::get('/home', 'TokopediaController@search');
 
