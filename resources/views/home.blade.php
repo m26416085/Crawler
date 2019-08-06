@@ -141,6 +141,8 @@
         </div>
     </form>
 
+    <a href="/checkout">Checkout</a>
+
     <!-- List-Items-Added -->
     <div class="item-container-add">
         @foreach($cartCollection as $cart)
