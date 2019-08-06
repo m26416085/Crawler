@@ -10,7 +10,6 @@
                 type: 'POST',
                 /* send the csrf-token and the input to the controller */
                 data: {
-                    message: $(".getinfo").val(),
                     product_url: $(this).parent().find(".product_url").val(),
                     image_url: $(this).parent().find(".image_url").val(),
                     id: $(this).parent().find(".id").val(),
@@ -55,7 +54,7 @@
                 type: 'POST',
                 /* send the csrf-token and the input to the controller */
                 data: {
-                    id_delete: $('.id_delete').html()
+                    id_delete: $(this).closest('.row').find('.id_delete').val()
                 },
                 dataType: 'JSON',
                 /* remind that 'data' is the response of the AjaxController */
@@ -154,7 +153,7 @@
                 <img class="item-add-img image_url" src="{{ $cart['attributes']['image_url'] }}">
             </div>
             <div class="col-sm-6">
-                <p hidden class="id_delete" name="id_delete" id="id_delete">{{ $cart['id'] }}</p>
+                <input type="hidden" class="id_delete" name="id_delete" id="id_delete" value="{{ $cart['id'] }}">
 
                 <p class="text-namabarang-add name">{{ $cart['name'] }}</p>
                 <p class="text-harga-add price_format">Rp. {{number_format( $cart['price'],0,",",".")}}</p>
@@ -180,8 +179,8 @@
         </div>
         @endif
         @endforeach
-
     </div>
+    
     @if($tokpedisempty==false)
     <!-- List-Items-Searched-Tokopedia -->
     <div class="item-container-search-Tokopedia">
