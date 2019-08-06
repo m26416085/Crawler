@@ -20,11 +20,14 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::post('/itemlist','ItemlistController@insert');
-Route::post('/home', 'HomeController@find');
 Route::get('/home', 'HomeController@index')->name('home');
+Route::post('/home', 'HomeController@find');
+Route::post('/posthome', 'HomeController@post');
+Route::post('/deletehome', 'HomeController@delete');
 Route::get('/itemlist', 'ItemlistController@index');
 Route::get('/profile', 'ProfileController@index');
 Route::get('/graph/{search}', 'PricegraphController@index');
+Route::post('/profile', 'ProfileController@profile');
 //Route::get('/home', 'TokopediaController@index');
 //Route::get('/home', 'TokopediaController@search');
 

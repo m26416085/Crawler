@@ -20,6 +20,9 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         //
+        "home",
+        "posthome",
+        "deletehome",
     ];
 
     /**

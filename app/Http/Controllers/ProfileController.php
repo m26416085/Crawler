@@ -31,4 +31,21 @@ class ProfileController extends Controller
         
         return view::make('profile', compact('user'));
     }
+    public function profile()
+    {
+        if (isset($_POST['save'])){
+            $user = auth()->user();
+
+            $name = $_POST['name'];
+            $phone = $_POST['phone'];
+            $address = $_POST['address'];
+
+            $user->name = $name;
+            $user->phone = $phone;
+            $user->address = $address;
+            $user->save();
+
+            return view::make('profile', compact('user'));
+        }
+    }
 }
