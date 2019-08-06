@@ -13,7 +13,7 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/jquery-3.4.1.js') }}"></script>
-
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
     <!-- Fonts -->
     <!-- <link rel="dns-prefetch" href="//fonts.gstatic.com"> -->
     <!-- <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet"> -->
@@ -31,7 +31,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white">
                 <!-- Navbar -->
                 <div class="sidenav">
-                    <a class="navbar-brand" href="/home"><img class="logo" src="icon/logo.png"></a>
+                    <a class="navbar-brand" href="/home"><img class="logo" src="{{ asset('icon/logo.png') }}"></a>
                     <div class="container-link-1stitem">
                         <a href="/home">Cari Barang</a>
                     </div>

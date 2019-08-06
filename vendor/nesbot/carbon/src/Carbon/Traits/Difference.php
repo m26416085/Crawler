@@ -34,11 +34,12 @@ use DateTimeInterface;
 trait Difference
 {
     /**
+     * @codeCoverageIgnore
+     *
      * @param CarbonInterval $diff
      */
     protected static function fixNegativeMicroseconds(CarbonInterval $diff)
     {
-        // @codeCoverageIgnoreStart
         if ($diff->s !== 0 || $diff->i !== 0 || $diff->h !== 0 || $diff->d !== 0 || $diff->m !== 0 || $diff->y !== 0) {
             $diff->f = (round($diff->f * 1000000) + 1000000) / 1000000;
             $diff->s--;
@@ -73,7 +74,6 @@ trait Difference
 
         $diff->f *= -1;
         $diff->invert();
-        // @codeCoverageIgnoreEnd
     }
 
     /**
@@ -330,7 +330,7 @@ trait Difference
             $diff = static::fixDiffInterval($diff, $absolute);
         }
 
-        $value = ((($diff->d * static::HOURS_PER_DAY) +
+        $value = (((($diff->m || $diff->y ? $diff->days : $diff->d) * static::HOURS_PER_DAY) +
             $diff->h) * static::MINUTES_PER_HOUR +
             $diff->i) * static::SECONDS_PER_MINUTE +
             $diff->s;
@@ -349,7 +349,7 @@ trait Difference
     public function diffInMicroseconds($date = null, $absolute = true)
     {
         $diff = $this->diff($this->resolveCarbon($date));
-        $value = (int) round((((($diff->d * static::HOURS_PER_DAY) +
+        $value = (int) round(((((($diff->m || $diff->y ? $diff->days : $diff->d) * static::HOURS_PER_DAY) +
             $diff->h) * static::MINUTES_PER_HOUR +
             $diff->i) * static::SECONDS_PER_MINUTE +
             ($diff->f + $diff->s)) * static::MICROSECONDS_PER_SECOND);

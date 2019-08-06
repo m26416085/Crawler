@@ -194,12 +194,28 @@ class SQLiteGrammar extends Grammar
         })->implode(', ');
 
         if (isset($query->joins) || isset($query->limit)) {
-            $selectSql = parent::compileSelect($query->select("{$query->from}.rowid"));
-
-            return "update {$table} set $columns where {$this->wrap('rowid')} in ({$selectSql})";
+            return $this->compileUpdateWithJoinsOrLimit($query, $columns);
         }
 
         return trim("update {$table} set {$columns} {$this->compileWheres($query)}");
+    }
+
+    /**
+     * Compile an update statement with joins or limit into SQL.
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query
+     * @param  string  $columns
+     * @return string
+     */
+    protected function compileUpdateWithJoinsOrLimit(Builder $query, $columns)
+    {
+        $segments = preg_split('/\s+as\s+/i', $query->from);
+
+        $alias = $segments[1] ?? $segments[0];
+
+        $selectSql = parent::compileSelect($query->select($alias.'.rowid'));
+
+        return "update {$this->wrapTable($query->from)} set {$columns} where {$this->wrap('rowid')} in ({$selectSql})";
     }
 
     /**
@@ -211,10 +227,10 @@ class SQLiteGrammar extends Grammar
      */
     public function prepareBindingsForUpdate(array $bindings, array $values)
     {
-        $cleanBindings = Arr::except($bindings, ['select', 'join']);
+        $cleanBindings = Arr::except($bindings, 'select');
 
         return array_values(
-            array_merge($values, $bindings['join'], Arr::flatten($cleanBindings))
+            array_merge($values, Arr::flatten($cleanBindings))
         );
     }
 

@@ -812,11 +812,12 @@ class HomeController extends Controller
                     include(app_path() . '\Library\simple_html_dom.php');
                 
                     $html = file_get_html($search);
-                
+                    dd($html);
                     // find item image
                     foreach($html->find('div[id=content-container] div.container-product div.clearfix div.rvm-left-column div.rvm-pdp-product div.rvm-left-column--left div.product-detail__img-holder div.content-img ') as $e)
                     {
                         $tokped_link_img= $e->innertext;
+                     
                         break;
                     }
                     $id = $search;

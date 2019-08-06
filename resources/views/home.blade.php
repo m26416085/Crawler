@@ -128,7 +128,7 @@
     <!-- List-Items-Searched-Tokopedia -->
     <div class="item-container-search-Tokopedia">
         <h1 class="text-center mb-3">List Barang Tokopedia</h1>
-        <div id="Item-list-Tokopedia" class="carousel slide" data-ride="carousel">
+        <div id="Item-list-Tokopedia" class="carousel slide" data-interval="false" data-ride="carousel">
             <!-- Cards -->
             <div class="carousel-inner row mx-auto">
    
@@ -239,7 +239,7 @@
     @if ($shopeeisempty==false)
     <div class="item-container-search-Shopee">
         <h1 class="text-center mb-3">List Barang Shopee</h1>
-        <div id="Item-list-Shopee" class="carousel slide" data-ride="carousel">
+        <div id="Item-list-Shopee" class="carousel slide" data-interval="false" data-ride="carousel">
             <div class="carousel-inner row mx-auto">
             <!-- Cards -->
             @if($countshopee==0)
@@ -347,7 +347,7 @@
     }
     var myVar;
     function myFunction() {
-        myVar = setTimeout(showPage, 3000);
+        myVar = setTimeout(showPage, 1000);
     }
     function showPage() {
         document.getElementById("loader").style.display = "none";

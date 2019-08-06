@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use Darryldecode\Cart\Cart;
 use App\Product;
 use App\Search;
 use View;
 use App\Price_History;
+date_default_timezone_set('Asia/Jakarta');
 
 class ItemlistController extends Controller
 {
@@ -94,7 +93,7 @@ class ItemlistController extends Controller
         $products = DB::table('products')->get();
         $sections= DB::table('searches')->get();
         $price_histories = DB::table('price__histories')->get();
-        
+
         // clear cart item after save to db
         \Cart::clear();
 
@@ -139,13 +138,13 @@ class ItemlistController extends Controller
                     //Product::find($product->id)->delete();
                     
                     foreach($price_histories as $history){
-                        if ($product->product_url == $history->url_product){
+                        if ($product->created_at == $history->created_at){
                             // delete price history
                             //Price_History::find($history->id)->delete();
-                            Price_History::destroy($history->url_product);
+                            Price_History::where('created_at', $history->created_at)->delete();
                         }
                     }
-                    Product::destroy($product->id_search);
+                    Product::where('id_search', $product->id_search)->delete();
                 }
             }
 
@@ -161,7 +160,7 @@ class ItemlistController extends Controller
             $sections= DB::table('searches')->get();
             $products = DB::table('products')->get();
             $price_histories = DB::table('price__histories')->get();
-
+           
 
             return view::make('itemlist', compact('cartCollection','products','sections', 'price_histories'));
 

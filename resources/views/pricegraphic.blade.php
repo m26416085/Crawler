@@ -4,5 +4,44 @@
 
 <div class="container justify-content-center content">
    <h3>Grafik</h3>
+   <div id="chartContainer" style="height: 100%; width: 100%;"></div>
+   
+
 </div>
+<script>
+
+ 
+var chart = new CanvasJS.Chart("chartContainer", {
+	title: {
+		text: "Data Perbandingan Harga"
+	},
+	axisY: {
+		title: "Range Harga"
+	},
+	data: [
+	{
+		type: "line",
+      	showInLegend: true,
+		xValueType: "dateTime",
+		legendText: '{{ $product_name_array[0] }}',
+		dataPoints: <?php echo json_encode($dataPoints[0], JSON_NUMERIC_CHECK); ?>
+	},]
+});
+chart.render();
+var counter = {{$productcount}}
+if(counter>1){
+	<?php for($x=1;$x<$productcount;$x++) { ?>
+		var newSeries = {
+			type: "line",
+			showInLegend: true,
+			xValueFormatString: "dateTime",
+			legendText: '{{ $product_name_array[$x] }}',
+			dataPoints: <?php echo json_encode($dataPoints[$x], JSON_NUMERIC_CHECK); ?>
+		};
+		chart.options.data.push(newSeries);
+	<?php } ?>
+	chart.render();
+}
+</script>
 @endsection
+
