@@ -155,7 +155,7 @@
                 <p hidden class="id_delete" name="id_delete" id="id_delete">{{ $cart['id'] }}</p>
 
                 <p class="text-namabarang-add name">{{ $cart['name'] }}</p>
-                <p class="text-harga-add price_format">{{ $cart['attributes']['price_format'] }}</p>
+                <p class="text-harga-add price_format">Rp. {{number_format( $cart['price'],0,",",".")}}</p>
                 <p class="text-namatoko-add shop_name">{{ $cart['attributes']['shop_name'] }}</p>
 
                 <p class="text-lokasitoko-add shop_location">{{ $cart['attributes']['shop_location'] }}</p>
@@ -174,7 +174,7 @@
                 <!-- <a class="item-deletebtn" ><img class="icon-delete" src="./svg/delete.svg"></a> -->
                 <button class="btn btn-del delete_button" name="delete_button" type="submit">Hapus<img class="icon-delete" src="./svg/delete.svg"></button>
             </div>
-            <!-- </form> -->
+            
         </div>
         @endif
         @endforeach
@@ -190,45 +190,43 @@
 
                 @if ($counttokped==0)
                 <div class="carousel-item col-md-3 active">
-                    <a target="_blank" href="{{ $data_arr['data'][0]['product_url'] }}">
+                  
                         <div class="card item">
-                            <form action="/home" method="POST" id="list_tokopedia_form">
+                        <a target="_blank" href="{{ $data_arr['data'][0]['product_url'] }}">
                                 @csrf
-                                <input type="hidden" name="product_url" value="{{$data_arr['data'][0]['product_url']}}">
+                                <input type="hidden" class="product_url" name="product_url" value="{{$data_arr['data'][0]['product_url']}}">
                                 <img class="card-img-top img-fluid" src="{{$data_arr['data'][0]['image_url']}}">
-                                <input type="hidden" name="image_url" value="{{$data_arr['data'][0]['image_url']}}">
+                                <input type="hidden" class="image_url" name="image_url" value="{{$data_arr['data'][0]['image_url']}}">
                                 <div class="card-body">
-                                    <input type="hidden" name="id" value="{{$data_arr['data'][0]['id']}}">
+                                    <input type="hidden" class="id" name="id" value="{{$data_arr['data'][0]['id']}}">
 
                                     <h4 class="card-title">{{$data_arr['data'][0]['product_name']}}</h4>
-                                    <input type="hidden" name="product_name" value="{{$data_arr['data'][0]['product_name']}}">
+                                    <input type="hidden" class="product_name" name="product_name" value="{{$data_arr['data'][0]['product_name']}}">
 
-                                    <p class="card-text">{{$data_arr['data'][0]['price_format']}}</p>
-                                    <input type="hidden" name="price_format" value="{{$data_arr['data'][0]['price_format']}}">
+                                    <p class="card-text">Rp. {{$data_arr['data'][0]['price_format']}}</p>
+                                    <input type="hidden" class="price_format" name="price_format" value="{{$data_arr['data'][0]['price_format']}}">
 
                                     <p class="card-text" hidden>{{$data_arr['data'][0]['price']}}</p>
-                                    <input type="hidden" name="price" value="{{$data_arr['data'][0]['price']}}">
+                                    <input type="hidden"  class="price" name="price" value="{{$data_arr['data'][0]['price']}}">
 
                                     <p class="card-text card-text-namatoko">{{$data_arr['data'][0]['shop_name']}}</p>
-                                    <input type="hidden" name="shop_name" value="{{$data_arr['data'][0]['shop_name']}}">
+                                    <input type="hidden" class="shop_name" name="shop_name" value="{{$data_arr['data'][0]['shop_name']}}">
 
                                     <p class="card-text">{{$data_arr['data'][0]['shop_location']}}</p>
-                                    <input type="hidden" name="shop_location" value="{{$data_arr['data'][0]['shop_location']}}">
+                                    <input type="hidden" class="shop_location" name="shop_location" value="{{$data_arr['data'][0]['shop_location']}}">
 
-                                    <input type="hidden" name="text_value" value="{{ $data_arr['data'][0]['keyword'] }}">
+                                    <input type="hidden" class="text_value" name="text_value" value="{{ $data_arr['data'][0]['keyword'] }}">
 
-                                    <input type="hidden" name="keyword_value_location_tokopedia" value="{{ $data_arr['data'][0]['keyword_value_location_tokopedia'] }}">
-                                    <input type="hidden" name="keyword_value_location_shopee" value="{{ $data_arr['data'][0]['keyword_value_location_shopee'] }}">
+                                    <input type="hidden" class="keyword_value_location_tokopedia" name="keyword_value_location_tokopedia" value="{{ $data_arr['data'][0]['keyword_value_location_tokopedia'] }}">
+                                    <input type="hidden" class="keyword_value_location_shopee" name="keyword_value_location_shopee" value="{{ $data_arr['data'][0]['keyword_value_location_shopee'] }}">
 
-                                    <input type="hidden" name="keyword_max" value="{{ $data_arr['data'][0]['keyword_max'] }}">
-                                    <input type="hidden" name="keyword_min" value="{{ $data_arr['data'][0]['keyword_min'] }}">
-
-                                    <button class="btn btn-add" name="add_button" type="submit" onclick="submitForms()">Tambah<img class="icon-add" src="./svg/plus.svg"></button>
-
+                                    <input type="hidden" class="keyword_max" name="keyword_max" value="{{ $data_arr['data'][0]['keyword_max'] }}">
+                                    <input type="hidden" class="keyword_min" name="keyword_min" value="{{ $data_arr['data'][0]['keyword_min'] }}">
                                 </div>
-                            </form>
+                                </a>
+                                <button class="btn btn-add postbutton" name="add_button" type="submit">Tambah</button>
                         </div>
-                    </a>
+                 
                 </div>
                 @elseif ($counttokped>0)
                 @for ($i = 0; $i < $counttokped; $i++) @if ($i==0) <div class="carousel-item col-md-3 active">
@@ -237,7 +235,7 @@
                         @endif
                         <div class="card item">
                             <a target="_blank" href="{{ $data_arr['data'][$i]['product_url'] }}">
-                                <!-- <form action="/home" method="POST" id="list_tokopedia_form"> -->
+                               
                                 @csrf
                                 <input type="hidden" class="product_url" name="product_url" value="{{$data_arr['data'][$i]['product_url']}}">
                                 <img class="card-img-top img-fluid" src="{{$data_arr['data'][$i]['image_url']}}">
@@ -269,9 +267,9 @@
                                     <input type="hidden" class="keyword_min" name="keyword_min" value="{{ $data_arr['data'][$i]['keyword_min'] }}">
 
                                 </div>
-                                <!-- </form> -->
+                              
                             </a>
-                            <button class="btn btn-add postbutton" name="add_button" type="submit">Tambah<img class="icon-add" src="./svg/plus.svg"></button>
+                            <button class="btn btn-add postbutton" name="add_button" type="submit">Tambah</button>
                         </div>
 
                     </div>
@@ -311,7 +309,7 @@
                                 <h4 class="card-title">{{$dataShopee_arr['data'][0]['product_name']}}</h4>
                                 <input type="hidden" class="product_name" name="product_name" value="{{ $dataShopee_arr['data'][0]['product_name'] }}">
 
-                                <p class="card-text">{{$dataShopee_arr['data'][0]['price_format']}}</p>
+                                <p class="card-text">Rp. {{$dataShopee_arr['data'][0]['price_format']}}</p>
                                 <input type="hidden" class="price_format"  name="price_format" value="{{ $dataShopee_arr['data'][0]['price_format'] }}">
                                 <input type="hidden" class="price"  name="price" value="{{$dataShopee_arr['data'][0]['price']}}">
 
@@ -332,7 +330,7 @@
 
                             </div>
                         </a>
-                        <button class="btn btn-add postbutton" name="add_button" type="submit" onclick="submitForms()">Tambah<img class="icon-add" src="./svg/plus.svg"></button>
+                        <button class="btn btn-add postbutton" name="add_button" type="submit">Tambah</button>
                     </div>
 
                 </div>
@@ -344,7 +342,7 @@
 
                         <div class="card item">
                             <a target="_blank" href="{{ $dataShopee_arr['data'][$x]['product_url'] }}">
-                                <!-- <form action="/home" method="POST"> -->
+                              
                                 @csrf
                                 <input type="hidden" class="product_url" name="product_url" value="{{ $dataShopee_arr['data'][$x]['product_url'] }}">
                                 <img class="card-img-top img-fluid" src="{{$dataShopee_arr['data'][$x]['image_url']}}">
@@ -375,9 +373,9 @@
 
 
                                 </div>
-                                <!-- </form> -->
+                                
                             </a>
-                            <button class="btn btn-add postbutton" name="add_button" type="submit" onclick="submitForms()">Tambah<img class="icon-add" src="./svg/plus.svg"></button>
+                            <button class="btn btn-add postbutton" name="add_button" type="submit">Tambah</button>
                         </div>
 
                     </div>
