@@ -29,6 +29,16 @@
     <link href="{{ asset('css/login.css') }}" rel="stylesheet">
     <link href="{{ asset('css/register.css') }}" rel="stylesheet">
     <link href="{{ asset('css/profile.css') }}" rel="stylesheet">
+    <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+    <script>
+    $(function(){
+        $('.link-menu').each(function() {
+            if ($(this).prop('href') == window.location.href) {
+                    $(this).addClass('selected');
+                }
+            });
+        });
+    </script>
 </head>
 <body >
     <div id="app">
@@ -37,13 +47,16 @@
                 <div class="sidenav">
                     <a class="navbar-brand" href="/home"><img class="logo" src="{{ asset('icon/logo.png') }}"></a>
                     <div class="container-link-1stitem">
-                        <a href="/home">Cari Barang</a>
+                        <a class="link-menu" href="/home">Cari Barang</a>
                     </div>
                     <div class="container-link">
-                        <a href="/itemlist">List Barang</a>
+                        <a class="link-menu" href="/checkout">Keranjang</a>
                     </div>
                     <div class="container-link">
-                        <a href="/profile">Profile</a>
+                        <a class="link-menu" href="/itemlist">List Barang</a>
+                    </div>
+                    <div class="container-link">
+                        <a class="link-menu" href="/profile">Profile</a>
                     </div>
                     <div class="container-link">
                         @guest

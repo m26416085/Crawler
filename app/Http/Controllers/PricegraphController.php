@@ -56,7 +56,9 @@ class PricegraphController extends Controller
         $dataPoints = $data_arr;
 
         $average = array_sum($price_arr)/count($price_arr);
-
+        $average = round($average);
+        $modder = $average%1000;
+        $average= $average-$modder;
         return view('pricegraphic', compact('dataPoints','shop_name_array','productcount','x','average'));
     }
 }

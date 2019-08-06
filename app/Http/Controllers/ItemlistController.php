@@ -33,9 +33,10 @@ class ItemlistController extends Controller
         $cartCollection = \Cart::getContent();
         $counter=0;
         //take the first keyword
+        $count= sizeof($cartCollection);
         foreach($cartCollection as $cart){
-            $keyword = $cart['attributes']['keyword'];
-            if($counter==1){
+            if($counter==$count-1){
+                $keyword = $cart['attributes']['keyword'];
                 break;
             }
             $counter++;
@@ -83,7 +84,7 @@ class ItemlistController extends Controller
 
                 $history = new Price_History();
                 $history->url_product = $product->product_url;
-                $history->price = $cart['price']+rand(2,5)*10000;
+                $history->price = $cart['price'];
                 $history->id_user = auth()->user()->id;
                 $history->save();
             }
@@ -163,6 +164,14 @@ class ItemlistController extends Controller
            
             return view::make('itemlist', compact('cartCollection','products','sections', 'price_histories'));
 
+        }
+        if(isset($_POST['update_keyword'])){
+            $sections= DB::table('searches')->get();
+            $products = DB::table('products')->get();
+            $price_histories = DB::table('price__histories')->get();
+
+
+            return view::make('itemlist', compact('cartCollection','products','sections', 'price_histories'));
         }
     }
 }

@@ -18,6 +18,7 @@ class CreatePriceHistoriesTable extends Migration
             $table->string('url_product');
             $table->integer('price');
             $table->integer('id_user')->nullable();
+            $table->integer('id_search');
             $table->timestamps();
         });
     }

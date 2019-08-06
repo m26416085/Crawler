@@ -279,5 +279,8 @@ a:hover{
     margin-left: -100px;
     width: 15%;
 }
-
+a.selected { 
+    background-color: #333333;
+    color: #ffffff;
+}
   
