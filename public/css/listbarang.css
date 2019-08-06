@@ -25,3 +25,21 @@
 .btn-save:hover{
     text-shadow: 0 0 .65px #333, 0 0 .65px #333;
 }
+.btn-delete-list{
+    background-color: #d10a00;
+    color: #ffffff;
+    width: 80px;
+    height: 30px;
+
+    margin-bottom: 5px;
+    display: block;
+}
+.btn-graph{
+    background-color: #333;
+    color: #ffffff;
+    width: 80px;
+    height: 30px;
+
+    margin-bottom: 5px;
+    display: block;
+}

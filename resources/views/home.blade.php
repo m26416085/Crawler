@@ -84,9 +84,17 @@
             <div class="tab-pane fade show active" id="pills-name" role="tabpanel" aria-labelledby="pills-name-tab">
 
                 <div class="input-group search">
-                    <input type="text" name="text_value" class="form-control input-search" placeholder="Nama Barang" value="">
-
-                    <button class="btn btn-default btn-search" name="find" type="submit">Cari</button>
+                    <input type="text" id="text_value" name="text_value" class="form-control input-search" placeholder="Nama Barang" value="">
+                    <button class="btn btn-default btn-search" id="find_namabarang" name="find" type="submit">Cari</button>
+                    <script>
+                         var input = document.getElementById("text_value");
+                            input.addEventListener("keyup", function(event) {
+                            if (event.keyCode === 13) {
+                            event.preventDefault();
+                            document.getElementById("find_namabarang").click();
+                            }
+                        });
+                    </script>
                 </div>
                 <!-- filter -->
                 <table>
@@ -134,14 +142,23 @@
             </div>
             <div class="tab-pane fade" id="pills-link" role="tabpanel" aria-labelledby="pills-link-tab">
                 <div class="input-group search">
-                    <input type="text" name="search_link" class="form-control input-search" placeholder="Link Barang" value="">
-                    <button class="btn btn-default btn-search" name="find_link" type="submit">Cari</button>
+                    <input type="text" name="search_link" id="search_link" class="form-control input-search" placeholder="Link Barang" value="">
+                    <button class="btn btn-default btn-search" id="find_link" name="find_link" type="submit">Cari</button>
+                    <script>
+                         var input = document.getElementById("search_link");
+                            input.addEventListener("keyup", function(event) {
+                            if (event.keyCode === 13) {
+                            event.preventDefault();
+                            document.getElementById("find_link").click();
+                            }
+                        });
+                    </script>
                 </div>
             </div>
         </div>
     </form>
 
-    <a href="/checkout">Checkout</a>
+    <a  href="/checkout"><button class="btn btn-default btn-checkout">Checkout</button></a>
 
     <!-- List-Items-Added -->
     <div class="item-container-add">

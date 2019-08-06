@@ -1,0 +1,19 @@
+.btn-update-profile{
+    background-color: #333;
+    width: 150px;
+    height: 30px;
+    color: #ffffff;
+}
+.btn-update-profile:hover{
+    background-color: #333;
+    color: #ffffff;
+}
+.container-data-profile{
+    margin-top: 20px;
+}
+.form-edit-profile{
+    padding-top: 20px;
+}
+.data-profile{
+    font-size: 20px;
+}

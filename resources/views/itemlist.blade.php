@@ -10,13 +10,15 @@
         <!-- data from database -->
 
         @foreach ($sections as $section)
-        <form action="/itemlist" method="POST" id="list_tokopedia_form">
+       
             @if (auth()->user()->id == $section->id_user)
             <div class="item-container">
 
                 <h1 class="text-center mb-3">{{str_replace('%20', ' ', $section->keyword)}}</h1>
-                <button type="submit" name="delete_button">Delete</button>
-                <a href="/graph/{{$section->id}}">Graph</a>
+                <a href="/graph/{{$section->id}}"><button class="btn btn-default btn-graph">Graph</button></a>
+                <form action="/itemlist" method="POST" id="list_tokopedia_form">
+                <button class="btn btn-default btn-delete-list" type="submit" name="delete_button">Delete</button>
+               
                 <div id="Item-list-{{$section->id}}" class="carousel slide" data-interval="false" data-ride="carousel">
                     <?php $counter = 0; ?>
                     <!-- Cards -->
@@ -25,31 +27,21 @@
                         @if ($section->id == $product->id_search)
                         @if ($product->product_name != 'asdfghjklkjgfds123890ythbnvdkodetokopediafwgheu3yr2t3r64ortfg')
                         @if ($counter==0)
-                        <div class="carousel-item col-md-3 active">
+                        <div class="carousel-item carousel-item-list col-md-3 active">
                             <?php $counter = 1; ?>
                             @elseif ($counter==1)
-                            <div class="carousel-item col-md-3">
+                            <div class="carousel-item carousel-item-list col-md-3">
                                 @endif
                                 <a target="_blank" href="{{$product->product_url}}">
                                     <div class="card item">
-
                                         @csrf
                                         <input type="text" hidden name="delete_id" value="{{ $section->id }}">
                                         <img class="card-img-top img-fluid" src="{{$product->image_url}}">
                                         <div class="card-body">
                                             <h4 class="card-title">{{$product->product_name}}</h4>
-                                            @foreach($price_histories as $price_history)
-                                                @if ($price_history->url_product == $product->product_url)
-                                                        <p class="card-text">Rp. {{ number_format($price_history->price,0,",",".") }}</p>
-                                                        <p class="card-text">{{ $price_history->created_at }}</p>
-                                                @endif
-                                            @endforeach
-
-                                            <p class="card-text" hidden>3333333</p>
-                                            <p class="card-text">{{$product->shop_name}}</p>
-                                            <p class="card-text">{{$product->shop_location}}</p>
+                                            <h4 class="card-text">{{$product->shop_name}}</h4>
+                                            <h4 class="card-text">{{$product->shop_location}}</h4>
                                         </div>
-
                                     </div>
                                 </a>
                             </div>

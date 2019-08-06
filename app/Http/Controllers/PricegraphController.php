@@ -35,16 +35,18 @@ class PricegraphController extends Controller
         $products = Product::where('id_search',$section_id)->get();
         //put data to array
    
-        $product_name_array = array();
+        $shop_name_array = array();
         $data_arr = array();
         $productcount=0;
+        $price_arr = array();
 
         foreach($products as $product){   
             $price_histories = Price_History::where('url_product',$product->product_url)->get();
             foreach($price_histories as $history){
-                $data_arr[$productcount][] = array('label'=>$product->shop_name ,'x' =>$history->created_at->timestamp , 'y' => $history->price);
+                $data_arr[$productcount][] = array('label'=>$product->product_name ,'x' =>$history->created_at->timestamp , 'y' => $history->price);
+                $price_arr[]=$history->price;
             }
-            $product_name_array[$productcount]=$product->product_name;
+            $shop_name_array[$productcount]=$product->shop_name;
             $productcount++;
         }
         $x = array();
@@ -52,6 +54,9 @@ class PricegraphController extends Controller
             array_push($x, $i);
         }
         $dataPoints = $data_arr;
-        return view('pricegraphic', compact('dataPoints','product_name_array','productcount','x'));
+
+        $average = array_sum($price_arr)/count($price_arr);
+
+        return view('pricegraphic', compact('dataPoints','shop_name_array','productcount','x','average'));
     }
 }

@@ -16,14 +16,27 @@ var chart = new CanvasJS.Chart("chartContainer", {
 		text: "Data Perbandingan Harga"
 	},
 	axisY: {
-		title: "Range Harga"
+		title: "Range Harga",
+		interval: {{$average}}
+	},
+	legend: {
+		cursor: "pointer",
+		itemclick: function (e) {
+			if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+				e.dataSeries.visible = false;
+			} else {
+				e.dataSeries.visible = true;
+			}
+
+			e.chart.render();
+		}
 	},
 	data: [
 	{
 		type: "line",
       	showInLegend: true,
 		xValueType: "dateTime",
-		legendText: '{{ $product_name_array[0] }}',
+		legendText: '{{ $shop_name_array[0] }}',
 		dataPoints: <?php echo json_encode($dataPoints[0], JSON_NUMERIC_CHECK); ?>
 	},]
 });
@@ -35,7 +48,7 @@ if(counter>1){
 			type: "line",
 			showInLegend: true,
 			xValueFormatString: "dateTime",
-			legendText: '{{ $product_name_array[$x] }}',
+			legendText: '{{ $shop_name_array[$x] }}',
 			dataPoints: <?php echo json_encode($dataPoints[$x], JSON_NUMERIC_CHECK); ?>
 		};
 		chart.options.data.push(newSeries);

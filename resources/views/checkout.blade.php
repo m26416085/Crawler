@@ -18,10 +18,10 @@
                 @foreach ($cartCollection as $cart)
                 @if ($cart['name'] != 'asdfghjklkjgfds123890ythbnvdkodetokopediafwgheu3yr2t3r64ortfg')
                 @if ($counter==0)
-                <div class="carousel-item col-md-3 active">
+                <div class="carousel-item carousel-item-list col-md-3 active">
                     <?php $counter = 1; ?>
                     @elseif ($counter==1)
-                    <div class="carousel-item col-md-3">
+                    <div class="carousel-item carousel-item-list col-md-3">
                         @endif
                         <a target="_blank" href="{{$cart['attributes']['product_url']}}">
                             <div class="card item">
@@ -29,7 +29,6 @@
                                 <div class="card-body">
                                     <h4 class="card-title">{{$cart['name']}}</h4>
                                     <p class="card-text">Rp. {{number_format($cart['price'],0,",",".")}}</p>
-                                    <p class="card-text" hidden>3333333</p>
                                     <p class="card-text">{{$cart['attributes']['shop_name']}}</p>
                                     <p class="card-text">{{$cart['attributes']['shop_location']}}</p>
                                 </div>
