@@ -85,7 +85,7 @@
                 <div class="input-group search">
                     <input type="text" name="text_value" class="form-control input-search" placeholder="Nama Barang" value="">
 
-                    <button class="btn btn-default" name="find" type="submit"><img class="icon-search" src="./svg/magnifying-glass.svg"></button>
+                    <button class="btn btn-default btn-search" name="find" type="submit">Cari</button>
                 </div>
                 <!-- filter -->
                 <table>
@@ -98,7 +98,7 @@
                         <td><label class="label-filter">Jumlah Barang</label></td>
                         <td>
                             <div class="form-check form-check-inline">
-                                <select name="limit" class="form-control filter-limit">
+                                <select name="limit" class="form-control filter-limit filter-input">
                                     <option value="5">5</option>
                                     <option value="10">10</option>
                                     <option value="15">15</option>
@@ -110,8 +110,8 @@
                     <tr>
                         <td><label class="label-filter">Lokasi</label></td>
                         <td>
-                            <div class="form-check form-check-inline">
-                                <select class="form-control filter-kota" name="location">
+                            <div class="form-check form-check-inline filter-input">
+                                <select class="form-control filter-kota filter-input" name="location">
                                     @foreach($city_data['city'] as $city)
                                     <option value="{{ $city['value_tokopedia'] }}|{{ $city['value_shopee'] }}|{{ $city['name'] }}">{{ $city['name'] }}</option>
                                     @endforeach
@@ -121,11 +121,11 @@
                     </tr>
                     <tr>
 
-                        <td> <label>Harga Minimal</label> </td>
-                        <td> <input class="form-control" type="number" name="harga_min" id="harga-min" value=""> </td>
+                        <td> <label class="label-filter">Harga Minimal</label> </td>
+                        <td> <input class="form-control filter-input" type="number" name="harga_min" id="harga-min" value=""> </td>
 
-                        <td> <label>Harga Maksimal</label> </td>
-                        <td> <input class="form-control" type="number" name="harga_maks" id="harga-maks" value=""> </td>
+                        <td> <label class="label-filter">Harga Maksimal</label> </td>
+                        <td> <input class="form-control filter-input" type="number" name="harga_maks" id="harga-maks" value=""> </td>
 
                     </tr>
                 </table>
@@ -133,8 +133,8 @@
             </div>
             <div class="tab-pane fade" id="pills-link" role="tabpanel" aria-labelledby="pills-link-tab">
                 <div class="input-group search">
-                    <input type="text" name="search_link" class="form-control input-search" placeholder="Link Detail Barang" value="">
-                    <button class="btn btn-default" name="find_link" type="submit"><img class="icon-search" src="./svg/magnifying-glass.svg"></button>
+                    <input type="text" name="search_link" class="form-control input-search" placeholder="Link Barang" value="">
+                    <button class="btn btn-default btn-search" name="find_link" type="submit">Cari</button>
                 </div>
             </div>
         </div>
