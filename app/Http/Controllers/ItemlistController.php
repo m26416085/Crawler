@@ -177,7 +177,7 @@ class ItemlistController extends Controller
     }
     public function sync(){
         $sections = DB::table('searches')->get();
-
+        include(app_path() . '\Library\simple_html_dom.php');
         foreach($sections as $section){
             $products = DB::table('products')->where('id_search', $section->id)->get();
             foreach($products as $product){
@@ -185,19 +185,23 @@ class ItemlistController extends Controller
                 if ($cekurl[1] == "tokopedia") {
                     $data = find_link_tokopedia("test", 0, 0, 0, 0, $product->product_url);
                     DB::table('price__histories')->where('id_search', $section->id)->insert([
-                        'price' => $data,
+                        'price' => $data['data'][0]['price'],
                         'id_search' => $section->id,
-                        'url_product' => $product->$product_url,
-                        'id_user' => auth()->user()->id
+                        'url_product' => $product->product_url,
+                        'id_user' => auth()->user()->id,
+                        'created_at' => date('Y-m-d H:i:s', time()),
+                        'updated_at' => date('Y-m-d H:i:s', time())
                     ]);
                 }
                 else{
                     $data = find_link_shopee($product->$product_url, 0, 0, 0, 0);
                     DB::table('price__histories')->where('id_search', $section->id)->insert([
-                        'price' => $data,
+                        'price' => $data['data'][0]['price'],
                         'id_search' => $section->id,
-                        'url_product' => $product->$product_url,
-                        'id_user' => auth()->user()->id
+                        'url_product' => $product->product_url,
+                        'id_user' => auth()->user()->id,
+                        'created_at' => date('Y-m-d H:i:s', time()),
+                        'updated_at' => date('Y-m-d H:i:s', time())
                     ]);
                 }
             }
@@ -206,7 +210,7 @@ class ItemlistController extends Controller
         $sections= DB::table('searches')->get();
         $products = DB::table('products')->get();
         $price_histories = DB::table('price__histories')->get();
-        dd(aaaa);
+
         return view::make('itemlist', compact('products','sections', 'price_histories'));
         
     }

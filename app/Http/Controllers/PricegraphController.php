@@ -44,8 +44,10 @@ class PricegraphController extends Controller
         foreach($products as $product){   
             $price_histories = Price_History::where('url_product',$product->product_url)->get();
             foreach($price_histories as $history){
-                $data_arr[$productcount][] = array('namabarang'=>$product->product_name,'x' =>strtotime($history->created_at->format('m/d/Y'))*1000, 'y' => $history->price);
-                $price_arr[]=$history->price;
+                if($history->id_search==$section_id){
+                    $data_arr[$productcount][] = array('namabarang'=>$product->product_name,'x' =>strtotime($history->created_at->format('m/d/Y'))*1000, 'y' => $history->price);
+                    $price_arr[]=$history->price;
+                }   
             }
             $shop_name_array[$productcount]=$product->shop_name;
             $productcount++;
