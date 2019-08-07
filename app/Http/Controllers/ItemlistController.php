@@ -86,6 +86,7 @@ class ItemlistController extends Controller
                 $history->url_product = $product->product_url;
                 $history->price = $cart['price'];
                 $history->id_user = auth()->user()->id;
+                $history->id_search = $search->id;
                 $history->save();
             }
         }
@@ -173,5 +174,27 @@ class ItemlistController extends Controller
 
             return view::make('itemlist', compact('cartCollection','products','sections', 'price_histories'));
         }
+    }
+    public function sync(){
+        $sections = DB::table('searches')->get();
+
+        foreach($sections as $section){
+            $products = DB::table('products')->where('id_search', $section->$id)->get();
+            foreach($products as $product){
+                $cekurl = explode(".", $product->product_url);
+                if ($cekurl[1] == "tokopedia") {
+                    $data = find_link_tokopedia("test", 0, 0, 0, 0, $product->product_url);
+                }
+                else{
+                    $data = find_link_shopee($product->$product_url, 0, 0, 0, 0);
+                }
+            }
+            DB::table('price__histories')->where('id_search', $section->$id)->insert([
+                'price' => $data
+            ]);
+        }
+        
+
+        
     }
 }

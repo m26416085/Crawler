@@ -33,6 +33,7 @@ Route::post('/checkout', 'Checkout@post');
 Route::get('/editsection', 'EditSection@index');
 Route::post('/editsection', 'EditSection@post');
 Route::post('/editsectionpost', 'EditSection@edit');
+Route::post('/syncitem', 'ItemlistController@sync');
 //Route::get('/home', 'TokopediaController@index');
 //Route::get('/home', 'TokopediaController@search');
 

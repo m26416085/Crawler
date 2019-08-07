@@ -98,8 +98,18 @@ function find_shopee($search, $city_value_shopee, $city_value_tokopedia, $limit,
     return $dataShopee_arr;
 }
 
-function find_link_tokopedia($search, $city_value_shopee, $city_value_tokopedia, $pmin, $pmaks, $html)
+function find_link_tokopedia($search, $city_value_shopee, $city_value_tokopedia, $pmin, $pmaks, $url)
 {
+    include(app_path() . '\Library\simple_html_dom.php');
+    
+    $curl = curl_init($url);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+    $response_string = curl_exec($curl);
+    $html = str_get_html($response_string);
+
     $data_arr = array();
 
     // find item image
