@@ -27,23 +27,8 @@
                 dataType: 'JSON',
                 /* remind that 'data' is the response of the AjaxController */
                 success: function(data) {
-                    // var div = $('.item-container-add', $(html)).addClass('done');
-                    // $('.item-container-add').html(div);
                     $(".item-container-add").load("home .item-container-add");
-                    //$(".item-container-add").load("/home");
-                    // $(".image_url").append(data.image_url);
-                    // $(".writeinfo").append(data.id);
-                    // $(".name").append(data.product_name);
-                    // $(".price_format").append(data.price_format);
-                    // $(".writeinfo").append(data.price);
-                    // $(".shop_name").append(data.shop_name);
-                    // $(".shop_location").append(data.shop_location);
-                    // $(".writeinfo").append(data.text_value);
-                    // $(".writeinfo").append(data.keyword_value_location_tokopedia);
-                    // $(".writeinfo").append(data.keyword_value_location_shopee);
-                    // $(".writeinfo").append(data.keyword_max);
-                    // $(".writeinfo").append(data.keyword_min);
-                    // $(".writeinfo").append(data.keyword_value_location_shopee);
+                    $(".checkouta").load("home .checkouta");
                 }
             });
         });
@@ -60,6 +45,7 @@
                 /* remind that 'data' is the response of the AjaxController */
                 success: function(data) {
                     $(".item-container-add").load("home .item-container-add");
+                    $(".checkouta").load("home .checkouta");
                 }
             });
         });
@@ -156,8 +142,13 @@
             </div>
         </div>
     </form>
-
-    <a  href="/checkout"><button class="btn btn-default btn-checkout">Checkout</button></a>
+    
+    <div class="checkouta">
+        @if(count($cartCollection) > 1)
+        <a  href="/checkout" class="checkouta"><button class="btn btn-default btn-checkout">Checkout</button></a>
+        @endif
+    </div>
+    
 
     <!-- List-Items-Added -->
     <div class="item-container-add">

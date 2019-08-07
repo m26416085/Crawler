@@ -16,6 +16,13 @@
 
                 <h1 class="text-center mb-3">{{str_replace('%20', ' ', $section->keyword)}}</h1>
                 <a href="/graph/{{$section->id}}"><button class="btn btn-default btn-graph">Graph</button></a>
+                <form action="/editsection" method="post">
+                    @csrf
+                    <input type="hidden" name="id_section" value="{{ $section->id }}">
+                    <input type="hidden" name="keyword_section" value="{{str_replace('%20', ' ', $section->keyword)}}">
+                    <button class="btn btn-default btn-delete-list" type="submit" name="edit_button">Edit</button>
+                </form>
+                
                 <form action="/itemlist" method="POST" id="list_tokopedia_form">
                 <button class="btn btn-default btn-delete-list" type="submit" name="delete_button">Delete</button>
                
