@@ -10,11 +10,10 @@
     width: 100%;
 }
 .btn-save{
-    text-align: right;
-    margin-left: 90%;
+    font-size: 20px;
     padding: 3px;
-    display: inline-block;
     background-color: #333;
+    width: 100%;
 }
 .btn-save:hover{
     background-color: #333;
@@ -32,7 +31,7 @@
     height: 30px;
 
     margin-bottom: 5px;
-    display: block;
+    display: inline-block;
 }
 .btn-graph{
     background-color: #333;
@@ -41,5 +40,10 @@
     height: 30px;
 
     margin-bottom: 5px;
-    display: block;
+    display: inline-block;
+}
+.wrapper-btn-save{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

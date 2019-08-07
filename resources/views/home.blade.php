@@ -157,7 +157,7 @@
         </div>
     </form>
 
-    <a  href="/checkout"><button class="btn btn-default btn-checkout">Checkout</button></a>
+    <a  href="/checkout"><button class="btn btn-default btn-checkout">Simpan ke Keranjang</button></a>
 
     <!-- List-Items-Added -->
     <div class="item-container-add">

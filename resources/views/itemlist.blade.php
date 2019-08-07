@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container justify-content-center content">
-    <h3>List Barang</h3>
+    <h3>List Pencarian</h3>
     <!-- data from cart -->
     <div class="item-container-cart">
         

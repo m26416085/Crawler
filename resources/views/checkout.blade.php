@@ -3,14 +3,10 @@
 @section('content')
 
 <div class="container justify-content-center content">
-    <h3>Checkout</h3>
+    <h3>Keranjang</h3>
     <!-- data from cart -->
     <div class="item-container-cart">
-        <form method="POST" action="/itemlist">
-            @csrf
-            <button class="btn btn-primary btn-save" name="save" type="submit">Simpan</button>
-        </form>
-        <h1 class="text-center mb-3">Cart</h1>
+        <h1 class="text-center mb-3">Tekan simpan untuk melanjutkan</h1>
         <div id="Item-list-cart" class="carousel slide" data-interval="false" data-ride="carousel">
             <?php $counter = 0; ?>
             <!-- Cards -->
@@ -48,7 +44,10 @@
                 </a>
             </div>
         </div>
-
+        <form method="POST" action="/itemlist">
+            @csrf
+            <button class="btn btn-primary btn-save" name="save" type="submit">Simpan</button>
+        </form>
     </div>
 </div>
 </div>

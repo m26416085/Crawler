@@ -15,9 +15,15 @@ var chart = new CanvasJS.Chart("chartContainer", {
 	title: {
 		text: "Data Perbandingan Harga"
 	},
+	toolTip:{   
+			content: "{namabarang}: {y}"      
+	},
 	axisY: {
 		title: "Range Harga",
 		interval: {{$average}}
+	},
+	axisX:{
+		valueFormatString: "DD-MMM-YYYY" ,
 	},
 	legend: {
 		cursor: "pointer",
