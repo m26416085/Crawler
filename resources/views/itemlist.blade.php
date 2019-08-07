@@ -3,6 +3,14 @@
 @section('content')
 
 <div class="container justify-content-center content">
+    <?php $c=0; ?>
+    @foreach($sections as $section)
+    @if(auth()->user()->id == $section->id_user)
+    <?php $c++; ?>
+    @endif
+    @endforeach
+
+    @if($c > 0)
     <h3>Tekan tombol Sync untuk melihat harga terbaru</h3>
     <!-- data from cart -->
     <div class="item-container-cart">
@@ -70,10 +78,18 @@
         <img class="icon-next" src="./svg/chevron-right.svg">
         <span class="sr-only">Next</span>
     </a>
+    @endif
+    @endforeach
+
+    @else
+        <div class="item-container-cart">
+            <img style="width: 50%" class="mx-auto d-block" src="{{ asset('icon/empty-cart.png') }}">
+            <h1 class="text-center mb-3">List pencarian masih kosong</h1>
+        </div>
+    @endif
 </div>
 </div>
-@endif
-@endforeach
+
 </div>
 
 
