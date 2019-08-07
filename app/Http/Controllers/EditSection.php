@@ -6,11 +6,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use View;
 use App\Search;
+use Illuminate\Support\Facades\Redirect;
 
 class EditSection extends Controller
 {
     public function index(){
-        
+        abort(404);
     }
 
     public function post(){
