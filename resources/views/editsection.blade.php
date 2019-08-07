@@ -7,6 +7,7 @@
         Keyword:<p class="data-profile">{{ $keyword }}</p>
     </div>
     <button type="button" class="btn btn-default btn-update-profile" data-toggle="collapse" data-target="#demo">Edit</button>
+    <a href="/itemlist"><button type="button" class="btn btn-default btn-update-profile">Kembali</button></a>
     <div id="demo" class="collapse">
         <form action="/editsectionpost" method="POST" class="form-edit-profile">
             @csrf
