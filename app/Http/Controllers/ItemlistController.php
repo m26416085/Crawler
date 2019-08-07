@@ -165,7 +165,7 @@ class ItemlistController extends Controller
             return view::make('itemlist', compact('cartCollection','products','sections', 'price_histories'));
 
         }
-        if(isset($_POST['update_keyword'])){
+        if(isset($_POST['edit_button'])){
             $sections= DB::table('searches')->get();
             $products = DB::table('products')->get();
             $price_histories = DB::table('price__histories')->get();

@@ -30,6 +30,8 @@ Route::get('/graph/{search}', 'PricegraphController@index');
 Route::post('/profile', 'ProfileController@profile');
 Route::get('/checkout', 'Checkout@index');
 Route::post('/checkout', 'Checkout@post');
+Route::post('/editsection', 'EditSection@post');
+Route::post('/editsectionpost', 'EditSection@edit');
 //Route::get('/home', 'TokopediaController@index');
 //Route::get('/home', 'TokopediaController@search');
 
