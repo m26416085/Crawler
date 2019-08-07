@@ -4,6 +4,7 @@
 
 <div class="container justify-content-center content">
     <h3>Keranjang</h3>
+    @if(count($cartCollection) > 1)
     <!-- data from cart -->
     <div class="item-container-cart">
         <h1 class="text-center mb-3">Tekan simpan untuk melanjutkan</h1>
@@ -49,6 +50,7 @@
             <button class="btn btn-primary btn-save" name="save" type="submit">Simpan</button>
         </form>
     </div>
+    @endif
 </div>
 </div>
 </div>
