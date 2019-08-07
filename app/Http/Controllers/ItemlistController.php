@@ -179,22 +179,35 @@ class ItemlistController extends Controller
         $sections = DB::table('searches')->get();
 
         foreach($sections as $section){
-            $products = DB::table('products')->where('id_search', $section->$id)->get();
+            $products = DB::table('products')->where('id_search', $section->id)->get();
             foreach($products as $product){
                 $cekurl = explode(".", $product->product_url);
                 if ($cekurl[1] == "tokopedia") {
                     $data = find_link_tokopedia("test", 0, 0, 0, 0, $product->product_url);
+                    DB::table('price__histories')->where('id_search', $section->id)->insert([
+                        'price' => $data,
+                        'id_search' => $section->id,
+                        'url_product' => $product->$product_url,
+                        'id_user' => auth()->user()->id
+                    ]);
                 }
                 else{
                     $data = find_link_shopee($product->$product_url, 0, 0, 0, 0);
+                    DB::table('price__histories')->where('id_search', $section->id)->insert([
+                        'price' => $data,
+                        'id_search' => $section->id,
+                        'url_product' => $product->$product_url,
+                        'id_user' => auth()->user()->id
+                    ]);
                 }
             }
-            DB::table('price__histories')->where('id_search', $section->$id)->insert([
-                'price' => $data
-            ]);
         }
-        
 
+        $sections= DB::table('searches')->get();
+        $products = DB::table('products')->get();
+        $price_histories = DB::table('price__histories')->get();
+        dd(aaaa);
+        return view::make('itemlist', compact('products','sections', 'price_histories'));
         
     }
 }

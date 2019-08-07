@@ -8,8 +8,9 @@
     <div class="item-container-cart">
         
         <!-- data from database -->
-        <form action="/syncitem">
-            <input type="submit" value="Sync">
+        <form action="/syncitem" method="post">
+            @csrf
+            <button type="submit">Submit</button>
         </form>
         @foreach ($sections as $section)
        
