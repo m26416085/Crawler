@@ -190,7 +190,7 @@ class HomeController extends Controller
             //tokopedia   
             if ($cekurl[1] == "tokopedia") {
                 $url = $search;
-
+                include(app_path() . '\Library\simple_html_dom.php');
                 $data_arr = find_link_tokopedia($search, $city_value_shopee, $city_value_tokopedia, $pmin, $pmaks, $url);
 
                 //tokopedia

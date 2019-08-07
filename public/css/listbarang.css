@@ -29,8 +29,8 @@
     color: #ffffff;
     width: 80px;
     height: 30px;
-
-    margin-bottom: 5px;
+    float: left;
+    margin-bottom: 5%;
     display: inline-block;
 }
 .btn-graph{
@@ -38,12 +38,33 @@
     color: #ffffff;
     width: 80px;
     height: 30px;
-
-    margin-bottom: 5px;
+    float: right;
+    margin-left: 5px;
+    margin-bottom: 5%;
     display: inline-block;
 }
 .wrapper-btn-save{
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.btn-sync{
+    background-color: #333;
+    color: #ffffff;
+    width: 80px;
+    height: 30px;
+    float: right;
+    margin-left: 100%;
+    margin-bottom: 5%;
+    display: block;
+}
+.btn-edit-list{
+    background-color: #333;
+    color: #ffffff;
+    width: 80px;
+    height: 30px;
+    float: right;
+
+    margin-bottom: 5%;
+    display: inline-block;
 }

@@ -53,7 +53,7 @@
                         <a class="link-menu" href="/checkout">Keranjang</a>
                     </div>
                     <div class="container-link">
-                        <a class="link-menu" href="/itemlist">List Barang</a>
+                        <a class="link-menu" href="/itemlist">List Pencarian</a>
                     </div>
                     <div class="container-link">
                         <a class="link-menu" href="/profile">Profile</a>
