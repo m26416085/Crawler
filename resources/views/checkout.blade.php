@@ -50,6 +50,11 @@
             <button class="btn btn-primary btn-save" name="save" type="submit">Simpan</button>
         </form>
     </div>
+    @else
+    <div class="item-container-cart">
+        <img style="width: 50%" class="mx-auto d-block" src="{{ asset('icon/empty-cart.png') }}">
+        <h1 class="text-center mb-3">Keranjang masih kosong</h1>
+    </div>
     @endif
 </div>
 </div>
