@@ -86,6 +86,7 @@ class ItemlistController extends Controller
                 $history->url_product = $product->product_url;
                 $history->price = $cart['price'];
                 $history->id_user = auth()->user()->id;
+                $history->id_search = $search->id;
                 $history->save();
             }
         }
@@ -142,7 +143,7 @@ class ItemlistController extends Controller
                         if ($product->created_at == $history->created_at){
                             // delete price history
                             //Price_History::find($history->id)->delete();
-                            Price_History::where('created_at', $history->created_at)->delete();
+                            Price_History::where('id_search', $history->id_search)->delete();
                         }
                     }
                     Product::where('id_search', $product->id_search)->delete();

@@ -28,8 +28,6 @@ class ProfileController extends Controller
     public function index()
     {
         $user = auth()->user();
-        dd($user);
-        
         return view::make('profile', compact('user'));
     }
     public function profile()
