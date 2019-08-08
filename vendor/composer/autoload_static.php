@@ -397,7 +397,6 @@ class ComposerStaticInite1434d477c86a7fe6df0bb9b90d328d9
     );
 
     public static $classMap = array (
-        'App\\Charts\\pricechart' => __DIR__ . '/../..' . '/app/Charts/pricechart.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\AjaxController' => __DIR__ . '/../..' . '/app/Http/Controllers/AjaxController.php',
@@ -406,7 +405,9 @@ class ComposerStaticInite1434d477c86a7fe6df0bb9b90d328d9
         'App\\Http\\Controllers\\Auth\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegisterController.php',
         'App\\Http\\Controllers\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ResetPasswordController.php',
         'App\\Http\\Controllers\\Auth\\VerificationController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/VerificationController.php',
+        'App\\Http\\Controllers\\Checkout' => __DIR__ . '/../..' . '/app/Http/Controllers/Checkout.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\EditSection' => __DIR__ . '/../..' . '/app/Http/Controllers/EditSection.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\ItemlistController' => __DIR__ . '/../..' . '/app/Http/Controllers/ItemlistController.php',
         'App\\Http\\Controllers\\PricegraphController' => __DIR__ . '/../..' . '/app/Http/Controllers/PricegraphController.php',
@@ -429,6 +430,7 @@ class ComposerStaticInite1434d477c86a7fe6df0bb9b90d328d9
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
         'App\\Search' => __DIR__ . '/../..' . '/app/Search.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
+        'App\\sync' => __DIR__ . '/../..' . '/app/sync.php',
         'Balping\\JsonRaw\\Encoder' => __DIR__ . '/..' . '/balping/json-raw-encoder/src/Encoder.php',
         'Balping\\JsonRaw\\Raw' => __DIR__ . '/..' . '/balping/json-raw-encoder/src/Raw.php',
         'Balping\\JsonRaw\\Replacer' => __DIR__ . '/..' . '/balping/json-raw-encoder/src/Replacer.php',

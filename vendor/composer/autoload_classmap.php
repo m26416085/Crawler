@@ -6,7 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'App\\Charts\\pricechart' => $baseDir . '/app/Charts/pricechart.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Http\\Controllers\\AjaxController' => $baseDir . '/app/Http/Controllers/AjaxController.php',
@@ -15,7 +14,9 @@ return array(
     'App\\Http\\Controllers\\Auth\\RegisterController' => $baseDir . '/app/Http/Controllers/Auth/RegisterController.php',
     'App\\Http\\Controllers\\Auth\\ResetPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ResetPasswordController.php',
     'App\\Http\\Controllers\\Auth\\VerificationController' => $baseDir . '/app/Http/Controllers/Auth/VerificationController.php',
+    'App\\Http\\Controllers\\Checkout' => $baseDir . '/app/Http/Controllers/Checkout.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
+    'App\\Http\\Controllers\\EditSection' => $baseDir . '/app/Http/Controllers/EditSection.php',
     'App\\Http\\Controllers\\HomeController' => $baseDir . '/app/Http/Controllers/HomeController.php',
     'App\\Http\\Controllers\\ItemlistController' => $baseDir . '/app/Http/Controllers/ItemlistController.php',
     'App\\Http\\Controllers\\PricegraphController' => $baseDir . '/app/Http/Controllers/PricegraphController.php',
@@ -38,6 +39,7 @@ return array(
     'App\\Providers\\RouteServiceProvider' => $baseDir . '/app/Providers/RouteServiceProvider.php',
     'App\\Search' => $baseDir . '/app/Search.php',
     'App\\User' => $baseDir . '/app/User.php',
+    'App\\sync' => $baseDir . '/app/sync.php',
     'Balping\\JsonRaw\\Encoder' => $vendorDir . '/balping/json-raw-encoder/src/Encoder.php',
     'Balping\\JsonRaw\\Raw' => $vendorDir . '/balping/json-raw-encoder/src/Raw.php',
     'Balping\\JsonRaw\\Replacer' => $vendorDir . '/balping/json-raw-encoder/src/Replacer.php',

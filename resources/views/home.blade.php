@@ -50,6 +50,8 @@
             });
         });
     });
+ 
+    
 </script>
 <div class="container justify-content-center content" id="content">
     <!-- Tabs -->

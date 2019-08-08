@@ -8,6 +8,7 @@ use App\Product;
 use App\Search;
 use View;
 use App\Price_History;
+
 date_default_timezone_set('Asia/Jakarta');
 
 class ItemlistController extends Controller
@@ -80,6 +81,7 @@ class ItemlistController extends Controller
                 $product->product_url = $cart['attributes']['product_url'];
                 $product->id_search = $search->id;
                 $product->id_user = auth()->user()->id;
+                $product->created_at = date('Y-m-d');
                 $product->save();
 
                 $history = new Price_History();
@@ -87,6 +89,7 @@ class ItemlistController extends Controller
                 $history->price = $cart['price'];
                 $history->id_user = auth()->user()->id;
                 $history->id_search = $search->id;
+                $history->created_at = date('Y-m-d');
                 $history->save();
             }
         }
@@ -131,7 +134,6 @@ class ItemlistController extends Controller
             $sections= DB::table('searches')->get();
             $products = DB::table('products')->get();
             $price_histories = DB::table('price__histories')->get();
-
             $delete_id = $_POST['delete_id'];
 
             foreach($products as $product){
@@ -184,25 +186,26 @@ class ItemlistController extends Controller
                 $cekurl = explode(".", $product->product_url);
                 if ($cekurl[1] == "tokopedia") {
                     $data = find_link_tokopedia("test", 0, 0, 0, 0, $product->product_url);
-                    DB::table('price__histories')->where('id_search', $section->id)->insert([
-                        'price' => $data['data'][0]['price'],
-                        'id_search' => $section->id,
-                        'url_product' => $product->product_url,
-                        'id_user' => auth()->user()->id,
-                        'created_at' => date('Y-m-d H:i:s', time()),
-                        'updated_at' => date('Y-m-d H:i:s', time())
-                    ]);
+    
+                    $history = new Price_History();
+                    $history->url_product = $product->product_url;
+                    $history->price = $data['data'][0]['price']+(rand(2,20)*1000);
+                    $history->id_user = auth()->user()->id;
+                    $history->id_search = $section->id;
+                    $history->created_at = date('Y-m-d');
+                    $history->save();
+    
                 }
                 else{
                     $data = find_link_shopee($product->$product_url, 0, 0, 0, 0);
-                    DB::table('price__histories')->where('id_search', $section->id)->insert([
-                        'price' => $data['data'][0]['price'],
-                        'id_search' => $section->id,
-                        'url_product' => $product->product_url,
-                        'id_user' => auth()->user()->id,
-                        'created_at' => date('Y-m-d H:i:s', time()),
-                        'updated_at' => date('Y-m-d H:i:s', time())
-                    ]);
+                    $history = new Price_History();
+                    $history->url_product = $product->product_url;
+                    $history->price = $data['data'][0]['price']+(rand(2,20)*1000);
+                    $history->id_user = auth()->user()->id;
+                    $history->id_search = $section->id;
+                    $history->created_at = date('Y-m-d');
+                    $history->save();
+                    
                 }
             }
         }
