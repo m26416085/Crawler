@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container justify-content-center content">
-   <h3>Grafik</h3>
+   <!-- <h3>Grafik</h3> -->
    <div id="chartContainer" style="height: 100%; width: 100%;"></div>
    
 
@@ -23,7 +23,7 @@ var chart = new CanvasJS.Chart("chartContainer", {
 		interval: {{$average}}
 	},
 	axisX:{
-		valueFormatString: "DD-MMM-YYYY" ,
+		valueFormatString: "D-M-YY" ,
 		interval: 1,
         intervalType: "day",
 	},

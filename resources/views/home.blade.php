@@ -64,7 +64,7 @@
                 success: function(data) {
                     $(".item-container-add").load("home .item-container-add");
                     $(".checkouta").load("home .checkouta");
-                    toastr.success('Data berhasil dihapus!');
+                    toastr.error('Data berhasil dihapus!');
                 }
             });
         });
@@ -120,7 +120,7 @@
                 <table>
                     <tr>
                         <td>
-                            <h5 class="filter-title">Filter</h5>
+                            <h5 class="filter-title">Filter Pencarian</h5>
                         </td>
                     </tr>
                     <tr>

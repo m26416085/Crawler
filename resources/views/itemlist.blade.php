@@ -11,7 +11,7 @@
     @endforeach
 
     @if($c > 0)
-    <h3>Tekan tombol Sync untuk melihat harga terbaru</h3>
+    <h3 style="font-size: 17px; float: right">Tekan tombol Sync untuk melihat harga terbaru</h3>
     <!-- data from cart -->
     <div class="item-container-cart">
         
@@ -83,9 +83,9 @@
     @endforeach
     
     @else
-        <div class="item-container-cart">
+        <div class="item-container-cart" style="padding-top: 75px;">
             <img style="width: 50%" class="mx-auto d-block" src="{{ asset('icon/empty-cart.png') }}">
-            <h1 class="text-center mb-3">List pencarian masih kosong</h1>
+            <h1 class="text-center mb-3" style="font-size: 25px;">List pencarian masih kosong</h1>
         </div>
     @endif
 

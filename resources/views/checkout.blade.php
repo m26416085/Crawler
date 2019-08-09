@@ -3,8 +3,9 @@
 @section('content')
 
 <div class="container justify-content-center content">
-    <h3>Keranjang</h3>
     @if(count($cartCollection) > 1)
+    <!-- <h3>Keranjang</h3> -->
+    <p>Pastikan keranjang anda sudah sesuai dengan apa yang anda inginkan.</p>
     <!-- data from cart -->
     <div class="item-container-cart">
         <h1 class="text-center mb-3">Tekan simpan untuk melanjutkan</h1>
@@ -51,9 +52,9 @@
         </form>
     </div>
     @else
-    <div class="item-container-cart">
+    <div class="item-container-cart" style="padding-top: 75px;">
         <img style="width: 50%" class="mx-auto d-block" src="{{ asset('icon/empty-cart.png') }}">
-        <h1 class="text-center mb-3">Keranjang masih kosong</h1>
+        <h1 class="text-center mb-3" style="font-size: 25px;">Keranjang masih kosong</h1>
     </div>
     @endif
 </div>

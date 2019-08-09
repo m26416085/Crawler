@@ -7,7 +7,10 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>PriceTrend - Partner anda dalam berbisnis online.</title>
+
+    <link rel="shortcut icon" type="image/png" href="{{ asset('icon/favicon.png') }}"/>
+    <!-- <title>{{ config('app.name', 'Laravel') }}</title> -->
 
     <!-- load jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
