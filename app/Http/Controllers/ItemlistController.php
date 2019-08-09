@@ -167,12 +167,15 @@ class ItemlistController extends Controller
 
         }
         if(isset($_POST['edit_button'])){
-            $sections= DB::table('searches')->get();
-            $products = DB::table('products')->get();
-            $price_histories = DB::table('price__histories')->get();
+            $id = $_POST['id_section'];
+            $sections = DB::table('searches')->get();
+            foreach($sections as $section){
+                if($section->id == $id){
+                    $keyword = $section->keyword;
+                }
+            }
 
-
-            return view::make('itemlist', compact('cartCollection','products','sections', 'price_histories'));
+            return view::make('editsection', compact('keyword', 'id'));
         }
     }
     public function sync(){

@@ -29,6 +29,8 @@
     <link href="{{ asset('css/login.css') }}" rel="stylesheet">
     <link href="{{ asset('css/register.css') }}" rel="stylesheet">
     <link href="{{ asset('css/profile.css') }}" rel="stylesheet">
+    @toastr_css
+    @toastr_js
     <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
     <script>
     $(function(){
