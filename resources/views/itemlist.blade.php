@@ -66,7 +66,7 @@
         </form>
         @endforeach
 
-    </div>
+        </div>
     <a class="carousel-control-prev" href="#Item-list-{{$section->id}}" role="button" data-slide="prev">
         <img class="icon-prev" src="./svg/chevron-left.svg">
         <span class="sr-only">Previous</span>
@@ -76,18 +76,19 @@
         <span class="sr-only">Next</span>
     </a>
     @endif
-    @endforeach
+    </div>
+    </div>
 
+    </div>
+    @endforeach
+    
     @else
         <div class="item-container-cart">
             <img style="width: 50%" class="mx-auto d-block" src="{{ asset('icon/empty-cart.png') }}">
             <h1 class="text-center mb-3">List pencarian masih kosong</h1>
         </div>
     @endif
-</div>
-</div>
 
-</div>
 
 
 @endsection

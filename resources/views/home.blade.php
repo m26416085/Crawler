@@ -83,6 +83,8 @@
             toastr.info('Data sedang dicari...');
         });
     });
+ 
+    
 </script>
 <div class="container justify-content-center content" id="content">
     <!-- Tabs -->

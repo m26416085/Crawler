@@ -39,6 +39,7 @@ return array(
     'App\\Providers\\RouteServiceProvider' => $baseDir . '/app/Providers/RouteServiceProvider.php',
     'App\\Search' => $baseDir . '/app/Search.php',
     'App\\User' => $baseDir . '/app/User.php',
+    'App\\sync' => $baseDir . '/app/sync.php',
     'Balping\\JsonRaw\\Encoder' => $vendorDir . '/balping/json-raw-encoder/src/Encoder.php',
     'Balping\\JsonRaw\\Raw' => $vendorDir . '/balping/json-raw-encoder/src/Raw.php',
     'Balping\\JsonRaw\\Replacer' => $vendorDir . '/balping/json-raw-encoder/src/Replacer.php',

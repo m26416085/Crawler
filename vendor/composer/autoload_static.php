@@ -439,6 +439,7 @@ class ComposerStaticInite1434d477c86a7fe6df0bb9b90d328d9
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
         'App\\Search' => __DIR__ . '/../..' . '/app/Search.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
+        'App\\sync' => __DIR__ . '/../..' . '/app/sync.php',
         'Balping\\JsonRaw\\Encoder' => __DIR__ . '/..' . '/balping/json-raw-encoder/src/Encoder.php',
         'Balping\\JsonRaw\\Raw' => __DIR__ . '/..' . '/balping/json-raw-encoder/src/Raw.php',
         'Balping\\JsonRaw\\Replacer' => __DIR__ . '/..' . '/balping/json-raw-encoder/src/Replacer.php',

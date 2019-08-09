@@ -24,6 +24,8 @@ var chart = new CanvasJS.Chart("chartContainer", {
 	},
 	axisX:{
 		valueFormatString: "DD-MMM-YYYY" ,
+		interval: 1,
+        intervalType: "day",
 	},
 	legend: {
 		cursor: "pointer",
