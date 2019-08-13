@@ -2,12 +2,15 @@
 
 @section('content')
 
+
+
 <div class="container justify-content-center content">
    <!-- <h3>Grafik</h3> -->
    <div id="chartContainer" style="height: 100%; width: 100%;"></div>
    
 
 </div>
+
 <script>
 
  
@@ -15,8 +18,9 @@ var chart = new CanvasJS.Chart("chartContainer", {
 	title: {
 		text: "Data Perbandingan Harga"
 	},
+	width: 720,
 	toolTip:{   
-			content: "{namabarang}: {y}"      
+		content: "{namabarang}: {y}"      
 	},
 	axisY: {
 		title: "Range Harga",
@@ -63,6 +67,7 @@ if(counter>1){
 	<?php } ?>
 	chart.render();
 }
+
 </script>
 @endsection
 

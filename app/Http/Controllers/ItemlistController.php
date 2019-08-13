@@ -136,14 +136,10 @@ class ItemlistController extends Controller
             $price_histories = DB::table('price__histories')->get();
             $delete_id = $_POST['delete_id'];
 
-            // delete price history
             Price_History::where('id_search', $delete_id)->delete();
-            // delete product id
+        
             Product::where('id_search', $delete_id)->delete();
-
-
-
-
+   
             // delete search id
             Search::destroy($delete_id);
 
@@ -182,7 +178,7 @@ class ItemlistController extends Controller
     
                     $history = new Price_History();
                     $history->url_product = $product->product_url;
-                    $history->price = $data['data'][0]['price']+(rand(2,20)*1000);
+                    $history->price = $data['data'][0]['price'];
                     $history->id_user = auth()->user()->id;
                     $history->id_search = $section->id;
                     $history->created_at = date('Y-m-d');
@@ -193,7 +189,7 @@ class ItemlistController extends Controller
                     $data = find_link_shopee($product->$product_url, 0, 0, 0, 0);
                     $history = new Price_History();
                     $history->url_product = $product->product_url;
-                    $history->price = $data['data'][0]['price']+(rand(2,20)*1000);
+                    $history->price = $data['data'][0]['price'];
                     $history->id_user = auth()->user()->id;
                     $history->id_search = $section->id;
                     $history->created_at = date('Y-m-d');
@@ -205,9 +201,7 @@ class ItemlistController extends Controller
 
         $sections= DB::table('searches')->get();
         $products = DB::table('products')->get();
-        $price_histories = DB::table('price__histories')->get();
-
-        return view::make('itemlist', compact('products','sections', 'price_histories'));
+        return view::make('itemlist', compact('products','sections'));
         
     }
 }
