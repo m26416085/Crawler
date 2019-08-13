@@ -136,21 +136,11 @@ class ItemlistController extends Controller
             $price_histories = DB::table('price__histories')->get();
             $delete_id = $_POST['delete_id'];
 
-            foreach($products as $product){
-                if($product->id_search == $delete_id){
-                    // delete product id
-                    //Product::find($product->id)->delete();
-                    
-                    foreach($price_histories as $history){
-                        if ($product->created_at == $history->created_at){
-                            // delete price history
-                            //Price_History::find($history->id)->delete();
-                            Price_History::where('id_search', $history->id_search)->delete();
-                        }
-                    }
-                    Product::where('id_search', $product->id_search)->delete();
-                }
-            }
+            // delete price history
+            Price_History::where('id_search', $delete_id)->delete();
+            // delete product id
+            Product::where('id_search', $delete_id)->delete();
+
 
 
 
