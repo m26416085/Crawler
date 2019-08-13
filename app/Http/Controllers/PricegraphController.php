@@ -57,25 +57,25 @@ class PricegraphController extends Controller
         foreach ($products as $product){   
             $histories = Price_History::where('url_product',$product->product_url)->get();
             $date=$product->created_at;
-            
             foreach ($histories as $history){
-                if($history->created_at==$date){
-                    $hargatotal=$hargatotal+$history->price;
-                    $pricecount++;
-                }
-                else{ 
-                    $data_arr[$productcount][] = array('namabarang'=>$product->product_name,'x' =>strtotime($date->format('m/d/Y'))*1000, 'y' => $price_arr[$productcount]=round($hargatotal/$pricecount));
-                    $date=$history->created_at;
-                    $pricecount=1;
-                    $hargatotal=$history->price;
+                if($history->id_search==$section_id){
+                    if($history->created_at==$date){
+                        $hargatotal=$hargatotal+$history->price;
+                        $pricecount++;
+                    }
+                    else{
+                        $data_arr[$productcount][] = array('namabarang'=>$product->product_name,'x' =>strtotime($date->format('m/d/Y'))*1000, 'y' => $price_arr[$productcount]=round($hargatotal/$pricecount));
+                        $date=$history->created_at;
+                        $pricecount=1;
+                        $hargatotal=$history->price;
+                    }
                 }
             }
             $data_arr[$productcount][] = array('namabarang'=>$product->product_name,'x' =>strtotime($date->format('m/d/Y'))*1000, 'y' => $price_arr[$productcount]=round($hargatotal/$pricecount));
             $shop_name_array[$productcount]=$product->shop_name;
             $productcount++;
-
         }
-        
+
 
         $dataPoints = $data_arr;
         

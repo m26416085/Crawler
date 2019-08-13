@@ -2,12 +2,7 @@
 
 @section('content')
 
-<div class="container justify-content-center content">
-   <h3>Grafik</h3>
-   <div id="chartContainer" style="height: 100%; width: 100%;"></div>
-   
-
-</div>
+<div id="chartContainer"></div>
 <script>
 
  
@@ -15,15 +10,16 @@ var chart = new CanvasJS.Chart("chartContainer", {
 	title: {
 		text: "Data Perbandingan Harga"
 	},
+	width: 720,
 	toolTip:{   
-			content: "{namabarang}: {y}"      
+		content: "{namabarang}: {y}"      
 	},
 	axisY: {
 		title: "Range Harga",
 		interval: {{$average}}
 	},
 	axisX:{
-		valueFormatString: "DD-MMM-YYYY" ,
+		valueFormatString: "D-M-YY" ,
 		interval: 1,
         intervalType: "day",
 	},
@@ -63,6 +59,7 @@ if(counter>1){
 	<?php } ?>
 	chart.render();
 }
+
 </script>
 @endsection
 

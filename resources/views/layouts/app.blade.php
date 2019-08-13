@@ -16,7 +16,7 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/jquery-3.4.1.js') }}"></script>
-    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script src="{{ asset('js/canvasjs-2.3.2/canvasjs.min.js') }}"></script>
     <!-- Fonts -->
     <!-- <link rel="dns-prefetch" href="//fonts.gstatic.com"> -->
     <!-- <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet"> -->
@@ -29,7 +29,7 @@
     <link href="{{ asset('css/login.css') }}" rel="stylesheet">
     <link href="{{ asset('css/register.css') }}" rel="stylesheet">
     <link href="{{ asset('css/profile.css') }}" rel="stylesheet">
-    <link href="toastr.css" rel="stylesheet"/>
+    <link href="{{ asset('css/graph.css') }}" rel="stylesheet">
     <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
     <script>
     $(function(){
