@@ -11,7 +11,7 @@
     @endforeach
 
     @if($c > 0)
-    <h3>Tekan tombol Sync untuk melihat harga terbaru</h3>
+    <h3 style="font-size: 17px; float: right">Tekan tombol Sync untuk melihat harga terbaru</h3>
     <!-- data from cart -->
     <div class="item-container-cart">
         
@@ -25,19 +25,16 @@
             @if (auth()->user()->id == $section->id_user)
           
             <a href="/graph/{{$section->id}}"><button class="btn btn-default btn-graph">Graph</button></a>
-            <form action="/editsection" method="post">
-                @csrf
-                <input type="hidden" name="id_section" value="{{ $section->id }}">
-                <input type="hidden" name="keyword_section" value="{{str_replace('%20', ' ', $section->keyword)}}">
-                <button class="btn btn-default btn-edit-list" type="submit" name="edit_button">Edit</button>
-            </form>
+
             
             <form action="/itemlist" method="POST" id="list_tokopedia_form">
             <button class="btn btn-default btn-delete-list" type="submit" name="delete_button">Delete</button>
         
             <div class="item-container">
+                <input type="hidden" name="id_section" value="{{ $section->id }}">
+                <input type="hidden" name="keyword_section" value="{{str_replace('%20', ' ', $section->keyword)}}">
 
-                <h1 class="text-center mb-3">{{str_replace('%20', ' ', $section->keyword)}}</h1>
+                <h1 class="text-center mb-3">{{str_replace('%20', ' ', $section->keyword)}}<button class="btn btn-default btn-edit-list" type="submit" name="edit_button"><img class="image-edit" src="{{ asset('icon/pencil.svg') }}"></button></h1>
                 <div id="Item-list-{{$section->id}}" class="carousel slide" data-interval="false" data-ride="carousel">
                     <?php $counter = 0; ?>
                     <!-- Cards -->
@@ -86,9 +83,9 @@
     @endforeach
     
     @else
-        <div class="item-container-cart">
+        <div class="item-container-cart" style="padding-top: 75px;">
             <img style="width: 50%" class="mx-auto d-block" src="{{ asset('icon/empty-cart.png') }}">
-            <h1 class="text-center mb-3">List pencarian masih kosong</h1>
+            <h1 class="text-center mb-3" style="font-size: 25px;">List pencarian masih kosong</h1>
         </div>
     @endif
 

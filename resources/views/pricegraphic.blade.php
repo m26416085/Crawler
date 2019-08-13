@@ -2,7 +2,15 @@
 
 @section('content')
 
-<div id="chartContainer"></div>
+
+
+<div class="container justify-content-center content">
+   <!-- <h3>Grafik</h3> -->
+   <div id="chartContainer" style="height: 100%; width: 100%;"></div>
+   
+
+</div>
+
 <script>
 
  

@@ -9,7 +9,7 @@
     <button type="button" class="btn btn-default btn-update-profile" data-toggle="collapse" data-target="#demo">Edit</button>
     <a href="/itemlist"><button type="button" class="btn btn-default btn-update-profile">Kembali</button></a>
     <div id="demo" class="collapse">
-        <form action="/editsectionpost" method="POST" class="form-edit-profile">
+        <form action="/editsection" method="POST" class="form-edit-profile">
             @csrf
             Keyword: <input class="form-control" type="text" name="keyword" value="{{ $keyword }}"><br>
             <input type="hidden" name="id_section" value="{{ $id }}">
