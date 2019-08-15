@@ -136,7 +136,6 @@ class ItemlistController extends Controller
             $price_histories = DB::table('price__histories')->get();
             $delete_id = $_POST['delete_id'];
 
-
             Price_History::where('id_search', $delete_id)->delete();
         
             Product::where('id_search', $delete_id)->delete();
