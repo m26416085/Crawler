@@ -181,7 +181,7 @@
 
     <div class="checkouta">
         @if(count($cartCollection) > 1)
-        <a href="/checkout" class="checkouta"><button class="btn btn-default btn-checkout">Checkout</button></a>
+        <a href="/checkout" class="checkouta"><button class="btn btn-default btn-checkout">Simpan ke keranjang</button></a>
         @endif
     </div>
 

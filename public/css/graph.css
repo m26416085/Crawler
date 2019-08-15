@@ -1,0 +1,12 @@
+.btn-filter-graph{
+    background-color: #333;
+    color: #ffffff;
+    width: 80px;
+    height: 30px;
+    margin-left: 5px;
+}
+.graph{
+    height: 100%; 
+    width: 100%;
+    margin-top: 5%;
+}

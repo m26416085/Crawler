@@ -5,15 +5,30 @@
 
 
 <div class="container justify-content-center content">
-   <!-- <h3>Grafik</h3> -->
-   <div id="chartContainer" style="height: 100%; width: 100%;"></div>
-   
+<form action="/graph/{{$section_id}}" method="POST">
+@csrf
+<label class="label-filter">Filter Waktu</label>
+<table>
+<tr>
+	<td>
+	<div class="form-check form-check-inline">
+		<select name="time" class="form-control filter-limit filter-input">
+			<option value="hari">Hari</option>
+			<option value="bulan">Bulan</option>
+		</select>
+	</div>
+	</td>
+	<td><button class="btn btn-default btn-filter-graph">Submit</button></td>
+</tr>
+</table>
+</form>
+	<div class="graph" id="chartContainer">
 
+	</div>          
 </div>
 
 <script>
 
- 
 var chart = new CanvasJS.Chart("chartContainer", {
 	title: {
 		text: "Data Perbandingan Harga"
@@ -26,11 +41,23 @@ var chart = new CanvasJS.Chart("chartContainer", {
 		title: "Range Harga",
 		interval: {{$average}}
 	},
+
+	<?php if ($filter==0) { ?>
 	axisX:{
 		valueFormatString: "D-M-YY" ,
 		interval: 1,
         intervalType: "day",
 	},
+	<?php } ?>
+
+	<?php	if ($filter==1) { ?>
+	axisX:{
+		valueFormatString: "M-YY" ,
+		interval: 1,
+        intervalType: "day",
+	},
+	<?php } ?>
+
 	legend: {
 		cursor: "pointer",
 		itemclick: function (e) {

@@ -187,7 +187,7 @@ class ItemlistController extends Controller
     
                 }
                 else{
-                    $data = find_link_shopee($product->$product_url, 0, 0, 0, 0);
+                    $data = find_link_shopee($product->product_url, 0, 0, 0, 0);
                     $history = new Price_History();
                     $history->url_product = $product->product_url;
                     $history->price = $data['data'][0]['price'];

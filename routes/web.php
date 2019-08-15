@@ -27,6 +27,7 @@ Route::post('/deletehome', 'HomeController@delete');
 Route::get('/itemlist', 'ItemlistController@index');
 Route::get('/profile', 'ProfileController@index');
 Route::get('/graph/{search}', 'PricegraphController@index');
+Route::post('/graph/{search}', 'PricegraphController@filter');
 Route::post('/profile', 'ProfileController@profile');
 Route::get('/checkout', 'Checkout@index');
 Route::post('/checkout', 'Checkout@post');

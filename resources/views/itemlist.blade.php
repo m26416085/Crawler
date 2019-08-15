@@ -23,12 +23,12 @@
         @foreach ($sections as $section)
        
             @if (auth()->user()->id == $section->id_user)
-          
             <a href="/graph/{{$section->id}}"><button class="btn btn-default btn-graph">Graph</button></a>
 
-            
             <form action="/itemlist" method="POST" id="list_tokopedia_form">
+         
             <button class="btn btn-default btn-delete-list" type="submit" name="delete_button">Delete</button>
+            
         
             <div class="item-container">
                 <input type="hidden" name="id_section" value="{{ $section->id }}">
@@ -78,10 +78,10 @@
     @endif
     </div>
     </div>
-
-    </div>
     @endforeach
     
+
+    </div>
     @else
         <div class="item-container-cart" style="padding-top: 75px;">
             <img style="width: 50%" class="mx-auto d-block" src="{{ asset('icon/empty-cart.png') }}">
