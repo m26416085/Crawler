@@ -75,9 +75,11 @@
         <img class="icon-next" src="./svg/chevron-right.svg">
         <span class="sr-only">Next</span>
     </a>
+
+    </div>
+    
+    </div>
     @endif
-    </div>
-    </div>
     @endforeach
     
 
