@@ -1,6 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
+<script>
+    $(document).ready(function() {
+        $(document).on('click', '#button_sync', function(e) {
+                toastr.options = {
+                    "timeOut": "60000",
+                    "extendedTimeOut": "60000",
+                }
+                toastr.info('Data sedang diperbaharui...');
+            });
+    });
+</script>
 
 <div class="container justify-content-center content">
     <?php $c=0; ?>
@@ -18,7 +29,7 @@
         <!-- data from database -->
         <form action="/syncitem" method="post">
             @csrf
-            <button class="btn btn-default btn-sync" type="submit">Sync</button>
+            <button class="btn btn-default btn-sync" name="button_sync" id="button_sync" type="submit">Sync</button>
         </form>
         @foreach ($sections as $section)
        
@@ -92,5 +103,5 @@
     @endif
 
 
-
+@toastr_render
 @endsection

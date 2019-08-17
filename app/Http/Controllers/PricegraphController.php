@@ -33,7 +33,7 @@ class PricegraphController extends Controller
         $section_id = $section;
         $search=Search::find($section_id);
         $products = Product::where('id_search',$section_id)->get();
-   
+        $onedata=0;
         $data_arr = array();
         $productcount=0;
         $created_at=array();
@@ -68,6 +68,7 @@ class PricegraphController extends Controller
                         $data_arr[$productcount][] = array('namabarang'=>$product->product_name,'x' =>strtotime($date->format('m/d/Y'))*1000, 'y' => $price_arr[$productcount]=round($hargatotal/$pricecount));
                         $date=$history->created_at;
                         $pricecount=1;
+                        $onedata=1;
                         $hargatotal=$history->price;
                     }
                 }
@@ -86,7 +87,7 @@ class PricegraphController extends Controller
         $average = round($average);
         $modder = $average%1000;
         $average= $average-$modder;
-        return view('pricegraphic', compact('dataPoints','shop_name_array','productcount','average','section_id','filter'));
+        return view('pricegraphic', compact('dataPoints','shop_name_array','productcount','average','section_id','filter','onedata'));
     }
     public function filter($section)
     {   
@@ -97,7 +98,7 @@ class PricegraphController extends Controller
         $data_arr = array();
         $productcount=0;
         $created_at=array();
-       
+        $onedata=0;
         $pricecount=0; 
         $hargatotal=0;
         $time= $_POST['time'];
@@ -119,6 +120,7 @@ class PricegraphController extends Controller
                             $data_arr[$productcount][] = array('namabarang'=>$product->product_name,'x' =>strtotime($date->format('m/d/Y'))*1000, 'y' => $price_arr[$productcount]=round($hargatotal/$pricecount));
                             $date=$history->created_at;
                             $pricecount=1;
+                            $onedata=1;
                             $hargatotal=$history->price;
                         }
                     }
@@ -157,7 +159,7 @@ class PricegraphController extends Controller
                             $date=$history->created_at;
                             $date=explode(" ",$date);
                             $date=explode("-",$date[0]);
-                            
+                            $onedata=1;
                             $pricecount=1;
                             $hargatotal=$history->price;
                         }
@@ -174,11 +176,10 @@ class PricegraphController extends Controller
         }
 
         $dataPoints = $data_arr;
-        
         $average = array_sum($price_arr)/count($price_arr);
         $average = round($average);
         $modder = $average%1000;
         $average= $average-$modder;
-        return view('pricegraphic', compact('dataPoints','shop_name_array','productcount','average','section_id','filter'));
+        return view('pricegraphic', compact('dataPoints','shop_name_array','productcount','average','section_id','filter','onedata'));
     }
 }

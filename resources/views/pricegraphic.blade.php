@@ -45,7 +45,12 @@ var chart = new CanvasJS.Chart("chartContainer", {
 	<?php if ($filter==0) { ?>
 	axisX:{
 		valueFormatString: "D-M-YY" ,
+		<?php if ($onedata==1) { ?>
 		interval: 1,
+		<?php } ?>
+		<?php if ($onedata==0) { ?>
+		interval: 0,
+		<?php } ?>
         intervalType: "day",
 	},
 	<?php } ?>
@@ -53,7 +58,12 @@ var chart = new CanvasJS.Chart("chartContainer", {
 	<?php	if ($filter==1) { ?>
 	axisX:{
 		valueFormatString: "M-YY" ,
+		<?php if ($onedata==1) { ?>
 		interval: 1,
+		<?php } ?>
+		<?php if ($onedata==0) { ?>
+		interval: 0,
+		<?php } ?>
         intervalType: "day",
 	},
 	<?php } ?>
