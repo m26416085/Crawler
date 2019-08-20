@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Product;
 use App\Search;
 use View;
+use Carbon\Carbon;
 use App\Price_History;
 
 date_default_timezone_set('Asia/Jakarta');
@@ -103,34 +104,85 @@ class PricegraphController extends Controller
         $hargatotal=0;
         $time= $_POST['time'];
 
+        if(empty($_POST['tanggalmulai'])){
+            $dari='0';
+        }
+        else{
+            $dari=strtotime($_POST['tanggalmulai']);
+            $dari=date('Y-m-d',$dari);
+            $dari=Carbon::parse($dari);
+        }
+        if(empty($_POST['tanggalakhir'])){
+            $sampai='0';
+        }
+        else{
+            $sampai=strtotime($_POST['tanggalakhir']);
+            $sampai= date('Y-m-d',$sampai);
+            $sampai=Carbon::parse($sampai);
+        }
+       
         if($time=='hari')
         {
-            foreach ($products as $product){   
-                $histories = Price_History::where('url_product',$product->product_url)->get();
-                if($hargatotal==0){
-                    $date=$product->created_at;
-                }
-                foreach ($histories as $history){
-                    if($history->id_search==$section_id){
-                        if($history->created_at==$date){
-                            $hargatotal=$hargatotal+$history->price;
-                            $pricecount++;
-                        }
-                        else{
-                            $data_arr[$productcount][] = array('namabarang'=>$product->product_name,'x' =>strtotime($date->format('m/d/Y'))*1000, 'y' => $price_arr[$productcount]=round($hargatotal/$pricecount));
-                            $date=$history->created_at;
-                            $pricecount=1;
-                            $onedata=1;
-                            $hargatotal=$history->price;
+            foreach ($products as $product){ 
+                if($dari=='0'){
+                    $histories = Price_History::where('url_product',$product->product_url)->get();
+                    if($hargatotal==0){
+                        $date=$product->created_at;
+                    }
+                    foreach ($histories as $history){
+                        if($history->id_search==$section_id){
+                            if($history->created_at==$date){
+                                $hargatotal=$hargatotal+$history->price;
+                                $pricecount++;
+                            }
+                            else{
+                                $data_arr[$productcount][] = array('namabarang'=>$product->product_name,'x' =>strtotime($date->format('m/d/Y'))*1000, 'y' => $price_arr[$productcount]=round($hargatotal/$pricecount));
+                                $date=$history->created_at;
+                                $pricecount=1;
+                                $onedata=1;
+                                $hargatotal=$history->price;
+                            }
                         }
                     }
+                    $data_arr[$productcount][] = array('namabarang'=>$product->product_name,'x' =>strtotime($date->format('m/d/Y'))*1000, 'y' => $price_arr[$productcount]=round($hargatotal/$pricecount));
+                    $pricecount=0;
+                    $hargatotal=0;
+                    $shop_name_array[$productcount]=$product->shop_name;
+                    $productcount++;
+                    $filter=0;
                 }
-                $data_arr[$productcount][] = array('namabarang'=>$product->product_name,'x' =>strtotime($date->format('m/d/Y'))*1000, 'y' => $price_arr[$productcount]=round($hargatotal/$pricecount));
-                $pricecount=0;
-                $hargatotal=0;
-                $shop_name_array[$productcount]=$product->shop_name;
-                $productcount++;
-                $filter=0;
+                else{
+                    $histories = Price_History::where('url_product',$product->product_url)->whereBetween('created_at', [$dari, $sampai])->get();
+                    if($hargatotal==0){
+                        $date=$dari;
+                    }
+                    foreach ($histories as $history){
+                        if($history->id_search==$section_id){
+                            if($history->created_at==$date){
+                                $hargatotal=$hargatotal+$history->price;
+                                $pricecount++;
+                            }
+                            else{
+                                if($pricecount==0){
+                                    $data_arr[$productcount][] = array('namabarang'=>$product->product_name,'x' =>strtotime($date->format('m/d/Y'))*1000, 'y' => null);
+                                }
+                                else{
+                                    $data_arr[$productcount][] = array('namabarang'=>$product->product_name,'x' =>strtotime($date->format('m/d/Y'))*1000, 'y' => $price_arr[$productcount]=round($hargatotal/$pricecount));
+                                }
+                                $date=$history->created_at;
+                                $pricecount=1;
+                                $onedata=1;
+                                $hargatotal=$history->price;
+                            }
+                        }
+                    }
+                    $data_arr[$productcount][] = array('namabarang'=>$product->product_name,'x' =>strtotime($date->format('m/d/Y'))*1000, 'y' => $price_arr[$productcount]=round($hargatotal/$pricecount));
+                    $pricecount=0;
+                    $hargatotal=0;
+                    $shop_name_array[$productcount]=$product->shop_name;
+                    $productcount++;
+                    $filter=0;
+                }
             }
         }
         else if($time=='bulan')

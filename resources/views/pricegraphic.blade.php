@@ -7,7 +7,7 @@
 <div class="container justify-content-center content">
 <form action="/graph/{{$section_id}}" method="POST">
 @csrf
-<label class="label-filter">Filter Waktu</label>
+<label class="label-filter">Filter Tipe Waktu</label>
 <table>
 <tr>
 	<td>
@@ -18,9 +18,17 @@
 		</select>
 	</div>
 	</td>
-	<td><button class="btn btn-default btn-filter-graph">Submit</button></td>
+</tr>
+<tr>
+	<td> <label class="label-filter">Filter Tanggal</label> </td>
+</tr>
+<tr>
+	<td> <input class="form-control filter-input" type="date" name="tanggalmulai" id="tanggalmulai" placeholder="tgl/bln/thn"> </td>
+	<td> <input class="form-control filter-input" type="date" name="tanggalakhir" id="tanggalakhir" placeholder="tgl/bln/thn"> </td>
 </tr>
 </table>
+<button class="btn btn-default btn-filter-graph">Submit</button>
+
 </form>
 	<div class="graph" id="chartContainer">
 
