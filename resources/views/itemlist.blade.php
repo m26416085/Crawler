@@ -45,7 +45,7 @@
                 <input type="hidden" name="id_section" value="{{ $section->id }}">
                 <input type="hidden" name="keyword_section" value="{{str_replace('%20', ' ', $section->keyword)}}">
 
-                <h1 class="text-center mb-3">{{str_replace('%20', ' ', $section->keyword)}}<button class="btn btn-default btn-edit-list" type="submit" name="edit_button"><img class="image-edit" src="{{ asset('icon/pencil.svg') }}"></button></h1>
+                <h1 class="text-center mb-3">{{str_replace('%20', ' ', $section->keyword)}}<button class="btn btn-default btn-edit-list" type="submit" name="edit_button"><img class="image-edit" src="{{ asset('icon/pencil.svg') }}"></button><p style="font-size:17px;">Search Date: {{ $section->created_at }}</p></h1>
                 <div id="Item-list-{{$section->id}}" class="carousel slide" data-interval="false" data-ride="carousel">
                     <?php $counter = 0; ?>
                     <!-- Cards -->
