@@ -149,7 +149,7 @@ class HomeController extends Controller
 
         //search by link
         if (isset($_POST['find_link'])) {
-
+            
             // list all city
             $city_url = "https://api.myjson.com/bins/8cnk5";
             $city_data = http_request($city_url);
@@ -186,6 +186,17 @@ class HomeController extends Controller
             }
 
             $cekurl = explode(".", $search);
+
+            if(strlen($_POST['search_link']) < 60 ){
+                $cartCollection = \Cart::getContent();
+
+                $cartCollection->toArray();
+
+                $tokpedisempty = true;
+                $shopeeisempty = true;
+
+                return view::make('home', compact('dataShopee_arr', 'data_arr', 'countshopee', 'counttokped', 'cartCollection', 'city_data', 'tokpedisempty', 'shopeeisempty'));
+            }
 
             //tokopedia   
             if ($cekurl[1] == "tokopedia") {
