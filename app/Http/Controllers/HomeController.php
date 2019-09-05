@@ -203,7 +203,10 @@ class HomeController extends Controller
                 $url = $search;
                 include(app_path() . '\Library\simple_html_dom.php');
                 $data_arr = find_link_tokopedia($search, $city_value_shopee, $city_value_tokopedia, $pmin, $pmaks, $url);
-
+                if(!$data_arr){  
+                    toastr()->error('Data tidak ditemukan.', 'Error!');
+                    return redirect()->route('home');
+                }
                 //tokopedia
                 $counttokped = 0;
                 $countshopee = -1;

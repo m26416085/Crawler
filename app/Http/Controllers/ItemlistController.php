@@ -175,15 +175,23 @@ class ItemlistController extends Controller
                 $cekurl = explode(".", $product->product_url);
                 if ($cekurl[1] == "tokopedia") {
                     $data = find_link_tokopedia("test", 0, 0, 0, 0, $product->product_url);
-    
-                    $history = new Price_History();
-                    $history->url_product = $product->product_url;
-                    $history->price = $data['data'][0]['price'];
-                    $history->id_user = auth()->user()->id;
-                    $history->id_search = $section->id;
-                    $history->created_at = date('Y-m-d');
-                    $history->save();
-    
+                    if(!$data){
+                        toastr()->error('Data '.$product->product_name.' tidak ditemukan.', 'Gagal update data!');
+                    }
+                    else{
+                        $history = new Price_History();
+                        $history->url_product = $product->product_url;
+                        $history->price = $data['data'][0]['price'];
+                        if($data['data'][0]['price']=="1"){
+                            $sections= DB::table('searches')->get();
+                            $products = DB::table('products')->get();
+                            return view::make('itemlist', compact('products','sections'));
+                        }
+                        $history->id_user = auth()->user()->id;
+                        $history->id_search = $section->id;
+                        $history->created_at = date('Y-m-d');
+                        $history->save();
+                    }
                 }
                 else{
                     $data = find_link_shopee($product->product_url, 0, 0, 0, 0);

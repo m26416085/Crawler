@@ -1,5 +1,6 @@
 <?php
 
+
 function http_request($url)
 {
     // initialize curl
@@ -101,55 +102,65 @@ function find_shopee($search, $city_value_shopee, $city_value_tokopedia, $limit,
 
 function find_link_tokopedia($search, $city_value_shopee, $city_value_tokopedia, $pmin, $pmaks, $url)
 {
-    $curl = curl_init($url);
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1);
-    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
-    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
-    $response_string = curl_exec($curl);
-    $html = str_get_html($response_string);
+    try{
+        $curl = curl_init($url);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+        $response_string = curl_exec($curl);
+        $html = str_get_html($response_string);
 
-    $data_arr = array();
+        $data_arr = array();
 
-    // find item image
-    foreach ($html->find('div[id=content-container] div.container-product div.clearfix div.rvm-left-column div.rvm-pdp-product div.rvm-left-column--left div.product-detail__img-holder div.content-img ') as $e) {
-        $tokped_link_img = $e->innertext;
-        break;
+        // find item image
+        foreach ($html->find('div[id=content-container] div.container-product div.clearfix div.rvm-left-column div.rvm-pdp-product div.rvm-left-column--left div.product-detail__img-holder div.content-img ') as $e) {
+            $tokped_link_img = $e->innertext;
+            break;
+        }
+        $id = $search;
+        if(isset($tokped_link_img) && !empty($tokped_link_img)){
+            $tokped_link_img = str_replace('<img', '', $tokped_link_img);
+            $tokped_link_img = str_replace('src="', '', $tokped_link_img);
+            $tokped_link_img = str_replace('"', '', $tokped_link_img);
+            $tokped_link_img = str_replace('/>', '', $tokped_link_img);
+            $tokped_link_img = str_replace(' ', '', $tokped_link_img);
+        }
+        else{
+            $tokped_link_img = "";
+        }    
+        // find item title
+        foreach ($html->find('div.rvm-left-column--right h1.rvm-product-title span') as $e) {
+            $tokped_link_productname = $e->innertext;
+        }
+
+        // find item price
+        foreach ($html->find('div.rvm-price-holder div.rvm-price span') as $e) {
+            $tokped_link_productprice = $e->innertext;
+        }
+        $tokped_link_price = str_replace('.', '', $tokped_link_productprice);
+
+        // find shop name
+        foreach ($html->find('div.sticky-footer div.container div.pdp-shop div.pdp-shop__info div.pdp-shop__info__name-wrapper span') as $e) {
+            $tokped_link_shopname = $e->innertext;
+        }
+
+        foreach ($html->find('div.sticky-footer div.container div.pdp-shop div.pdp-shop__info p.pdp-shop__info__stats span') as $e) {
+            $tokped_link_shoplocation = $e->innertext;
+            break;
+        }
+
+        $tokped_link_shoplocation = str_replace("Online", "", $tokped_link_shoplocation);
+        $tokped_link_shoplocation = str_replace("Hari", "", $tokped_link_shoplocation);
+        $tokped_link_shoplocation = str_replace("ini", "", $tokped_link_shoplocation);
+        $data_arr['data'][] = array('id' => $id, 'image_url' => $tokped_link_img, 'product_name' => $tokped_link_productname, 'price_format' => $tokped_link_productprice, 'price' => $tokped_link_price, 'shop_name' => $tokped_link_shopname, 'shop_location' => $tokped_link_shoplocation, 'product_url' => $search, 'keyword' => $search, 'keyword_value_location_tokopedia' => $city_value_tokopedia, 'keyword_value_location_shopee' => $city_value_shopee, 'keyword_max' => $pmaks, 'keyword_min' => $pmin);
+
+        return $data_arr;
     }
-    $id = $search;
-    $tokped_link_img = str_replace('<img', '', $tokped_link_img);
-    $tokped_link_img = str_replace('src=', '', $tokped_link_img);
-    $tokped_link_img = str_replace('"', '', $tokped_link_img);
-    $tokped_link_img = str_replace('/>', '', $tokped_link_img);
-    $tokped_link_img = str_replace(' ', '', $tokped_link_img);
-
-    // find item title
-    foreach ($html->find('div.rvm-left-column--right h1.rvm-product-title span') as $e) {
-        $tokped_link_productname = $e->innertext;
+    catch(Exception $e){
+        //dd($e->getMessage());
+        return false;  
     }
-
-    // find item price
-    foreach ($html->find('div.rvm-price-holder div.rvm-price span') as $e) {
-        $tokped_link_productprice = $e->innertext;
-    }
-    $tokped_link_price = str_replace('.', '', $tokped_link_productprice);
-
-    // find shop name
-    foreach ($html->find('div.sticky-footer div.container div.pdp-shop div.pdp-shop__info div.pdp-shop__info__name-wrapper span') as $e) {
-        $tokped_link_shopname = $e->innertext;
-    }
-
-    foreach ($html->find('div.sticky-footer div.container div.pdp-shop div.pdp-shop__info p.pdp-shop__info__stats span') as $e) {
-        $tokped_link_shoplocation = $e->innertext;
-        break;
-    }
-
-    $tokped_link_shoplocation = str_replace("Online", "", $tokped_link_shoplocation);
-    $tokped_link_shoplocation = str_replace("Hari", "", $tokped_link_shoplocation);
-    $tokped_link_shoplocation = str_replace("ini", "", $tokped_link_shoplocation);
-    $data_arr['data'][] = array('id' => $id, 'image_url' => $tokped_link_img, 'product_name' => $tokped_link_productname, 'price_format' => $tokped_link_productprice, 'price' => $tokped_link_price, 'shop_name' => $tokped_link_shopname, 'shop_location' => $tokped_link_shoplocation, 'product_url' => $search, 'keyword' => $search, 'keyword_value_location_tokopedia' => $city_value_tokopedia, 'keyword_value_location_shopee' => $city_value_shopee, 'keyword_max' => $pmaks, 'keyword_min' => $pmin);
-
-    return $data_arr;
 }
 
 function find_link_shopee($search, $city_value_shopee, $city_value_tokopedia, $pmaks, $pmin)
